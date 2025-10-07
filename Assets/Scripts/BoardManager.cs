@@ -20,6 +20,16 @@ public class BoardManager : MonoBehaviour
         InitBoard();
     }
 
+    /// <summary>
+    ///         指定した座標のパネルを取得
+    /// </summary>
+    public Panel GetPanel(int x, int y)
+    {
+        //　範囲チェック
+        if (x < 0 || y < 0 || x >= _width || y >= _height) return null;
+        return _boardArray[x, y];
+    }
+
     //  盤面の初期化
     private void InitBoard()
     {
