@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "SwipeAction",
+    "maps": [
+        {
+            "name": "GamePlay",
+            "id": "f02a5665-a9d7-4b58-8170-f68ba788bcb0",
+            "actions": [
+                {
+                    "name": "Press",
+                    "type": "Button",
+                    "id": "885454ba-e0f7-4b46-a588-271eb108ff7d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "de5d52e8-f2e7-4a93-bb8a-ce70ba193a6a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9c0e1dcf-2d72-476b-a711-87c0f373a5e8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e2b0359-359c-4009-9d2d-88807ddc22ef",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
