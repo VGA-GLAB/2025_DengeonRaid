@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class CoinPanel : MonoBehaviour
+public class CoinPanel : Panel
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField,Header("1つのパネルにつき何コイン手に入れるか")]
+    int _coin;
 
-    // Update is called once per frame
-    void Update()
+    //コインの所有数を管理する変数(仮)
+    int _wallet;
+    //Panelの消えた枚数を管理する変数(仮)
+    int _deletePanelNumber;
+    public override void Effect()
     {
-        
+        _wallet += _coin * _deletePanelNumber;
+        base.Effect();
     }
 }
