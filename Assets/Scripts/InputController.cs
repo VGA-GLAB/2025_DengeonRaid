@@ -14,6 +14,7 @@ public class InputController : MonoBehaviour
     private InputAction _pressAction;
     private InputAction _positionAction;
     private bool _isDragging = false;
+    private InGameStateMachine _gameStateMachine;
 
     #region ライフサイクル
     private void Awake()
@@ -23,6 +24,11 @@ public class InputController : MonoBehaviour
 
         _pressAction = _swipeAction.GamePlay.Press;
         _positionAction = _swipeAction.GamePlay.Position;
+    }
+
+    private void Start()
+    {
+        _gameStateMachine = InGameStateManager.Instance.IGsm;
     }
 
     private void Update()
@@ -60,29 +66,43 @@ public class InputController : MonoBehaviour
     }
     #endregion
 
-    //  クリックした時
-    private void HandlePress(InputAction.CallbackContext context)
+    /// <summary>
+    ///         クリックした時
+    /// </summary>
+    private void HandlePress(InputAction.CallbackContext ctx)
     {
         Vector2 mousePos = _positionAction.ReadValue<Vector2>();
         Panel panel = GetPanelUnderCursor(mousePos);
         if (panel != null)
         {
             _isDragging = true;
-            _boardManager.StartSelection(panel);
+            if (_gameStateMachine.CurrentState is SIGIdle)
+            {
+                _gameStateMachine.ChangeState<SIGDrawLine>();
+            }
         }
     }
 
-    //  クリックから離した時
+    /// <summary>
+    ///         クリックから離した時
+    /// </summary>
     private void HandleRelease(InputAction.CallbackContext ctx)
     {
         if (_isDragging)
         {
             _isDragging = false;
-            _boardManager.EndSelection();
+            if (_gameStateMachine.CurrentState is SIGDrawLine)
+            {
+                _gameStateMachine.ChangeState<SIGEliminatePanel>();
+            }
         }
     }
 
-    //  マウス位置からRayを飛ばして、当たったパネルを返す
+    /// <summary>
+    ///          マウス位置からRayを飛ばして、当たったパネルを返す
+    /// </summary>
+    /// <param name="mousePos">マウスカーソルの位置</param>
+    /// <returns>その位置のパネルを返す</returns>
     private Panel GetPanelUnderCursor(Vector2 mousePos)
     {
         Vector3 worldPos = _camera.ScreenToWorldPoint(mousePos);
