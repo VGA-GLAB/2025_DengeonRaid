@@ -16,16 +16,19 @@ public class MouseListener : MonoBehaviour
 
     void Update()
     {
-        if (_sm.CurrentState is SIGBusy) return;
         if (Input.GetMouseButtonDown(0))
         {
-            _sm.ChangeState<SIGDrawLine>();
+            if(_sm.CurrentState is SIGIdle){
+                _sm.ChangeState<SIGDrawLine>();
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            UIVignette.SetActive(false);
-            _sm.ChangeState<SIGEliminatePanel>();
+            if (_sm.CurrentState is SIGDrawLine)
+            {
+                _sm.ChangeState<SIGEliminatePanel>();
+            }
         }
     }
 }

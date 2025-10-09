@@ -35,10 +35,4 @@ public class GlobalStateManager : MonoBehaviour
         Gsm.RegisterState(new SInGame());
         Gsm.RegisterState(new SResultScreen());
     }
-
-    public void OnStartButtonClick()
-    {
-        Gsm.ChangeState<SInGame>();
-        SceneManager.LoadScene("02_TestInGameScene_Chou");
-    }
 }

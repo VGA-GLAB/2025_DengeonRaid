@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,6 +55,10 @@ public class InGameStateManager : MonoBehaviour
         if (Score >= 10)
         {
             SceneManager.LoadScene("03_TestResultScene_Chou");
+        }
+        else
+        {
+            IGsm.ChangeState<SIGIdle>();
         }
     }
 
