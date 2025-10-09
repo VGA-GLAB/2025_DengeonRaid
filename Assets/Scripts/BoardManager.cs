@@ -23,6 +23,7 @@ public class BoardManager : MonoBehaviour
 
     private LineRenderer _lineRenderer;
     private List<Vector3> _linePositions = new List<Vector3>();
+    private InGameStateMachine _gameStateMachine;
 
     private void Awake()
     {
@@ -33,6 +34,8 @@ public class BoardManager : MonoBehaviour
     private void Start()
     {
         InitBoard();
+        _gameStateMachine = InGameStateManager.Instance.IGsm;
+        _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter += EndSelection;
     }
 
     /// <summary>
@@ -68,7 +71,6 @@ public class BoardManager : MonoBehaviour
             panel.PanelId != _selectedStack.Peek().PanelId || 
             !IsAdjacent8(_selectedStack.Peek(), panel))
             return;
-
 
         if (_selectedStack.Contains(panel))
         {
@@ -112,7 +114,9 @@ public class BoardManager : MonoBehaviour
     }
 
 
-    //  盤面の初期化
+    /// <summary>
+    ///         盤面の初期化
+    /// </summary>
     private void InitBoard()
     {
         _boardArray = new Panel[_width, _height];
@@ -132,7 +136,9 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    //  ライン更新
+    /// <summary>
+    ///         ライン更新
+    /// </summary>
     private void UpdateLine()
     {
         //  一度選択した線が、次のドラッグでも残るためすべて消去
@@ -148,14 +154,19 @@ public class BoardManager : MonoBehaviour
         _lineRenderer.SetPositions(_linePositions.ToArray());
     }
 
-    //  ライン初期化
+    /// <summary>
+    ///         ライン初期化
+    /// </summary>
     private void ClearLine()
     {
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
     }
 
-    //  縦横斜めと接しているかの判定
+    /// <summary>
+    ///         縦横斜めと接しているかの判定
+    /// </summary>
+    /// <returns>縦横斜めで隣接していたらtrue</returns>
     private bool IsAdjacent8(Panel a,Panel b)
     {
         Vector2Int posA = a.BoardPos;
