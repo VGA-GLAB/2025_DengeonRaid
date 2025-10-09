@@ -63,7 +63,12 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void ContinueSelection(Panel panel)
     {
-        if (!_isSelected) return;
+        //  選択中、パネルが違う種類,縦横斜めにない場合
+        if (!_isSelected || 
+            panel.PanelId != _selectedStack.Peek().PanelId || 
+            !IsAdjacent8(_selectedStack.Peek(), panel))
+            return;
+
 
         if (_selectedStack.Contains(panel))
         {
@@ -92,7 +97,7 @@ public class BoardManager : MonoBehaviour
         if (!_isSelected) return;
         _isSelected = false;
 
-        if (_selectedStack.Count > _selectCount)
+        if (_selectedStack.Count >= _selectCount)
         {
             Debug.Log($"パネルを消去{_selectedStack.Count}個");
 
@@ -119,8 +124,9 @@ public class BoardManager : MonoBehaviour
                 //  後でランダムではなくして調整
                 int randomPanel = Random.Range(0, _panelPrefabs.Length);
                 Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
-
                 panel.transform.localPosition = new Vector3(x, -y, 0);
+
+                panel.Initialize(new Vector2Int(x, y),randomPanel);
                 _boardArray[x, y] = panel;
             }
         }
@@ -147,5 +153,16 @@ public class BoardManager : MonoBehaviour
     {
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
+    }
+
+    //  縦横斜めと接しているかの判定
+    private bool IsAdjacent8(Panel a,Panel b)
+    {
+        Vector2Int posA = a.BoardPos;
+        Vector2Int posB = b.BoardPos;
+        int dx = Mathf.Abs(posA.x - posB.x);
+        int dy = Mathf.Abs(posA.y - posB.y);
+
+        return (dx <= 1 && dy <= 1 && (dx + dy != 0));
     }
 }

@@ -42,7 +42,6 @@ public class InputController : MonoBehaviour
     {
         _pressAction.performed += HandlePress;
         _pressAction.canceled += HandleRelease;
-
         _swipeAction.Enable();
     }
 
