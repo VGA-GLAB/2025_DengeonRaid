@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PotionPanel : Panel
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField,Header("‰ñ•œ—Ê")]
+    int _heal;
 
-    // Update is called once per frame
-    void Update()
+    //Player‚ÌHP‚É‚È‚é•Ï”(‰¼)
+    int HP;
+    //Panel‚ÌÁ‚¦‚½–‡”‚ğŠÇ—‚·‚é•Ï”(‰¼)
+    int _deletePanelNumber;
+    public override void Effect()
     {
-        
+        HP += _heal * _deletePanelNumber;
+        base.Effect();
     }
 }
