@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class EnemyPanel : Panel
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField, Header("‰ñ•œ—Ê")]
+    int _damage;
 
-    // Update is called once per frame
-    void Update()
+    //Player‚ÌHP‚É‚È‚é•Ï”(‰¼)
+    int HP;
+    //Panel‚ÌÁ‚¦‚½–‡”‚ğŠÇ—‚·‚é•Ï”(‰¼)
+    int _deletePanelNumber;
+    public override void Effect()
     {
-        
+        HP -= _damage * _deletePanelNumber;
+        base.Effect();
     }
 }
