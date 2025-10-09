@@ -15,11 +15,20 @@ public class BoardManager : MonoBehaviour
 
     [Header("参照")]
     [SerializeField] private Panel[] _panelPrefabs;
-    [SerializeField,Tooltip("生成したパネルの親")] private Transform _boardRoot;
+    [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private bool _isSelected = false;
+
+    private LineRenderer _lineRenderer;
+    private List<Vector3> _linePositions = new List<Vector3>();
+
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.positionCount = 0;
+    }
 
     private void Start()
     {
@@ -45,6 +54,8 @@ public class BoardManager : MonoBehaviour
         _selectedStack.Clear();
         _selectedStack.Push(panel);
         _isSelected = true;
+
+        UpdateLine();
     }
 
     /// <summary>
@@ -65,12 +76,12 @@ public class BoardManager : MonoBehaviour
             }
             return;
         }
-
-        Panel last = _selectedStack.Peek();
-        if (last != panel)
+        else
         {
             _selectedStack.Push(panel);
         }
+
+        UpdateLine();
     }
 
     /// <summary>
@@ -91,7 +102,10 @@ public class BoardManager : MonoBehaviour
             }
             _selectedStack.Clear();
         }
+
+        ClearLine();
     }
+
 
     //  盤面の初期化
     private void InitBoard()
@@ -110,5 +124,28 @@ public class BoardManager : MonoBehaviour
                 _boardArray[x, y] = panel;
             }
         }
+    }
+
+    //  ライン更新
+    private void UpdateLine()
+    {
+        //  一度選択した線が、次のドラッグでも残るためすべて消去
+        _linePositions.Clear();
+
+        foreach(var panel in _selectedStack)
+        {
+            if(panel != null)
+                _linePositions.Add(panel.transform.position);
+        }
+
+        _lineRenderer.positionCount = _linePositions.Count;
+        _lineRenderer.SetPositions(_linePositions.ToArray());
+    }
+
+    //  ライン初期化
+    private void ClearLine()
+    {
+        _lineRenderer.positionCount = 0;
+        _linePositions.Clear();
     }
 }
