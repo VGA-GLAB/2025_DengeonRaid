@@ -38,31 +38,43 @@ public class InputController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _pressAction.performed += HandlePress;
+        _pressAction.canceled += HandleRelease;
+
+        _swipeAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _pressAction.performed -= HandlePress;
+        _pressAction.canceled -= HandleRelease;
+        _swipeAction.Disable();
+    }
+
     private void OnDestroy()
     {
-        _pressAction.performed -= OnPress;
-        _pressAction.canceled -= OnRelease;
+        _pressAction.performed -= HandlePress;
+        _pressAction.canceled -= HandleRelease;
         _swipeAction.Disable();
     }
     #endregion
 
     //  クリックした時
-    private void OnPress(InputAction.CallbackContext context)
+    private void HandlePress(InputAction.CallbackContext context)
     {
         Vector2 mousePos = _positionAction.ReadValue<Vector2>();
         Panel panel = GetPanelUnderCursor(mousePos);
         if (panel != null)
         {
             _isDragging = true;
-            if (panel != null)
-            {
-                _boardManager.StartSelection(panel);
-            }
+            _boardManager.StartSelection(panel);
         }
     }
 
     //  クリックから離した時
-    private void OnRelease(InputAction.CallbackContext ctx)
+    private void HandleRelease(InputAction.CallbackContext ctx)
     {
         if (_isDragging)
         {
@@ -79,21 +91,4 @@ public class InputController : MonoBehaviour
 
         return hit.collider ? hit.collider.GetComponent<Panel>() : null;
     }
-
-    #region 登録と解除
-    private void OnEnable()
-    {
-        _pressAction.performed += OnPress;
-        _pressAction.canceled += OnRelease;
-
-        _swipeAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _pressAction.performed -= OnPress;
-        _pressAction.canceled -= OnRelease;
-        _swipeAction.Disable();
-    }
-    #endregion
 }
