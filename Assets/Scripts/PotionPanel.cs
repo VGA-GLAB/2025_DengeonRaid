@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PotionPanel : MonoBehaviour
+public class PotionPanel : Panel
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
