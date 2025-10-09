@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PotionPanel : Panel
+public class EnemyPanel : Panel
 {
-    [SerializeField,Header("‰ñ•œ—Ê")]
-    int _heal;
+    [SerializeField, Header("‰ñ•œ—Ê")]
+    int _damage;
 
     //Player‚ÌHP‚É‚È‚é•Ï”(‰¼)
     int HP;
@@ -11,7 +11,7 @@ public class PotionPanel : Panel
     int _deletePanelNumber;
     public override void Effect()
     {
-        HP += _heal * _deletePanelNumber;
+        HP -= _damage * _deletePanelNumber;
         base.Effect();
     }
 }
