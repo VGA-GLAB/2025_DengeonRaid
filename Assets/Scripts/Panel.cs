@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Vector2Int BoardPos { get; set; }
+    public int PanelId { get; set; }
+
+    public void Initialize(Vector2Int pos, int panel)
     {
-        
+        BoardPos = pos;
+        PanelId = panel;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Effect()
     {
-        
+
     }
 }
