@@ -72,7 +72,7 @@ public class BoardManager : MonoBehaviour
             //  選択済みなら戻り処理
             while (_selectedStack.Peek() != panel)
             {
-                var removed = _selectedStack.Pop();
+                Panel removed = _selectedStack.Pop();
             }
             return;
         }
