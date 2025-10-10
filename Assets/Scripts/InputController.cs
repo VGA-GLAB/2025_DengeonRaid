@@ -76,6 +76,7 @@ public class InputController : MonoBehaviour
         if (panel != null)
         {
             _isDragging = true;
+            _boardManager.StartSelection(panel);
             if (_gameStateMachine.CurrentState is SIGIdle)
             {
                 _gameStateMachine.ChangeState<SIGDrawLine>();
