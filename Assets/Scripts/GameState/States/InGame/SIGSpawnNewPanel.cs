@@ -9,6 +9,7 @@ public class SIGSpawnNewPanel : IInGameState
     // 状態開始時に呼び出す処理
     public void Enter()
     {
+        OnEnter?.Invoke();
     }
 
     // 状態中のフレーム毎処理
