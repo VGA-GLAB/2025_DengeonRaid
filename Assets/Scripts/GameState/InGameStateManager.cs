@@ -29,10 +29,10 @@ public class InGameStateManager : MonoBehaviour
     private void Start()
     {
         // 状態のeventに処理を登録する
-        IGsm.States[typeof(SIGIntro)].OnEnter += UpdateUIScoreText;
+        //IGsm.States[typeof(SIGIntro)].OnEnter += UpdateUIScoreText;
         IGsm.States[typeof(SIGCheckGameEnd)].OnEnter += JudgeGameEnd;
-        IGsm.States[typeof(SIGEliminatePanel)].OnEnter += UpdateUIScoreText;
-        IGsm.ChangeState<SIGIntro>();
+        //IGsm.States[typeof(SIGEliminatePanel)].OnEnter += UpdateUIScoreText;
+        IGsm.ChangeState<SIGIdle>();
     }
 
     /// <summary>
@@ -52,18 +52,18 @@ public class InGameStateManager : MonoBehaviour
 
     public void JudgeGameEnd()
     {
-        if (Score >= 10)
-        {
-            SceneManager.LoadScene("03_TestResultScene_Chou");
-        }
-        else
-        {
+        //if (Score >= 10)
+        //{
+        //    SceneManager.LoadScene("03_TestResultScene_Chou");
+        //}
+        //else
+        //{
             IGsm.ChangeState<SIGIdle>();
-        }
+        //}
     }
 
-    public void UpdateUIScoreText()
-    {
-        _uiUpdater.UpdateScoreText();
-    }
+    //public void UpdateUIScoreText()
+    //{
+    //    _uiUpdater.UpdateScoreText();
+    //}
 }
