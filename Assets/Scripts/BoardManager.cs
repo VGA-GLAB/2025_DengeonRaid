@@ -145,16 +145,21 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
+        //  盤面の各列を左から順に処理
         for (int x = 0; x < _width; x++)
         {
+            //  パネルを落とす先の位置を示す変数
             int emptyY = _height - 1;
+
             for (int y = _height - 1; y >= 0; y--)
             {
                 Panel panel = _boardArray[x, y];
+                //  このマスが空ならスキップ
                 if (panel == null) continue;
 
                 if (emptyY != y)
                 {
+                    //  盤面配列の更新
                     _boardArray[x, emptyY] = panel;
                     _boardArray[x,y] = null;
 
@@ -164,11 +169,13 @@ public class BoardManager : MonoBehaviour
                 emptyY--; 
             }
 
-            for(int y = emptyY; y >= 0; y--)
+            //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
+            for (int y = emptyY; y >= 0; y--)
             {
                 int randomPanel = Random.Range(0, _panelPrefabs.Length);
                 Panel newPanel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
 
+                //  TODO: 落下アニメーションをつける
                 newPanel.transform.localPosition = new Vector3(x, -y, 0);
                 newPanel.Initialize(new Vector2Int(x, y), randomPanel);
                 _boardArray[x, y] = newPanel;
