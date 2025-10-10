@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
+    public Figures _fgs;
+
     public Vector2Int BoardPos { get; set; }
     public int PanelId { get; set; }
 
@@ -9,6 +11,7 @@ public class Panel : MonoBehaviour
     {
         BoardPos = pos;
         PanelId = panel;
+        _fgs = GetComponent<Figures>();
     }
 
     public virtual void Effect()
