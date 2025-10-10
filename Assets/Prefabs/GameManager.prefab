@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3949415200207055762}
   - component: {fileID: 8696041008577261275}
   - component: {fileID: 854405042033314825}
+  - component: {fileID: 5922098764012209962}
   - component: {fileID: 7838907015552340945}
   m_Layer: 0
   m_Name: GameManager
@@ -67,6 +68,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputController
   _boardManager: {fileID: 8696041008577261275}
   _camera: {fileID: 0}
+--- !u!114 &5922098764012209962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483908665870514725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d860bd902c8b74facbabd4de61dc23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGameStateManager
+  Score: 0
+  _panelMovement: {fileID: 0}
+  _uiUpdater: {fileID: 0}
 --- !u!120 &7838907015552340945
 LineRenderer:
   serializedVersion: 2
