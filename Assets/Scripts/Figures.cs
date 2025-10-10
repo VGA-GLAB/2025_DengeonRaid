@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Figures : MonoBehaviour
@@ -7,11 +6,6 @@ public class Figures : MonoBehaviour
     public int _playerHP;
 
     public bool _death;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
