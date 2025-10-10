@@ -1,16 +1,27 @@
+using System;
 using UnityEngine;
 
 public class Figures : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int _wallet;
+    public int _playerHP;
+
+    public bool _death;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (_playerHP <= 0)
+        {
+            _death = true;
+        }
+        else
+        {
+            _death = false;
+        }
     }
 }
