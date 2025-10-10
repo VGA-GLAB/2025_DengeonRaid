@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 ///         盤面の情報を管理するクラス
@@ -36,6 +36,7 @@ public class BoardManager : MonoBehaviour
         InitBoard();
         _gameStateMachine = InGameStateManager.Instance.IGsm;
         _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter += EndSelection;
+        _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter += DropPanel;
     }
 
     /// <summary>
@@ -67,8 +68,8 @@ public class BoardManager : MonoBehaviour
     public void ContinueSelection(Panel panel)
     {
         //  選択中、パネルが違う種類,縦横斜めにない場合
-        if (!_isSelected || 
-            panel.PanelId != _selectedStack.Peek().PanelId || 
+        if (!_isSelected ||
+            panel.PanelId != _selectedStack.Peek().PanelId ||
             !IsAdjacent8(_selectedStack.Peek(), panel))
             return;
 
@@ -105,11 +106,14 @@ public class BoardManager : MonoBehaviour
 
             foreach (var selectPanel in _selectedStack)
             {
+                Vector2Int pos = selectPanel.BoardPos;
+                _boardArray[pos.x, pos.y] = null;
                 Destroy(selectPanel.gameObject);
             }
             _selectedStack.Clear();
         }
 
+        _gameStateMachine.ChangeState<SIGSpawnNewPanel>();
         ClearLine();
     }
 
@@ -130,10 +134,47 @@ public class BoardManager : MonoBehaviour
                 Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
                 panel.transform.localPosition = new Vector3(x, -y, 0);
 
-                panel.Initialize(new Vector2Int(x, y),randomPanel);
+                panel.Initialize(new Vector2Int(x, y), randomPanel);
                 _boardArray[x, y] = panel;
             }
         }
+    }
+
+    /// <summary>
+    ///         パネル落としの処理
+    /// </summary>
+    private void DropPanel()
+    {
+        for (int x = 0; x < _width; x++)
+        {
+            int emptyY = _height - 1;
+            for (int y = _height - 1; y >= 0; y--)
+            {
+                Panel panel = _boardArray[x, y];
+                if (panel == null) continue;
+
+                if (emptyY != y)
+                {
+                    _boardArray[x, emptyY] = panel;
+                    _boardArray[x,y] = null;
+
+                    panel.BoardPos = new Vector2Int(x, emptyY);
+                    panel.transform.localPosition = new Vector3Int(x, -emptyY, 0);
+                }
+                emptyY--; 
+            }
+
+            for(int y = emptyY; y >= 0; y--)
+            {
+                int randomPanel = Random.Range(0, _panelPrefabs.Length);
+                Panel newPanel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
+
+                newPanel.transform.localPosition = new Vector3(x, -y, 0);
+                newPanel.Initialize(new Vector2Int(x, y), randomPanel);
+                _boardArray[x, y] = newPanel;
+            }
+        }
+        _gameStateMachine.ChangeState<SIGIdle>();
     }
 
     /// <summary>
@@ -144,9 +185,9 @@ public class BoardManager : MonoBehaviour
         //  一度選択した線が、次のドラッグでも残るためすべて消去
         _linePositions.Clear();
 
-        foreach(var panel in _selectedStack)
+        foreach (var panel in _selectedStack)
         {
-            if(panel != null)
+            if (panel != null)
                 _linePositions.Add(panel.transform.position);
         }
 
@@ -167,7 +208,7 @@ public class BoardManager : MonoBehaviour
     ///         縦横斜めと接しているかの判定
     /// </summary>
     /// <returns>縦横斜めで隣接していたらtrue</returns>
-    private bool IsAdjacent8(Panel a,Panel b)
+    private bool IsAdjacent8(Panel a, Panel b)
     {
         Vector2Int posA = a.BoardPos;
         Vector2Int posB = b.BoardPos;
