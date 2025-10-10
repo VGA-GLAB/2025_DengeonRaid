@@ -3,12 +3,12 @@ using UnityEngine;
 public class EnemyPanel : Panel
 {
     [SerializeField, Header("‰ñ•œ—Ê")]
-    int _damage;
+    private int _damage;
 
     //Player‚ÌHP‚É‚È‚é•Ï”(‰¼)
-    int HP;
+    private int HP;
     //Panel‚ÌÁ‚¦‚½–‡”‚ğŠÇ—‚·‚é•Ï”(‰¼)
-    int _deletePanelNumber;
+    private int _deletePanelNumber;
     public override void Effect()
     {
         HP -= _damage * _deletePanelNumber;

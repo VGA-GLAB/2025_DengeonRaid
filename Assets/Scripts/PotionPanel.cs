@@ -3,12 +3,12 @@ using UnityEngine;
 public class PotionPanel : Panel
 {
     [SerializeField,Header("‰ñ•œ—Ê")]
-    int _heal;
+    private int _heal;
 
     //Player‚ÌHP‚É‚È‚é•Ï”(‰¼)
-    int HP;
+    private int HP;
     //Panel‚ÌÁ‚¦‚½–‡”‚ğŠÇ—‚·‚é•Ï”(‰¼)
-    int _deletePanelNumber;
+    private int _deletePanelNumber;
     public override void Effect()
     {
         HP += _heal * _deletePanelNumber;
