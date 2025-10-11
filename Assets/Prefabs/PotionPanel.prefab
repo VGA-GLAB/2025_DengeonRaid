@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7910157517532800730}
   - component: {fileID: 7125304331575397388}
-  - component: {fileID: 1816980362282440841}
   - component: {fileID: -6019969635894293031}
   - component: {fileID: 263918383826840547}
+  - component: {fileID: 8298974069918889336}
   m_Layer: 0
   m_Name: PotionPanel
   m_TagString: Untagged
@@ -93,18 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1816980362282440841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2218359526877018153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0909b1311d2de5048ae1775087638368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!61 &-6019969635894293031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -261,3 +249,16 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8298974069918889336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218359526877018153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1b68d889961c844a06a1aabe97a5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PotionPanel
+  _heal: 1
