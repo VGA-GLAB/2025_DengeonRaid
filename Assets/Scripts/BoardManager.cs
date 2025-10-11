@@ -15,19 +15,20 @@ public class BoardManager : MonoBehaviour
 
     [Header("参照")]
     [SerializeField] private Panel[] _panelPrefabs;
+    [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private bool _isSelected = false;
 
-    private LineRenderer _lineRenderer;
     private List<Vector3> _linePositions = new List<Vector3>();
     private InGameStateMachine _gameStateMachine;
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        if( _lineRenderer != null )
         _lineRenderer.positionCount = 0;
     }
 
@@ -189,6 +190,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void UpdateLine()
     {
+        if(_lineRenderer == null) return;
         //  一度選択した線が、次のドラッグでも残るためすべて消去
         _linePositions.Clear();
 
@@ -207,6 +209,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void ClearLine()
     {
+        if( _lineRenderer == null) return;
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
     }
