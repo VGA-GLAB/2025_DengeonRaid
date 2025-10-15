@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6577069989502047705}
   - component: {fileID: 5085685963464608945}
-  - component: {fileID: 2540975338578434615}
   - component: {fileID: 1625946810168813193}
+  - component: {fileID: -4260931707250557988}
   m_Layer: 0
   m_Name: CoinPanel
   m_TagString: Untagged
@@ -92,18 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2540975338578434615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448241291402004874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0909b1311d2de5048ae1775087638368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!61 &1625946810168813193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +138,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-4260931707250557988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d0fe7cf022e694a9eae00b784f6d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinPanel
+  _coin: 1
