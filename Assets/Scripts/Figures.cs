@@ -1,26 +1,23 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Figures : MonoBehaviour
 {
-    [SerializeField] Text _walletText;
     //ƒRƒCƒ“‚ÌŠ—L”
-    public int _wallet;
+    public int Wallet;
     //Player‚ÌHP
-    public int _playerHP;
+    public int PlayerHP;
 
-    public bool _death;
+    public bool IsDeath;
 
     void Update()
     {
-        _walletText.text= _wallet.ToString();
-        if (_playerHP <= 0)
+        if (PlayerHP <= 0)
         {
-            _death = true;
+            IsDeath = true;
         }
         else
         {
-            _death = false;
+            IsDeath = false;
         }
     }
 }

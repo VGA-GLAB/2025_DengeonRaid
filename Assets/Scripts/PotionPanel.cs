@@ -7,7 +7,7 @@ public class PotionPanel : Panel
 
     public override void Effect()
     {
-        _fgs._playerHP += _heal;
+        Fgs.PlayerHP += _heal;
         base.Effect();
     }
 }
