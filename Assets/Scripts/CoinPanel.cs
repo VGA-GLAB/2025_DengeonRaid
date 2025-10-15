@@ -7,7 +7,7 @@ public class CoinPanel : Panel
 
     public override void Effect()
     {
-        Figures._wallet += _coin;
+        Fgs.Wallet += _coin;
         base.Effect();
     }
 }
