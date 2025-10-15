@@ -6,18 +6,6 @@ public class Figures : MonoBehaviour
     public int Wallet;
     //Player‚ÌHP
     public int PlayerHP;
-
+    //Player‚ª¶‚«‚Ä‚é‚©‚Ç‚¤‚©
     public bool IsDeath;
-
-    void Update()
-    {
-        if (PlayerHP <= 0)
-        {
-            IsDeath = true;
-        }
-        else
-        {
-            IsDeath = false;
-        }
-    }
 }
