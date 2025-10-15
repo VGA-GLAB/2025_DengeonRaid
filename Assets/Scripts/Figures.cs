@@ -5,9 +5,9 @@ public class Figures : MonoBehaviour
 {
     [SerializeField] Text _walletText;
     //ƒRƒCƒ“‚ÌŠ—L”
-    public static int _wallet;
+    public int _wallet;
     //Player‚ÌHP
-    public static int _playerHP;
+    public int _playerHP;
 
     public bool _death;
 

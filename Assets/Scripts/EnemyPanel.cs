@@ -7,7 +7,7 @@ public class EnemyPanel : Panel
 
     public override void Effect()
     {
-        Figures._playerHP -= _damage;
+        _fgs._playerHP -= _damage;
         base.Effect();
     }
 }
