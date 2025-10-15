@@ -27,8 +27,15 @@ public class BoardManager : MonoBehaviour
 
     private void Awake()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
-        if( _lineRenderer != null )
+        if (_lineRenderer == null)
+        {
+            if (!TryGetComponent(out _lineRenderer))
+            {
+                _lineRenderer = this.gameObject.AddComponent<LineRenderer>();
+                Debug.LogWarning("LineRendererが見つからないので自動追加", this);
+            }
+        }
+
         _lineRenderer.positionCount = 0;
     }
 
