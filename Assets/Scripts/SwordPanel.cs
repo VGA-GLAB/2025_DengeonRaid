@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class SwordPanel : MonoBehaviour
+public class SwordPanel : Panel
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField, Header("Playerが与えるダメージに対するバフ")]
+    private int _dageBuff;
+    public override void Effect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Playerの攻撃力に_daageBuffを乗算する処理を追加する
+        base.Effect();
     }
 }
