@@ -25,6 +25,7 @@ public class PlayerStatusManager : MonoBehaviour
         _currentCoin = 0;
     }
      
+    //  各値を取得できるメソッド群
     public Func<int> GetCurrentHp => () => _currentHp;
     public Func<int> GetMaxHp => () => _maxHp;
 
@@ -60,12 +61,19 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///         アイテムを買う際のコイン管理
+    /// </summary>
+    /// <param name="amount"></param>
     public void BuyItem(int amount)
     {
         _currentCoin -= amount;
         //TODO:金額が超えたときどうしよう
     }
 
+    /// <summary>
+    ///         レベルアップ
+    /// </summary>
     public void LevelUp()
     { 
         //  あげる値考えよう
