@@ -43,9 +43,9 @@ public class PlayerStatusManager : MonoBehaviour
     {
         if (_currentShield > 0)
         {
-            int shieldDameage = Mathf.Min(damage, _currentShield);
-            _currentShield -= shieldDameage;
-            damage -= shieldDameage;
+            int shieldDamage = Mathf.Min(damage, _currentShield);
+            _currentShield -= shieldDamage;
+            damage -= shieldDamage;
         }
 
         if (damage > 0)
