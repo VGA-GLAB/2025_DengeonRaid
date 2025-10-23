@@ -2,8 +2,6 @@
 
 public class PotionPanel : Panel
 {
-    public override string PanelGroupTag => "Portion";
-
     [SerializeField,Header("回復量")]
     private int _heal;
 

@@ -2,8 +2,6 @@
 
 public class EnemyPanel : Panel
 {
-    public override string PanelGroupTag => "Battle";
-
     [SerializeField, Header("回復量")]
     private int _damage;
 
