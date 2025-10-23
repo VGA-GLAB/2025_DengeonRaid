@@ -3,14 +3,14 @@ using UnityEngine;
 public class Panel : MonoBehaviour
 {
     public Vector2Int BoardPos { get; set; }
-    public int PanelId { get; set; }
+
+    public virtual string PanelGroupTag => "Default";
 
     [SerializeField]
     protected Figures Fgs;
-    public void Initialize(Vector2Int pos, int panel)
+    public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
-        PanelId = panel;
     }
 
     public virtual void Effect()
