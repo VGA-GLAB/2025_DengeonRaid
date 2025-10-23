@@ -1,13 +1,29 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
     public Vector2Int BoardPos { get; set; }
 
-    public virtual string PanelGroupTag => "Default";
+    [Header("パネル識別情報")]
+    [SerializeField, Tooltip("同じ種類パネルを区別するためのID")]
+    private int _panelId;
+
+    [SerializeField,Tooltip("このパネルが属するグループ")]
+    private PanelGroup _panelGroup;
 
     [SerializeField]
     protected Figures Fgs;
+
+    /// <summary>
+    ///         パネルのID(読み取り用)
+    /// </summary>
+    public int PanelId => _panelId;
+
+    /// <summary>
+    ///         このパネルが属するグループ(読み取り用)
+    /// </summary>
+    public PanelGroup Group => _panelGroup;
+
     public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
