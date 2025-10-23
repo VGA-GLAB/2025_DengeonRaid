@@ -1,8 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PotionPanel : Panel
 {
-    [SerializeField,Header("�񕜗�")]
+    public override string PanelGroupTag => "Portion";
+
+    [SerializeField,Header("回復量")]
     private int _heal;
 
     public override void Effect()
