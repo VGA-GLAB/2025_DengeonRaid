@@ -77,7 +77,7 @@ public class BoardManager : MonoBehaviour
     {
         //  選択中、パネルが違う種類,縦横斜めにない場合
         if (!_isSelected ||
-            panel.PanelId != _selectedStack.Peek().PanelId ||
+            panel.PanelGroupTag != _selectedStack.Peek().PanelGroupTag ||
             !IsAdjacent8(_selectedStack.Peek(), panel))
             return;
 
@@ -142,7 +142,7 @@ public class BoardManager : MonoBehaviour
                 Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
                 panel.transform.localPosition = new Vector3(x, -y, 0);
 
-                panel.Initialize(new Vector2Int(x, y), randomPanel);
+                panel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = panel;
             }
         }
@@ -185,7 +185,7 @@ public class BoardManager : MonoBehaviour
 
                 //  TODO: 落下アニメーションをつける
                 newPanel.transform.localPosition = new Vector3(x, -y, 0);
-                newPanel.Initialize(new Vector2Int(x, y), randomPanel);
+                newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
             }
         }
