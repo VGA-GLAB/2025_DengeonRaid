@@ -75,10 +75,15 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void ContinueSelection(Panel panel)
     {
-        //  選択中、パネルが違う種類,縦横斜めにない場合
+        //  選択中、縦横斜めにない場合
         if (!_isSelected ||
-            panel.PanelGroupTag != _selectedStack.Peek().PanelGroupTag ||
             !IsAdjacent8(_selectedStack.Peek(), panel))
+            return;
+
+        Panel lastPanel = _selectedStack.Peek();
+
+        //  接続可能かをチェック
+        if (!CanConnectType(lastPanel, panel))
             return;
 
         if (_selectedStack.Contains(panel))
@@ -169,12 +174,12 @@ public class BoardManager : MonoBehaviour
                 {
                     //  盤面配列の更新
                     _boardArray[x, emptyY] = panel;
-                    _boardArray[x,y] = null;
+                    _boardArray[x, y] = null;
 
                     panel.BoardPos = new Vector2Int(x, emptyY);
                     panel.transform.localPosition = new Vector3Int(x, -emptyY, 0);
                 }
-                emptyY--; 
+                emptyY--;
             }
 
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
@@ -197,7 +202,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void UpdateLine()
     {
-        if(_lineRenderer == null) return;
+        if (_lineRenderer == null) return;
         //  一度選択した線が、次のドラッグでも残るためすべて消去
         _linePositions.Clear();
 
@@ -216,7 +221,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void ClearLine()
     {
-        if( _lineRenderer == null) return;
+        if (_lineRenderer == null) return;
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
     }
@@ -233,5 +238,26 @@ public class BoardManager : MonoBehaviour
         int dy = Mathf.Abs(posA.y - posB.y);
 
         return (dx <= 1 && dy <= 1 && (dx + dy != 0));
+    }
+
+    /// <summary>
+    ///         GroupやIDを見てつなげられるか判定
+    /// </summary>
+    /// <returns></returns>
+    private bool CanConnectType(Panel a, Panel b)
+    {
+        //  同じグループならOK
+        if (a.Group == b.Group)
+        {
+            //  同グループ内で同じIDならOK
+            if (a.PanelId == b.PanelId)
+                return true;
+
+            //  グループがBattleなら、異なるIDでもOK
+            if (a.Group == PanelGroup.Battle)
+                return true;
+        }
+
+        return false;
     }
 }
