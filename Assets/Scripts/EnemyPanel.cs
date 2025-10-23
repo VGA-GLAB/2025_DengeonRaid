@@ -1,8 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyPanel : Panel
 {
-    [SerializeField, Header("�񕜗�")]
+    public override string PanelGroupTag => "Battle";
+
+    [SerializeField, Header("回復量")]
     private int _damage;
 
     public override void Effect()
