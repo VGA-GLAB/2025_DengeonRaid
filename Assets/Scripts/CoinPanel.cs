@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class CoinPanel : Panel
 {
-    [SerializeField,Header("1‚Â‚Ìƒpƒlƒ‹‚É‚Â‚«‰½ƒRƒCƒ“è‚É“ü‚ê‚é‚©")]
+    [SerializeField,Header("1ã¤ã®ãƒ‘ãƒãƒ«ã«ã¤ãä½•ã‚³ã‚¤ãƒ³æ‰‹ã«å…¥ã‚Œã‚‹ã‹")]
     private int _coin;
 
     public override void Effect()
