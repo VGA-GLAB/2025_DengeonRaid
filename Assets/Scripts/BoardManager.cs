@@ -248,6 +248,7 @@ public class BoardManager : MonoBehaviour
         Vector3 prev = _linePositions[1];
 
         Vector3 dir = (end - prev).normalized;
+        //  始点から終点に向かうベクトルの角度を、0°〜360の見た目の回転角に変換
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         if (_currentArrow == null)
@@ -258,9 +259,6 @@ public class BoardManager : MonoBehaviour
             end,
             Quaternion.Euler(0, 0, angle)
         );
-
-        // 少しだけ内側にずらすと見た目が自然（オプション）
-        _currentArrow.transform.position = end - dir * 0.1f;
 
         _currentArrow.SetActive(true);
     }
