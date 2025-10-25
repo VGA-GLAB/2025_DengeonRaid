@@ -150,4 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d0fe7cf022e694a9eae00b784f6d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinPanel
+  _panelId: 0
+  _panelGroup: 0
+  Fgs: {fileID: 0}
   _coin: 1
