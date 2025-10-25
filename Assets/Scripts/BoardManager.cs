@@ -16,8 +16,10 @@ public class BoardManager : MonoBehaviour
     [Header("参照")]
     [SerializeField] private Panel[] _panelPrefabs;
     [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private GameObject _arrowPrefab;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
+    private GameObject _currentArrow;
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private bool _isSelected = false;
@@ -214,6 +216,8 @@ public class BoardManager : MonoBehaviour
 
         _lineRenderer.positionCount = _linePositions.Count;
         _lineRenderer.SetPositions(_linePositions.ToArray());
+
+        UpdateArrowHead();
     }
 
     /// <summary>
@@ -224,6 +228,41 @@ public class BoardManager : MonoBehaviour
         if (_lineRenderer == null) return;
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
+        _currentArrow.SetActive(false);
+    }
+
+    /// <summary>
+    ///         矢印の向きを更新
+    /// </summary>
+    private void UpdateArrowHead()
+    {
+        if (_linePositions.Count < 2)
+        {
+            if (_currentArrow != null)
+                _currentArrow.SetActive(false);
+            return;
+        }
+
+        //   終点と一つ前の点から向きを算出
+        Vector3 end = _linePositions[0];
+        Vector3 prev = _linePositions[1];
+
+        Vector3 dir = (end - prev).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        if (_currentArrow == null)
+            _currentArrow = Instantiate(_arrowPrefab, _lineRenderer.transform);
+
+        //   終点に設置
+        _currentArrow.transform.SetPositionAndRotation(
+            end,
+            Quaternion.Euler(0, 0, angle)
+        );
+
+        // 少しだけ内側にずらすと見た目が自然（オプション）
+        _currentArrow.transform.position = end - dir * 0.1f;
+
+        _currentArrow.SetActive(true);
     }
 
     /// <summary>
