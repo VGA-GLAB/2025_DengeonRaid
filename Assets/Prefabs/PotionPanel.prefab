@@ -261,4 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1b68d889961c844a06a1aabe97a5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PotionPanel
+  _panelId: 1
+  _panelGroup: 0
+  Fgs: {fileID: 0}
   _heal: 1
