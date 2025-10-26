@@ -18,10 +18,12 @@ public class SIGIntro : IInGameState
     // 状態中のフレーム毎処理
     public void Update()
     {
+        OnUpdate?.Invoke();
     }
 
     // 状態終了時に呼び出す処理
     public void Exit()
     {
+        OnExit?.Invoke();
     }
 }

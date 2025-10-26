@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
@@ -32,5 +32,15 @@ public class Panel : MonoBehaviour
     public virtual void Effect()
     {
 
+    }
+
+    public virtual void Effect(PreviewPlayerData preview)
+    {
+        Debug.Log("Effectメソッドが未実装");
+    }
+
+    public virtual void DestroyThis()
+    {
+        Debug.Log("DestroyThisメソッドが未実装");
     }
 }

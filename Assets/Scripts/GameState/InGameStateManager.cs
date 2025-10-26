@@ -2,38 +2,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InGameStateManager : MonoBehaviour
+public class InGameStateManager : StaticInstanceMonoBehaviour<InGameStateManager>
 {
-    public static InGameStateManager Instance;
     /// <summary>InGame StateMachine</summary>
     public InGameStateMachine IGsm;
     public int Score = 0;
     
     [SerializeField] private PanelMovement _panelMovement;
-    [SerializeField] private UIUpdater _uiUpdater;
+    [SerializeField] private UIController uiController;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
-        InitGlobalStateMachine();
-    }
-
+    #region ライフサイクル
     private void Start()
     {
         // 状態のeventに処理を登録する
-        //IGsm.States[typeof(SIGIntro)].OnEnter += UpdateUIScoreText;
         IGsm.States[typeof(SIGCheckGameEnd)].OnEnter += JudgeGameEnd;
-        //IGsm.States[typeof(SIGEliminatePanel)].OnEnter += UpdateUIScoreText;
         IGsm.ChangeState<SIGIdle>();
     }
+    #endregion
 
     /// <summary>
     /// 設定を書く感じで、ゲームで使用する状態を登録する
@@ -48,6 +33,11 @@ public class InGameStateManager : MonoBehaviour
         IGsm.RegisterState(new SIGSpawnNewPanel());
         IGsm.RegisterState(new SIGBusy());
         IGsm.RegisterState(new SIGCheckGameEnd());
+    }
+
+    protected override void CustomAwake()
+    {
+        InitGlobalStateMachine();
     }
 
     public void JudgeGameEnd()

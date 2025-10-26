@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PotionPanel : Panel
 {
@@ -8,5 +8,16 @@ public class PotionPanel : Panel
     public override void Effect()
     {
         Fgs.PlayerHP += _heal;
+        base.Effect();
+    }
+
+    public override void Effect(PreviewPlayerData preview)
+    {
+        preview.Hp += _heal;
+    }
+    public override void DestroyThis()
+    {
+        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        Destroy(gameObject);
     }
 }
