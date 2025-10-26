@@ -11,9 +11,6 @@ public class Panel : MonoBehaviour
     [SerializeField,Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
 
-    [SerializeField]
-    protected Figures Fgs;
-
     /// <summary>
     ///         パネルのID(読み取り用)
     /// </summary>
@@ -27,11 +24,6 @@ public class Panel : MonoBehaviour
     public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
-    }
-
-    public virtual void Effect()
-    {
-
     }
 
     public virtual void Effect(PreviewPlayerData preview)

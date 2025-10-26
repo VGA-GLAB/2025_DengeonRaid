@@ -21,19 +21,7 @@ public class EnemyPanel : Panel
     public int Hp { get => _hp; private set => _hp = value; }
     public bool IsDead { get => _isDead; private set => _isDead = value; }
 
-    public override void Effect()
-    {
-        Fgs.PlayerHP -= Attack;
-        if (Fgs.PlayerHP <= 0)
-        {
-            Fgs.IsDeath = true;
-        }
-        else
-        {
-            Fgs.IsDeath = false;
-        }
-        base.Effect();
-    }
+
 
     public void SetResolvePreview(PreviewEnemyData preview)
     {
