@@ -1,13 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CoinPanel : Panel
+public class ShieldPanel : Panel
 {
-    [SerializeField,Header("1つのパネルにつき何コイン手に入れるか")]
-    private int _coin;
+    [SerializeField, Header("シールド量")]
+    private int _shield = 5;
 
     public override void Effect(PreviewPlayerData preview)
     {
-        preview.Gold += _coin;
+        preview.Shield +=  _shield;
     }
     public override void DestroyThis()
     {

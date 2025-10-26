@@ -1,11 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class SwordPanel : Panel
 {
-    [SerializeField, Header("Player‚ª—^‚¦‚éƒ_ƒ[ƒW‚É‘Î‚·‚éƒoƒt")]
+    [SerializeField, Header("PlayerãŒä¸ãˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ã«å¯¾ã™ã‚‹ãƒãƒ•")]
     private int _damageBuff;
-    public override void Effect()
+
+    public override void Effect(PreviewPlayerData preview)
     {
-        //Player‚ÌUŒ‚—Í‚É_daageBuff‚ğæZ‚·‚éˆ—‚ğ’Ç‰Á‚·‚é
+        preview.PanelAttack += _damageBuff;
+    }
+    public override void DestroyThis()
+    {
+        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        Destroy(gameObject);
     }
 }
