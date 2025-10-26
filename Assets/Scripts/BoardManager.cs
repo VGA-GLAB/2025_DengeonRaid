@@ -26,6 +26,8 @@ public class BoardManager : MonoBehaviour
 
     private List<Vector3> _linePositions = new List<Vector3>();
     private InGameStateMachine _gameStateMachine;
+    private ReferenceManager _rm;
+    private GameDirector _director;
 
     private void Awake()
     {
@@ -43,6 +45,8 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        _rm = ReferenceManager.Instance;
+        _director = _rm.GameDirector;
         InitBoard();
         _gameStateMachine = InGameStateManager.Instance.IGsm;
         _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter += EndSelection;
@@ -57,6 +61,23 @@ public class BoardManager : MonoBehaviour
         //　範囲チェック
         if (x < 0 || y < 0 || x >= _width || y >= _height) return null;
         return _boardArray[x, y];
+    }
+
+    /// <summary>
+    ///         ボードにある全ての敵パネルを取得する
+    /// </summary>
+    /// <returns></returns>
+    public List<EnemyPanel> GetEnemyPanels()
+    {
+        List<EnemyPanel> rst = new List<EnemyPanel>();
+        foreach (var panel in _boardArray)
+        {
+            if (panel is EnemyPanel)
+            {
+                rst.Add(panel as EnemyPanel);
+            }
+        }
+        return rst;
     }
 
     /// <summary>
@@ -123,13 +144,14 @@ public class BoardManager : MonoBehaviour
             {
                 Vector2Int pos = selectPanel.BoardPos;
                 _boardArray[pos.x, pos.y] = null;
-                Destroy(selectPanel.gameObject);
             }
+
+            _rm.PanelResolvingController.ProcessWrapped();
             _selectedStack.Clear();
         }
 
-        _gameStateMachine.ChangeState<SIGSpawnNewPanel>();
         ClearLine();
+        _director.PanelResolvingFinished();
     }
 
 

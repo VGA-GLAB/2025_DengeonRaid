@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
     private InputAction _positionAction;
     private bool _isDragging = false;
     private InGameStateMachine _gameStateMachine;
+    private ReferenceManager _rm;
 
     #region ライフサイクル
     private void Awake()
@@ -28,7 +29,8 @@ public class InputController : MonoBehaviour
 
     private void Start()
     {
-        _gameStateMachine = InGameStateManager.Instance.IGsm;
+        _rm =ReferenceManager.Instance;
+        _gameStateMachine = _rm.Igsm;
     }
 
     private void Update()
