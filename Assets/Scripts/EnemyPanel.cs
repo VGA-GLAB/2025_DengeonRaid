@@ -16,6 +16,5 @@ public class EnemyPanel : Panel
         {
             Fgs.IsDeath = false;
         }
-        base.Effect();
     }
 }

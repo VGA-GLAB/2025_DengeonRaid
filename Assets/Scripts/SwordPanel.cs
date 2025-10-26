@@ -7,6 +7,5 @@ public class SwordPanel : Panel
     public override void Effect()
     {
         //Player‚ÌUŒ‚—Í‚É_daageBuff‚ğæZ‚·‚éˆ—‚ğ’Ç‰Á‚·‚é
-        base.Effect();
     }
 }
