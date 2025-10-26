@@ -16,8 +16,10 @@ public class BoardManager : MonoBehaviour
     [Header("参照")]
     [SerializeField] private Panel[] _panelPrefabs;
     [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private GameObject _arrowPrefab;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
+    private GameObject _currentArrow;
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private bool _isSelected = false;
@@ -75,10 +77,15 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     public void ContinueSelection(Panel panel)
     {
-        //  選択中、パネルが違う種類,縦横斜めにない場合
+        //  選択中、縦横斜めにない場合
         if (!_isSelected ||
-            panel.PanelId != _selectedStack.Peek().PanelId ||
             !IsAdjacent8(_selectedStack.Peek(), panel))
+            return;
+
+        Panel lastPanel = _selectedStack.Peek();
+
+        //  接続可能かをチェック
+        if (!CanConnectType(lastPanel, panel))
             return;
 
         if (_selectedStack.Contains(panel))
@@ -142,7 +149,7 @@ public class BoardManager : MonoBehaviour
                 Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
                 panel.transform.localPosition = new Vector3(x, -y, 0);
 
-                panel.Initialize(new Vector2Int(x, y), randomPanel);
+                panel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = panel;
             }
         }
@@ -169,12 +176,12 @@ public class BoardManager : MonoBehaviour
                 {
                     //  盤面配列の更新
                     _boardArray[x, emptyY] = panel;
-                    _boardArray[x,y] = null;
+                    _boardArray[x, y] = null;
 
                     panel.BoardPos = new Vector2Int(x, emptyY);
                     panel.transform.localPosition = new Vector3Int(x, -emptyY, 0);
                 }
-                emptyY--; 
+                emptyY--;
             }
 
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
@@ -185,7 +192,7 @@ public class BoardManager : MonoBehaviour
 
                 //  TODO: 落下アニメーションをつける
                 newPanel.transform.localPosition = new Vector3(x, -y, 0);
-                newPanel.Initialize(new Vector2Int(x, y), randomPanel);
+                newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
             }
         }
@@ -197,7 +204,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void UpdateLine()
     {
-        if(_lineRenderer == null) return;
+        if (_lineRenderer == null) return;
         //  一度選択した線が、次のドラッグでも残るためすべて消去
         _linePositions.Clear();
 
@@ -209,6 +216,8 @@ public class BoardManager : MonoBehaviour
 
         _lineRenderer.positionCount = _linePositions.Count;
         _lineRenderer.SetPositions(_linePositions.ToArray());
+
+        UpdateArrowHead();
     }
 
     /// <summary>
@@ -216,9 +225,42 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void ClearLine()
     {
-        if( _lineRenderer == null) return;
+        if (_lineRenderer == null) return;
         _lineRenderer.positionCount = 0;
         _linePositions.Clear();
+        _currentArrow.SetActive(false);
+    }
+
+    /// <summary>
+    ///         矢印の向きを更新
+    /// </summary>
+    private void UpdateArrowHead()
+    {
+        if (_linePositions.Count < 2)
+        {
+            if (_currentArrow != null)
+                _currentArrow.SetActive(false);
+            return;
+        }
+
+        //   終点と一つ前の点から向きを算出
+        Vector3 end = _linePositions[0];
+        Vector3 prev = _linePositions[1];
+
+        Vector3 dir = (end - prev).normalized;
+        //  始点から終点に向かうベクトルの角度を、0°〜360の見た目の回転角に変換
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        if (_currentArrow == null)
+            _currentArrow = Instantiate(_arrowPrefab, _lineRenderer.transform);
+
+        //   終点に設置
+        _currentArrow.transform.SetPositionAndRotation(
+            end,
+            Quaternion.Euler(0, 0, angle)
+        );
+
+        _currentArrow.SetActive(true);
     }
 
     /// <summary>
@@ -233,5 +275,26 @@ public class BoardManager : MonoBehaviour
         int dy = Mathf.Abs(posA.y - posB.y);
 
         return (dx <= 1 && dy <= 1 && (dx + dy != 0));
+    }
+
+    /// <summary>
+    ///         GroupやIDを見てつなげられるか判定
+    /// </summary>
+    /// <returns></returns>
+    private bool CanConnectType(Panel a, Panel b)
+    {
+        //  同じグループならOK
+        if (a.Group == b.Group)
+        {
+            //  同グループ内で同じIDならOK
+            if (a.PanelId == b.PanelId)
+                return true;
+
+            //  グループがBattleなら、異なるIDでもOK
+            if (a.Group == PanelGroup.Battle)
+                return true;
+        }
+
+        return false;
     }
 }
