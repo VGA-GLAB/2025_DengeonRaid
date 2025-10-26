@@ -8,6 +8,7 @@ public class GlobalStateManager : MonoBehaviour
     /// <summary>全体StateMachine</summary>
     public GlobalStateMachine Gsm;
 
+    #region ライフサイクル
     private void Awake()
     {
         if (Instance == null)
@@ -27,7 +28,9 @@ public class GlobalStateManager : MonoBehaviour
     {
         Gsm.ChangeState<STitleScreen>();
     }
+    #endregion
 
+    #region Privateメソッド
     private void InitGlobalStateMachine()
     {
         Gsm = new GlobalStateMachine();
@@ -35,4 +38,6 @@ public class GlobalStateManager : MonoBehaviour
         Gsm.RegisterState(new SInGame());
         Gsm.RegisterState(new SResultScreen());
     }
+    #endregion
+
 }

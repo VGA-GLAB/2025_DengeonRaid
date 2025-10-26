@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class CoinPanel : Panel
 {
@@ -8,5 +8,17 @@ public class CoinPanel : Panel
     public override void Effect()
     {
         Fgs.Wallet += _coin;
+        base.Effect();
+    }
+
+    public override void Effect(PreviewPlayerData preview)
+    {
+        preview.Gold += _coin;
+    }
+
+    public override void DestroyThis()
+    {
+        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        Destroy(gameObject);
     }
 }

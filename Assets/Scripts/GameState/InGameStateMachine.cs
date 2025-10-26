@@ -6,8 +6,9 @@ public class InGameStateMachine
 {
     public IInGameState CurrentState; // 現在状態
     public readonly Dictionary<Type, IInGameState> States = new(); // 全ての状態を保持するDictionary、最初に登録する
-
     public event Action<Type, Type> OnStateChanged; // 状態遷移時呼び出し用delegate。今は未だ使わないかも
+
+    #region Publicメソッド
     
     /// <summary>
     /// StateMachineで管理されるゲーム状態を登録する
@@ -48,4 +49,6 @@ public class InGameStateMachine
     {
         CurrentState?.Update();
     }
+    
+    #endregion
 }

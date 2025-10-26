@@ -1,10 +1,8 @@
-using System;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-/// <summary>
-/// InGame状態：ゲーム終了判定
-/// </summary>
-public class SIGCheckGameEnd : IInGameState
+public class SIGEnemyTurn : IInGameState
 {
     public event Action OnEnter;
     public event Action OnUpdate;

@@ -9,7 +9,7 @@ public class SIGEliminatePanel : IInGameState
     public event Action OnEnter;
     public event Action OnUpdate;
     public event Action OnExit;
-    
+
     // 状態開始時に呼び出す処理
     public void Enter()
     {
@@ -19,10 +19,12 @@ public class SIGEliminatePanel : IInGameState
     // 状態中のフレーム毎処理
     public void Update()
     {
+        OnUpdate?.Invoke();
     }
 
     // 状態終了時に呼び出す処理
     public void Exit()
     {
+        OnExit?.Invoke();
     }
 }
