@@ -21,8 +21,6 @@ public class EnemyPanel : Panel
     public int Hp { get => _hp; private set => _hp = value; }
     public bool IsDead { get => _isDead; private set => _isDead = value; }
 
-
-
     public void SetResolvePreview(PreviewEnemyData preview)
     {
         _preview = preview;
