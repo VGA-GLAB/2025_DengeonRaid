@@ -22,6 +22,7 @@ public class BoardManager : MonoBehaviour
     private GameObject _currentArrow;
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
+    private List<Panel> _highlightedPanels = new List<Panel>();
     private bool _isSelected = false;
 
     private List<Vector3> _linePositions = new List<Vector3>();
@@ -90,6 +91,9 @@ public class BoardManager : MonoBehaviour
         _selectedStack.Push(panel);
         _isSelected = true;
 
+        _highlightedPanels.Clear();
+        HighlightConnectablePanels(panel, panel);
+
         UpdateLine();
     }
 
@@ -135,6 +139,8 @@ public class BoardManager : MonoBehaviour
     {
         if (!_isSelected) return;
         _isSelected = false;
+
+        ClearHighLight();
 
         if (_selectedStack.Count >= _selectCount)
         {
@@ -221,6 +227,7 @@ public class BoardManager : MonoBehaviour
         _gameStateMachine.ChangeState<SIGIdle>();
     }
 
+    #region LineRendrer関連
     /// <summary>
     ///         ライン更新
     /// </summary>
@@ -284,6 +291,7 @@ public class BoardManager : MonoBehaviour
 
         _currentArrow.SetActive(true);
     }
+    #endregion
 
     /// <summary>
     ///         縦横斜めと接しているかの判定
@@ -318,5 +326,58 @@ public class BoardManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///         選択できるものをハイライトするクラス
+    /// </summary>
+    /// <param name="rootPanel">マウスで最初に選んだパネル</param>
+    /// <param name="startPanel">探索の中心パネル</param>
+    private void HighlightConnectablePanels(Panel rootPanel, Panel startPanel)
+    {
+        startPanel.SetHighlight(true);
+        _highlightedPanels.Add(startPanel);
+
+        // 8方向探索
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                //  自分自身は除外
+                if (dx == 0 && dy == 0) continue;
+
+                int nx = startPanel.BoardPos.x + dx;
+                int ny = startPanel.BoardPos.y + dy;
+
+                Panel neighbor = GetPanel(nx, ny);
+                if (neighbor == null) continue;
+
+                //  現在のstartPanelとの接続条件
+                if (CanConnectType(startPanel, neighbor))
+                {
+                    // 無限ループ防止
+                    if (!ReferenceEquals(rootPanel, neighbor) &&
+                        !_highlightedPanels.Contains(neighbor))
+                    {
+                        // 再帰呼び出し
+                        HighlightConnectablePanels(rootPanel, neighbor);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /// <summary>
+    ///         ハイライトを消去
+    /// </summary>
+    private void ClearHighLight()
+    {
+        foreach (var panel in _highlightedPanels)
+        {
+            if (panel != null)
+                panel.SetHighlight(false);
+        }
+        _highlightedPanels.Clear();
     }
 }
