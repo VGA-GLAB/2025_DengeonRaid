@@ -11,6 +11,9 @@ public class Panel : MonoBehaviour
     [SerializeField,Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
 
+    private SpriteRenderer _spriteRenderer;
+    private Color _defaultColor;
+
     /// <summary>
     ///         パネルのID(読み取り用)
     /// </summary>
@@ -21,9 +24,22 @@ public class Panel : MonoBehaviour
     /// </summary>
     public PanelGroup Group => _panelGroup;
 
+    private void Awake()
+    {
+        if(_spriteRenderer == null)
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _defaultColor = _spriteRenderer.color;
+    }
+
     public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
+    }
+
+    public void SetHighlight(bool isOn)
+    {
+        _spriteRenderer.color = isOn ? Color.yellow : _defaultColor;
     }
 
     public virtual void Effect(PreviewPlayerData preview)
