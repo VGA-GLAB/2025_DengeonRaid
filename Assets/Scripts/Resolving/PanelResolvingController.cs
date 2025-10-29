@@ -8,7 +8,6 @@ public class PanelResolvingController : MonoBehaviour
     private void Start()
     {
         _rm = ReferenceManager.Instance;
-        //_rm.Igsm.States[typeof(SIGEliminatePanel)].OnEnter += ProcessWrapped;
     }
 
     /// <summary>
@@ -18,14 +17,13 @@ public class PanelResolvingController : MonoBehaviour
     {
         ProcessPanelResolvePreview();
         ApplyPanelResolvePreview();
-        //_rm.GameDirector.PanelResolvingFinished();
     }
     /// <summary>
     /// パネル消去結果のプレビューを作成する
     /// </summary>
     public void ProcessPanelResolvePreview()
     {
-        _resolver = new PanelResolver(_rm.PlayerController, _rm.ChouBoardManager.SelectedStack);
+        _resolver = new PanelResolver(_rm.PlayerController, _rm.BoardManager.SelectedStack);
         _resolver.ProcessPreview();
     }
 
@@ -35,7 +33,6 @@ public class PanelResolvingController : MonoBehaviour
     public void ApplyPanelResolvePreview()
     {
         _resolver.ApplyPreviews();
-        //_rm.ChouBoardManager._selectedStack.Clear();
         _resolver = null;
     }
 

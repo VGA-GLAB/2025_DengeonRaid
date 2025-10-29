@@ -5,20 +5,39 @@ using UnityEngine;
 
 public class EnemyAttackProcessor
 {
-    private ChouBoardManager _bm;
+    private BoardManager _bm;
     private PlayerController _player;
     private PreviewPlayerData _playerPreview;
+    public int FinalDamage { get; private set; }
 
-    public EnemyAttackProcessor(ChouBoardManager bm, PlayerController player)
+    public EnemyAttackProcessor(BoardManager bm, PlayerController player)
     {
         _bm = bm;
         _player = player;
-        _playerPreview = new PreviewPlayerData(player.Hp, player.Exp, player.Gold, player.Shield, player.ShieldStrength, player.BaseAttack);
+        _playerPreview = new PreviewPlayerData(_player);
     }
 
+    /// <summary>
+    /// ボードに敵パネルがあるか
+    /// </summary>
+    /// <returns></returns>
+    public bool EnemyExists()
+    {
+        List<EnemyPanel> enemies = _bm.GetEnemyPanels();
+        return enemies != null && enemies.Count > 0;
+    }
+
+    /// <summary>
+    /// 敵攻撃のダメージを算出する
+    /// </summary>
     public void Process()
     {
         List<EnemyPanel> enemies = _bm.GetEnemyPanels();
+
+        if(enemies.Count == 0)
+        {
+            return;
+        }
 
         int enemyAttack = 0;
         foreach (EnemyPanel enemy in enemies)
@@ -29,9 +48,10 @@ public class EnemyAttackProcessor
         // シールドが吸収できるダメージ量
         int playerShieldAbsorb = _playerPreview.Shield * _playerPreview.ShieldStrength;
         // 攻撃後に残るシールド値
-        int playerShieldRemain = playerShieldAbsorb > enemyAttack ? playerShieldAbsorb - enemyAttack : 0;
+        int playerShieldRemain = enemyAttack > playerShieldAbsorb ? 0 : (playerShieldAbsorb - enemyAttack) / _playerPreview.ShieldStrength;
         // プレイヤーHPへのダメージ
         int playerHpDamage = playerShieldAbsorb > enemyAttack ? 0 : enemyAttack - playerShieldAbsorb;
+        FinalDamage = playerHpDamage;
 
         _playerPreview.Hp -= playerHpDamage;
         _playerPreview.Shield = playerShieldRemain;
@@ -41,6 +61,13 @@ public class EnemyAttackProcessor
         }
 
         _player.SetResolvePreview(_playerPreview);
+    }
+
+    /// <summary>
+    /// 算出した結果をプレイヤーに適用する
+    /// </summary>
+    public void ApplyDamageToPlayer()
+    {
         _player.ApplyPreview();
     }
 }

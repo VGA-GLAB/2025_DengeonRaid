@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class EnemyPanel : Panel
@@ -12,6 +13,11 @@ public class EnemyPanel : Panel
     private int _hp;
     [SerializeField, Header("死亡フラグ")]
     private bool _isDead;
+
+    [Header("敵属性UI")]
+    [SerializeField] private TextMeshProUGUI _uiTextAttack;
+    [SerializeField] private TextMeshProUGUI _uiTextShield;
+    [SerializeField] private TextMeshProUGUI _uiTextHp;
     // 戦闘結果プレビューデータ
     private PreviewEnemyData _preview;
 
@@ -24,6 +30,11 @@ public class EnemyPanel : Panel
     public void SetResolvePreview(PreviewEnemyData preview)
     {
         _preview = preview;
+    }
+
+    private void Start()
+    {
+        UpdateAttrDisplay();
     }
     /// <summary>
     /// 戦闘処理で計算した結果プレビューを適用する
@@ -47,17 +58,19 @@ public class EnemyPanel : Panel
         _preview = null;
     }
 
-    /// <summary>
-    /// 属性表示を更新する
-    /// </summary>
-    public void RefreshDisplay()
-    {
-        // TODO 未実装
-    }
-
     public override void DestroyThis()
     {
-        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 敵の属性表示を更新する
+    /// </summary>
+    public void UpdateAttrDisplay()
+    {
+        _uiTextAttack.text = _attack.ToString();
+        _uiTextShield.text = _shield.ToString();
+        _uiTextHp.text = _hp.ToString();
     }
 }

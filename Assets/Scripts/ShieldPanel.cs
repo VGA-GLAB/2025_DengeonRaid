@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class ShieldPanel : Panel
 {
@@ -11,7 +11,7 @@ public class ShieldPanel : Panel
     }
     public override void DestroyThis()
     {
-        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
     }
 }

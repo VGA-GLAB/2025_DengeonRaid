@@ -11,7 +11,7 @@ public class CoinPanel : Panel
     }
     public override void DestroyThis()
     {
-        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
     }
 }
