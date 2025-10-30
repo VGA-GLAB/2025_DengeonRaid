@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1416c310c6e100d458b2802164a85670, type: 3}
+  m_Name: Shild
+  m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
+  ShopEffectType: 1
+  ItemName: Shild
+  Icon: {fileID: 0}
+  Value: 3
+  Description: "\u6700\u5927\u30B7\u30FC\u30EB\u30C9\u5897\u3084\u3057\u307E\u3059"
