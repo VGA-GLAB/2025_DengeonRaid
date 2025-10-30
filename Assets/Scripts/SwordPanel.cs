@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class SwordPanel : Panel
 {
-    [SerializeField, Header("Playerが与えるダメージに対するバフ")]
-    private int _damageBuff;
+    [SerializeField, Header("パネルごとのプレイヤー武器攻撃力加算回数")]
+    private int _weaponAmount;
 
     public override void Effect(PreviewPlayerData preview)
     {
-        preview.PanelAttack += _damageBuff;
+        preview.WeaponAmount += _weaponAmount;
     }
     public override void DestroyThis()
     {
-        //ReferenceManager.Instance.ChouBoardManager.RemovePanelFromBoard(this);
+        ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
     }
 }

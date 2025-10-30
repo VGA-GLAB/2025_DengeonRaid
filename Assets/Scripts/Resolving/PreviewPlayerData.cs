@@ -5,23 +5,39 @@ using UnityEngine;
 /// </summary>
 public class PreviewPlayerData
 {
-    public int Hp = 0;
-    public int Exp = 0;
-    public int Gold = 0;
-    public int Shield = 0;
-    public int ShieldStrength = 0;
-    public int PanelAttack = 0;
-    public int BaseAttack = 0;
-    public bool IsDead = false;
+    public int HpMax;
+    public int Hp;
+    public int Exp;
+    public int ExpMax;
+    public int Gold;
+    public int GoldMax;
+    public int Shield;
+    public int ShieldMax;
+    public int ShieldExp;
+    public int ShieldExpMax;
+    public int ShieldStrength;
+    public int BaseAttack;
+    public int WeaponAttack;
+    public int WeaponAmount;
+    public bool IsDead;
 
-    public PreviewPlayerData(int hp, int exp, int gold, int shield, int shieldStrength, int baseAttack)
+
+    public PreviewPlayerData(PlayerController player)
     {
-        Hp = hp;
-        Exp = exp;
-        Gold = gold;
-        Shield = shield;
-        ShieldStrength = shieldStrength;
-        PanelAttack = 0;
-        BaseAttack = baseAttack;
+        Hp = player.Hp;
+        HpMax = player.HpMax;
+        Exp = player.Exp;
+        ExpMax = player.ExpMax;
+        Gold = player.Gold;
+        GoldMax = player.GoldMax;
+        Shield = player.Shield;
+        ShieldMax = player.ShieldMax;
+        ShieldExp = player.ShieldExp;
+        ShieldExpMax = player.ShieldExpMax;
+        ShieldStrength = player.ShieldStrength;
+        BaseAttack = player.BaseAttack;
+        WeaponAttack = player.WeaponAttack;
+        WeaponAmount = 0;
+        IsDead = player.IsDead;
     }
 }

@@ -16,7 +16,7 @@ public class PanelResolver
     {
         _player = player;
         _panels = panels;
-        _playerPreview = new PreviewPlayerData(player.Hp, player.Exp, player.Gold, player.Shield, player.ShieldStrength, player.BaseAttack);
+        _playerPreview = new PreviewPlayerData(_player);
         _enemies = new List<EnemyPanel>();
     }
 
@@ -74,7 +74,7 @@ public class PanelResolver
                 }
                 else
                 {
-                    enemy.RefreshDisplay();
+                    enemy.UpdateAttrDisplay();
                 }
             }
             else
@@ -93,7 +93,7 @@ public class PanelResolver
     private void ProcessPlayerAttack(PreviewEnemyData enemyPreview)
     {
         // プレイヤーの総攻撃力
-        int playerAttack = _player.BaseAttack + _playerPreview.PanelAttack;
+        int playerAttack = _player.BaseAttack + (_playerPreview.WeaponAttack * _playerPreview.WeaponAmount);
         // 敵のシールドが吸収できるダメージ量
         int enemyShieldAbsorb = enemyPreview.Shield * enemyPreview.ShieldStrength;
         // 敵が攻撃を受けて残るシールド数

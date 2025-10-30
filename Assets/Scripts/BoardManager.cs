@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -30,6 +30,8 @@ public class BoardManager : MonoBehaviour
     private ReferenceManager _rm;
     private GameDirector _director;
 
+    public Stack<Panel> SelectedStack { get { return _selectedStack; } }
+
     private void Awake()
     {
         if (_lineRenderer == null)
@@ -49,7 +51,7 @@ public class BoardManager : MonoBehaviour
         _rm = ReferenceManager.Instance;
         _director = _rm.GameDirector;
         InitBoard();
-        _gameStateMachine = InGameStateManager.Instance.IGsm;
+        _gameStateMachine = _rm.Igsm;
         _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter += EndSelection;
         _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter += DropPanel;
     }
@@ -149,7 +151,6 @@ public class BoardManager : MonoBehaviour
             foreach (var selectPanel in _selectedStack)
             {
                 Vector2Int pos = selectPanel.BoardPos;
-                _boardArray[pos.x, pos.y] = null;
             }
 
             _rm.PanelResolvingController.ProcessWrapped();
@@ -224,7 +225,7 @@ public class BoardManager : MonoBehaviour
                 _boardArray[x, y] = newPanel;
             }
         }
-        _gameStateMachine.ChangeState<SIGIdle>();
+        _director.SpawnNewPanelFinished();
     }
 
     #region LineRendrer関連
@@ -367,7 +368,6 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
     ///         ハイライトを消去
     /// </summary>
@@ -379,5 +379,14 @@ public class BoardManager : MonoBehaviour
                 panel.SetHighlight(false);
         }
         _highlightedPanels.Clear();
+    }
+
+    /// <summary>
+    /// パネル二次元配列にて、指定されたパネルをnullに設定する
+    /// </summary>
+    /// <param name="panel"></param>
+    public void RemovePanelFromBoard(Panel panel)
+    {
+        _boardArray[panel.BoardPos.x, panel.BoardPos.y] = null;
     }
 }

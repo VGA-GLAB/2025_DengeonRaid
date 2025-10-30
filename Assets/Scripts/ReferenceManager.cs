@@ -17,7 +17,9 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public Text UIArmorExp;
     public Text UIExp;
     public Text UIGold;
-    
+    public GameObject UIEnemyAttackPanel;
+    public TextMeshProUGUI UIEnemyDamageText;
+
     [Header("システム系")]
     public Camera MainCamera;
     public InputController InputController;
@@ -31,8 +33,4 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     [Header("ゲーム内要素")]
     public PlayerController PlayerController;
     public Transform BoardPosition;
-
-    [Header("一時")]
-    public ChouInputController ChouInputController;
-    public ChouBoardManager ChouBoardManager;
 }

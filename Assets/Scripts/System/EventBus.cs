@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -51,7 +51,7 @@ public class EventBus
     /// </summary>
     /// <param name="key">eventキー</param>
     /// <param name="param">引数</param>
-    public void Punlish(string key, object param = null)
+    public void Publish(string key, object param = null)
     {
         Events[key].Invoke(param);
     }

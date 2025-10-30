@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2835087053382608362}
   - component: {fileID: 3549694994820210865}
-  - component: {fileID: 1010363264004800150}
-  - component: {fileID: 8616947282621469217}
+  - component: {fileID: -1984394713350848579}
+  - component: {fileID: -3303256531299770696}
   m_Layer: 0
-  m_Name: ShieldPanel
+  m_Name: SwordPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 811b4703b76f1f34193307d5a6dd0ed0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d416c8d61174734cb95a6ff1d6c91e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1010363264004800150
+--- !u!114 &-1984394713350848579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,13 +101,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2705542876679796301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62448e47f5f2bad4099597768944ce0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b28d8449dd61204fb6251b61b242fae, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShieldPanel
-  _panelId: 2
-  _panelGroup: 0
-  _shield: 5
---- !u!61 &8616947282621469217
+  m_EditorClassIdentifier: Assembly-CSharp::SwordPanel
+  _panelId: 3
+  _panelGroup: 1
+  _weaponAmount: 1
+--- !u!61 &-3303256531299770696
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

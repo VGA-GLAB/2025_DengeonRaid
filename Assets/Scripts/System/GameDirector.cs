@@ -49,23 +49,31 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     private void JudgeGameEnd()
     {
-        //if (Score >= 10)
-        //{
-        //    SceneManager.LoadScene("03_TestResultScene_Chou");
-        //}
-        //else
-        //{
+        // TODO ゲーム終了判定処理
         _igsm.ChangeState<SIGIdle>();
-        //}
     }
 
-    //public void UpdateUIScoreText()
-    //{
-    //    _uiUpdater.UpdateScoreText();
-    //}
-
+    /// <summary>
+    /// パネル消去処理完了
+    /// </summary>
     public void PanelResolvingFinished()
     {
         _rm.Igsm.ChangeState<SIGSpawnNewPanel>();
+    }
+
+    /// <summary>
+    /// パネル生成処理完了
+    /// </summary>
+    public void SpawnNewPanelFinished()
+    {
+        _rm.Igsm.ChangeState<SIGEnemyTurn>();
+    }
+
+    /// <summary>
+    /// 敵攻撃処理完了
+    /// </summary>
+    public void EnemyAttackFinished()
+    {
+        _rm.Igsm.ChangeState<SIGIdle>();
     }
 }
