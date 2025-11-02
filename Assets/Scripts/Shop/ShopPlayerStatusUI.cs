@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 ///         PlayerのステータスUI表示
 /// </summary>
-public class ShopPlayerStutsUI : MonoBehaviour
+public class ShopPlayerStatusUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private TMP_Text _attackText;
