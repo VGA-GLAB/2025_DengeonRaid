@@ -10,7 +10,7 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private Transform _shopItemTransform;
     [SerializeField] private GameObject _shopItemPrefab;
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private ShopPlayerStutsUI _shopPlayerStutsUI;
+    [SerializeField] private ShopPlayerStatusUI _shopPlayerStutsUI;
 
     private PreviewPlayerData _previewPlayerData;
     private bool _isInit = false;
