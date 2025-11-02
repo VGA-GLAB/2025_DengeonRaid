@@ -10,6 +10,7 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private Transform _shopItemTransform;
     [SerializeField] private GameObject _shopItemPrefab;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private ShopPlayerStutsUI _shopPlayerStutsUI;
 
     private PreviewPlayerData _previewPlayerData;
     private bool _isInit = false;
@@ -50,6 +51,7 @@ public class ShopUIManager : MonoBehaviour
     /// </summary>
     public void OpenShop()
     {
+        _shopPlayerStutsUI.SetUp(new PreviewPlayerData(_playerController));
         InitShop();
         gameObject.SetActive(true);
     }
