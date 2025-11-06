@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private List<Panel> _highlightedPanels = new List<Panel>();
     private bool _isSelected = false;
+    private bool _isSkillUsed = false;
 
     private List<Vector3> _linePositions = new List<Vector3>();
     private InGameStateMachine _gameStateMachine;
@@ -94,6 +95,7 @@ public class BoardManager : MonoBehaviour
     /// <param name="pos"></param>
     public void DeleatePanel(Vector2Int pos)
     {
+        _isSkillUsed = true;
         _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
         _boardArray[pos.x, pos.y].DestroyThis();
         DropPanel();
@@ -258,7 +260,11 @@ public class BoardManager : MonoBehaviour
                 _boardArray[x, y] = newPanel;
             }
         }
+
+        if(!_isSkillUsed)
         _director.SpawnNewPanelFinished();
+
+        _isSkillUsed = false;
     }
 
     #region LineRendrer関連
