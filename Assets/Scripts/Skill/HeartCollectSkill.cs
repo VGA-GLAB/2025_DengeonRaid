@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-
+﻿/// <summary>
+///         盤面のハートパネルを全て回収して使用スキル
+/// </summary>
 public class HeartCollectSkill : SkillBase
 {
     public override void ActivateSkill()
