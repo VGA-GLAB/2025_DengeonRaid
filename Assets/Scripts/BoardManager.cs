@@ -83,6 +83,7 @@ public class BoardManager : MonoBehaviour
     public void ReplacePanel(Vector2Int pos, Panel panel)
     {
         _boardArray[pos.x, pos.y].DestroyThis();
+        //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
         newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
         panel.Initialize(pos);
@@ -95,6 +96,7 @@ public class BoardManager : MonoBehaviour
     /// <param name="pos"></param>
     public void DeleatePanel(Vector2Int pos)
     {
+        //  スキル使用フラグを立てて、パネル効果を発動
         _isSkillUsed = true;
         _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
         _boardArray[pos.x, pos.y].DestroyThis();
