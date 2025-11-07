@@ -86,8 +86,8 @@ public class BoardManager : MonoBehaviour
         //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
         newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
-        panel.Initialize(pos);
-        _boardArray[pos.x, pos.y] = panel;
+        newPanel.Initialize(new Vector2Int(pos.x,pos.y));
+        _boardArray[pos.x, pos.y] = newPanel;
     }
 
     /// <summary>
