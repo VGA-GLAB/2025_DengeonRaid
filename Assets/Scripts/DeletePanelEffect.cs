@@ -1,14 +1,27 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class DeletePanelEffect : MonoBehaviour
 {
-    void Start()
+    [SerializeField, Header("移動場所")]
+    private Vector3 _targetPos;
+
+    [SerializeField, Header("移動速度")]
+    private float _moveSpeed;
+
+    [SerializeField, Header("パネルのサイズ")]
+    private Vector3 _panelSize;
+
+    [SerializeField, Header("パネルのサイズ変更速度")]
+    private float _panelScaleSpeed;
+
+    public void PanelMove()
     {
-        
+        transform.DOMove(_targetPos, _moveSpeed);
     }
 
-    void Update()
+    public void PanelScale()
     {
-        
+        transform.DOScale(_panelSize, _panelScaleSpeed);
     }
 }

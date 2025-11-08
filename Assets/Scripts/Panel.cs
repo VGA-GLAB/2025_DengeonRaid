@@ -12,18 +12,6 @@ public class Panel : MonoBehaviour
     [SerializeField,Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
 
-    [SerializeField,Header("移動場所")]
-    private Vector3 _targetPos;
-
-    [SerializeField,Header("移動速度")]
-    private float _moveSpeed;
-
-    [SerializeField, Header("パネルのサイズ")]
-    private Vector3 _panelSize;
-
-    [SerializeField, Header("パネルのサイズ変更速度")]
-    private float _panelScaleSpeed;
-
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
 
@@ -53,16 +41,6 @@ public class Panel : MonoBehaviour
     public void SetHighlight(bool isOn)
     {
         _spriteRenderer.color = isOn ? Color.yellow : _defaultColor;
-    }
-
-    public void PanelMove()
-    {
-        transform.DOMove(_targetPos,_moveSpeed);
-    }
-
-    public void PanelScale()
-    {
-        transform.DOScale(_panelSize, _panelScaleSpeed);
     }
 
     public virtual void Effect(PreviewPlayerData preview)
