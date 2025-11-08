@@ -6,6 +6,9 @@ public class DeletePanelEffect : MonoBehaviour
     [SerializeField, Header("ˆÚ“®êŠ")]
     private Vector3 _targetPos;
 
+    [SerializeField, Header("")]
+    private Vector3 _viaPos;
+
     [SerializeField, Header("ˆÚ“®‘¬“x")]
     private float _moveSpeed;
 
@@ -17,7 +20,7 @@ public class DeletePanelEffect : MonoBehaviour
 
     public void PanelMove()
     {
-        transform.DOMove(_targetPos, _moveSpeed);
+        transform.DOPath(new Vector3[] { _viaPos, _targetPos }, _moveSpeed, PathType.CatmullRom);
     }
 
     public void PanelScale()
