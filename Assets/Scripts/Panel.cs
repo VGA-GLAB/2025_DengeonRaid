@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Panel : MonoBehaviour
@@ -10,6 +11,12 @@ public class Panel : MonoBehaviour
 
     [SerializeField,Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
+
+    [SerializeField,Header("移動場所")]
+    private Vector3 _targetPos;
+
+    [SerializeField,Header("移動速度")]
+    private float _moveSpeed;
 
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
@@ -40,6 +47,11 @@ public class Panel : MonoBehaviour
     public void SetHighlight(bool isOn)
     {
         _spriteRenderer.color = isOn ? Color.yellow : _defaultColor;
+    }
+
+    public void UIMove()
+    {
+        transform.DOMove(_targetPos,_moveSpeed);
     }
 
     public virtual void Effect(PreviewPlayerData preview)
