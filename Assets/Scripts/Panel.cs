@@ -49,10 +49,11 @@ public class Panel : MonoBehaviour
         _spriteRenderer.color = isOn ? Color.yellow : _defaultColor;
     }
 
-    public void UIMove()
+    public void PanelMove()
     {
         transform.DOMove(_targetPos,_moveSpeed);
     }
+
 
     public virtual void Effect(PreviewPlayerData preview)
     {
