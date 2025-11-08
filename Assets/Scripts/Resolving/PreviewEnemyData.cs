@@ -17,4 +17,13 @@ public class PreviewEnemyData
         this.ShieldStrength = ShieldStrength;
         this.Attack = Attack;
     }
+
+    public　PreviewEnemyData(EnemyPanel enemy)
+    {
+        this.Hp = enemy.Hp;
+        this.Shield = enemy.Shield;
+        this.ShieldStrength = enemy.ShieldStrength;
+        this.Attack = enemy.Attack;
+        this.IsDead = enemy.IsDead;
+    }
 }

@@ -17,6 +17,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Panel[] _panelPrefabs;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private GameObject _arrowPrefab;
+    [SerializeField] private PlayerController _playerController;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
     private GameObject _currentArrow;
@@ -24,6 +25,7 @@ public class BoardManager : MonoBehaviour
     private Stack<Panel> _selectedStack = new Stack<Panel>();
     private List<Panel> _highlightedPanels = new List<Panel>();
     private bool _isSelected = false;
+    private bool _isSkillUsed = false;
 
     private List<Vector3> _linePositions = new List<Vector3>();
     private InGameStateMachine _gameStateMachine;
@@ -31,6 +33,7 @@ public class BoardManager : MonoBehaviour
     private GameDirector _director;
 
     public Stack<Panel> SelectedStack { get { return _selectedStack; } }
+    public Panel[,] GetBoardArray { get { return _boardArray; } }
 
     private void Awake()
     {
@@ -54,6 +57,12 @@ public class BoardManager : MonoBehaviour
         _gameStateMachine = _rm.Igsm;
         _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter += EndSelection;
         _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter += DropPanel;
+
+        destroyCancellationToken.Register(() =>
+        {
+            _gameStateMachine.States[typeof(SIGEliminatePanel)].OnEnter -= EndSelection;
+            _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter -= DropPanel;
+        });
     }
 
     /// <summary>
@@ -67,6 +76,34 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
+    ///         指定した座標のパネルを置き換える
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="panel"></param>
+    public void ReplacePanel(Vector2Int pos, Panel panel)
+    {
+        _boardArray[pos.x, pos.y].DestroyThis();
+        //  新しいパネルを生成、初期化
+        Panel newPanel = Instantiate(panel, _boardRoot);
+        newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
+        newPanel.Initialize(new Vector2Int(pos.x,pos.y));
+        _boardArray[pos.x, pos.y] = newPanel;
+    }
+
+    /// <summary>
+    ///         指定した座標のパネルを削除する
+    /// </summary>
+    /// <param name="pos"></param>
+    public void DeleatePanel(Vector2Int pos)
+    {
+        //  スキル使用フラグを立てて、パネル効果を発動
+        _isSkillUsed = true;
+        _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
+        _boardArray[pos.x, pos.y].DestroyThis();
+        DropPanel();
+    }
+
+    /// <summary>
     ///         ボードにある全ての敵パネルを取得する
     /// </summary>
     /// <returns></returns>
@@ -75,9 +112,9 @@ public class BoardManager : MonoBehaviour
         List<EnemyPanel> rst = new List<EnemyPanel>();
         foreach (var panel in _boardArray)
         {
-            if (panel is EnemyPanel)
+            if (panel is EnemyPanel p)
             {
-                rst.Add(panel as EnemyPanel);
+                rst.Add(p);
             }
         }
         return rst;
@@ -225,7 +262,11 @@ public class BoardManager : MonoBehaviour
                 _boardArray[x, y] = newPanel;
             }
         }
+
+        if(!_isSkillUsed)
         _director.SpawnNewPanelFinished();
+
+        _isSkillUsed = false;
     }
 
     #region LineRendrer関連
@@ -382,7 +423,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    /// パネル二次元配列にて、指定されたパネルをnullに設定する
+    ///         パネル二次元配列にて、指定されたパネルをnullに設定する
     /// </summary>
     /// <param name="panel"></param>
     public void RemovePanelFromBoard(Panel panel)
