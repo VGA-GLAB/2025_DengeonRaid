@@ -18,6 +18,12 @@ public class Panel : MonoBehaviour
     [SerializeField,Header("移動速度")]
     private float _moveSpeed;
 
+    [SerializeField, Header("パネルのサイズ")]
+    private Vector3 _panelSize;
+
+    [SerializeField, Header("パネルのサイズ変更速度")]
+    private float _panelScaleSpeed;
+
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
 
@@ -54,6 +60,10 @@ public class Panel : MonoBehaviour
         transform.DOMove(_targetPos,_moveSpeed);
     }
 
+    public void PanelScale()
+    {
+        transform.DOScale(_panelSize, _panelScaleSpeed);
+    }
 
     public virtual void Effect(PreviewPlayerData preview)
     {
