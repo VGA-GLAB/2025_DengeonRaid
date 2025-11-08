@@ -6,7 +6,7 @@ public class DeletePanelEffect : MonoBehaviour
     [SerializeField, Header("移動場所")]
     private Vector3 _targetPos;
 
-    [SerializeField, Header("")]
+    [SerializeField, Header("経由地点")]
     private Vector3 _viaPos;
 
     [SerializeField, Header("移動速度")]
