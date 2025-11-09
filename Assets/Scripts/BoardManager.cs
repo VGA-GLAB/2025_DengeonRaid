@@ -161,6 +161,7 @@ public class BoardManager : MonoBehaviour
             while (_selectedStack.Peek() != panel)
             {
                 Panel removed = _selectedStack.Pop();
+                UpdateLine();
             }
             return;
         }
