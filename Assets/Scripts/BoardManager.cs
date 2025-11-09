@@ -86,7 +86,7 @@ public class BoardManager : MonoBehaviour
         //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
         newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
-        newPanel.Initialize(new Vector2Int(pos.x,pos.y));
+        newPanel.Initialize(new Vector2Int(pos.x, pos.y));
         _boardArray[pos.x, pos.y] = newPanel;
     }
 
@@ -130,6 +130,7 @@ public class BoardManager : MonoBehaviour
         _selectedStack.Push(panel);
         _isSelected = true;
 
+        ClearHighLight();
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
@@ -192,10 +193,10 @@ public class BoardManager : MonoBehaviour
 
             _rm.PanelResolvingController.ProcessWrapped();
             _selectedStack.Clear();
+            _director.PanelResolvingFinished();
         }
 
         ClearLine();
-        _director.PanelResolvingFinished();
     }
 
 
@@ -263,8 +264,8 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        if(!_isSkillUsed)
-        _director.SpawnNewPanelFinished();
+        if (!_isSkillUsed)
+            _director.SpawnNewPanelFinished();
 
         _isSkillUsed = false;
     }
