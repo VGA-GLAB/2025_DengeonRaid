@@ -268,6 +268,10 @@ public class BoardManager : MonoBehaviour
         _isSkillUsed = false;
     }
 
+    /// <summary>
+    ///         重み付きランダムでパネルを取得
+    /// </summary>
+    /// <returns></returns>
     private Panel GetRandomPanel()
     {
         int totalWeight = 0;
