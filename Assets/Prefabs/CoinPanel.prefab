@@ -126,7 +126,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0051269233, y: 0.03287345}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -136,7 +136,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5744328, y: 0.5583147}
   m_EdgeRadius: 0
 --- !u!114 &-4260931707250557988
 MonoBehaviour:
@@ -152,5 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoinPanel
   _panelId: 0
   _panelGroup: 0
-  Fgs: {fileID: 0}
   _coin: 1
