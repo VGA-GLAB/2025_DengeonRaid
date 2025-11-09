@@ -14,7 +14,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private int _height = 6;
 
     [Header("参照")]
-    [SerializeField] private Panel[] _panelPrefabs;
+    [SerializeField] private PanelWeightData[] _panelPrefabs;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private PlayerController _playerController;
@@ -212,9 +212,7 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 0; y < _height; y++)
             {
-                //  後でランダムではなくして調整
-                int randomPanel = Random.Range(0, _panelPrefabs.Length);
-                Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
+                Panel panel = Instantiate(GetRandomPanel(), _boardRoot);
                 panel.transform.localPosition = new Vector3(x, -y, 0);
 
                 panel.Initialize(new Vector2Int(x, y));
@@ -255,8 +253,7 @@ public class BoardManager : MonoBehaviour
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
             for (int y = emptyY; y >= 0; y--)
             {
-                int randomPanel = Random.Range(0, _panelPrefabs.Length);
-                Panel newPanel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
+                Panel newPanel = Instantiate(GetRandomPanel(), _boardRoot);
 
                 //  TODO: 落下アニメーションをつける
                 newPanel.transform.localPosition = new Vector3(x, -y, 0);
@@ -269,6 +266,28 @@ public class BoardManager : MonoBehaviour
             _director.SpawnNewPanelFinished();
 
         _isSkillUsed = false;
+    }
+
+    private Panel GetRandomPanel()
+    {
+        int totalWeight = 0;
+        foreach (var panelData in _panelPrefabs)
+            totalWeight += panelData.Weight;
+
+        int randomValue = Random.Range(0, totalWeight);
+        int currentWeight = 0;
+
+        //  ループで積み上げながら比較
+        foreach (var panelData in _panelPrefabs)
+        {
+            currentWeight += panelData.Weight;
+            if (randomValue < currentWeight)
+            {
+                return panelData.PanelPrefab;
+            }
+        }
+        //  念のため返す
+        return _panelPrefabs.Length > 0 ? _panelPrefabs[0].PanelPrefab : null;
     }
 
     #region LineRendrer関連
