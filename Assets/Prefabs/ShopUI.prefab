@@ -659,7 +659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1289465201300148631
@@ -678,9 +678,9 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 700
+    m_Bottom: -3
+  m_ChildAlignment: 1
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1277,7 +1277,7 @@ GameObject:
   - component: {fileID: 2695278543010105368}
   - component: {fileID: 2992069988521556111}
   m_Layer: 5
-  m_Name: ShopUICanvas
+  m_Name: ShopUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopUIManager
   _shopItemDatabase: {fileID: 11400000, guid: 23b481c0567d90042a5b33e040864ec9, type: 2}
   _shopItemTransform: {fileID: 5605503920701310995}
-  _shopItemPrefab: {fileID: 8803145999032633390, guid: 2e1ee6b2e3f1ba246b554c0982c23bf9, type: 3}
+  _shopItemPrefab: {fileID: 1976840014438344846, guid: 2e1ee6b2e3f1ba246b554c0982c23bf9, type: 3}
   _playerController: {fileID: 0}
   _shopPlayerStutsUI: {fileID: 417424746197207349}
 --- !u!1 &8164836372573270641
