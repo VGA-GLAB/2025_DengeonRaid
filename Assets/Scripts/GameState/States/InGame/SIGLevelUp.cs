@@ -1,11 +1,10 @@
-using System;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
-/// 新しいパネルを生成する
+/// InGame状態：レベルアップ
 /// </summary>
-public class SIGSpawnNewPanel : IInGameState
+public class SIGLevelUp : IInGameState
 {
     public event Action OnEnter;
     public event Action OnUpdate;

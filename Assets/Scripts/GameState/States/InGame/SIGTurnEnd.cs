@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// 新しいパネルを生成する
+/// InGame状態：ターンエンド
 /// </summary>
-public class SIGSpawnNewPanel : IInGameState
+public class SIGTurnEnd : IInGameState
 {
     public event Action OnEnter;
     public event Action OnUpdate;

@@ -17,6 +17,7 @@ public class ShopUIManager : MonoBehaviour
 
     private void Start()
     {
+        _playerController = ReferenceManager.Instance.PlayerController; 
         this.gameObject.SetActive(false);
         InitShop();
     }
@@ -24,7 +25,6 @@ public class ShopUIManager : MonoBehaviour
     public void BuyItem(ShopItemData item)
     {
         _previewPlayerData = new PreviewPlayerData(_playerController);
-        _previewPlayerData.Gold = 0;
 
          //  対象ステータスを直接操作
         switch (item.ShopEffectType)
@@ -44,6 +44,8 @@ public class ShopUIManager : MonoBehaviour
                 _previewPlayerData.Gold += item.Value;
                 break;
         }
+        _playerController.SetResolvePreview(_previewPlayerData);
+        _playerController.ApplyPreview();
     }
 
     /// <summary>
@@ -62,6 +64,7 @@ public class ShopUIManager : MonoBehaviour
     public void CloseShop()
     {
         gameObject.SetActive(false);
+        ReferenceManager.Instance.GameDirector.ShopFinished();
     }
 
     /// <summary>

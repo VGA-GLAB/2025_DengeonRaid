@@ -44,7 +44,7 @@ public class PanelResolver
         {
             foreach (var enemy in _enemies)
             {
-                PreviewEnemyData enemyPreview = new PreviewEnemyData(enemy.Hp, enemy.Shield, enemy.ShieldStrength, enemy.Attack);
+                PreviewEnemyData enemyPreview = new PreviewEnemyData(enemy);
                 ProcessPlayerAttack(enemyPreview);
                 enemy.SetResolvePreview(enemyPreview);
             }
@@ -58,7 +58,6 @@ public class PanelResolver
     /// </summary>
     public void ApplyPreviews()
     {
-        _player.ApplyPreview();
         foreach (var enemy in _enemies)
         {
             enemy.ApplyPreview();
@@ -82,6 +81,7 @@ public class PanelResolver
                 panel.DestroyThis();
             }
         }
+        _player.ApplyPreview();
     }
     #endregion
     /// <summary>
@@ -105,6 +105,7 @@ public class PanelResolver
         enemyPreview.Hp -= enemyHpDamage;
         if(enemyPreview.Hp <= 0)
         {
+            _playerPreview.Exp += enemyPreview.KillExp;
             enemyPreview.IsDead = true;
         }
     }
