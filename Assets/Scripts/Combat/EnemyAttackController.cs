@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
@@ -35,7 +35,7 @@ public class EnemyAttackController : MonoBehaviour
             _rm.UIEnemyAttackPanel.SetActive(false);
             _processor.ApplyDamageToPlayer();
         }
-        _processor = null;  
+        _processor = null;
         _rm.GameDirector.EnemyAttackFinished();
     }
 }

@@ -1,38 +1,41 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class EnemyPanel : Panel
 {
     [SerializeField, Header("敵攻撃力")]
-    private int _attack;
+    protected int _attack;
     [SerializeField, Header("敵シールド")]
-    private int _shield;
+    protected int _shield;
     [SerializeField, Header("敵シールド耐久度")]
-    private int _shieldStrength;
+    protected int _shieldStrength;
     [SerializeField, Header("敵HP")]
-    private int _hp;
+    protected int _hp;
+    [SerializeField, Header("撃破Exp")]
+    protected int _killExp;
     [SerializeField, Header("死亡フラグ")]
-    private bool _isDead;
+    protected bool _isDead;
 
     [Header("敵属性UI")]
-    [SerializeField] private TextMeshProUGUI _uiTextAttack;
-    [SerializeField] private TextMeshProUGUI _uiTextShield;
-    [SerializeField] private TextMeshProUGUI _uiTextHp;
+    [SerializeField] protected TextMeshProUGUI _uiTextAttack;
+    [SerializeField] protected TextMeshProUGUI _uiTextShield;
+    [SerializeField] protected TextMeshProUGUI _uiTextHp;
     // 戦闘結果プレビューデータ
-    private PreviewEnemyData _preview;
+    protected PreviewEnemyData _preview;
 
-    public int Attack { get => _attack; private set => _attack = value; }
-    public int Shield { get => _shield; private set => _shield = value; }
-    public int ShieldStrength { get => _shieldStrength; private set => _shieldStrength = value; }
-    public int Hp { get => _hp; private set => _hp = value; }
-    public bool IsDead { get => _isDead; private set => _isDead = value; }
+    public int Attack { get => _attack; protected set => _attack = value; }
+    public int Shield { get => _shield; protected set => _shield = value; }
+    public int ShieldStrength { get => _shieldStrength; protected set => _shieldStrength = value; }
+    public int Hp { get => _hp; protected set => _hp = value; }
+    public int KillExp { get => _killExp; protected set => _killExp = value; }
+    public bool IsDead { get => _isDead; protected set => _isDead = value; }
 
     public void SetResolvePreview(PreviewEnemyData preview)
     {
         _preview = preview;
     }
 
-    private void Start()
+    protected void Start()
     {
         UpdateAttrDisplay();
     }
@@ -61,6 +64,7 @@ public class EnemyPanel : Panel
     public override void DestroyThis()
     {
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
+        ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
         Destroy(gameObject);
     }
 
