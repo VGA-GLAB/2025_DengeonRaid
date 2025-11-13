@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System;
 
 /// <summary>
 ///         パネルの落下演出
@@ -16,7 +17,7 @@ public class PanelDropEffect : MonoBehaviour
     ///         パネルの落下演出を再生する
     /// </summary>
     /// <param name="targetPosition"></param>
-    public void PlayDrop(Vector2Int targetPosition, float delay)
+    public void PlayDrop(Vector2Int targetPosition, float delay, Action callback)
     {
         Vector3 targetLocalPos = new Vector3(targetPosition.x, -targetPosition.y, 0);
         transform.localPosition = targetLocalPos + Vector3.up * _dropHeight;
@@ -26,7 +27,10 @@ public class PanelDropEffect : MonoBehaviour
             .AppendInterval(delay /*  */)
             .Append(transform.DOLocalMoveY(targetLocalPos.y, _dropDuration))
             .SetEase(Ease.OutBack)
-            .OnComplete(() => transform.DOScale(1.0f, 0.1f))
+            .OnComplete(() =>
+            {
+                transform.DOScale(1.0f, 0.1f).OnComplete(() => callback.Invoke());
+            })
             .SetLink(gameObject)
             .Play();
     }

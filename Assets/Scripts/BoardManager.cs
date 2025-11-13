@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
+    [SerializeField] private BossPanel _bossPrefab;
 
     private GameObject _currentArrow;
     private Panel[,] _boardArray;
@@ -259,7 +260,17 @@ public class BoardManager : MonoBehaviour
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
             for (int y = emptyY; y >= 0; y--)
             {
-                Panel newPanel = Instantiate(GetRandomPanel(), _boardRoot);
+                Panel newPanel;
+                // ボス出現条件を達している場合、Bossを生成する
+                if (ReferenceManager.Instance.GameDirector.CanGenerateBoss())
+                {
+                    newPanel = Instantiate(GetBossPanel(), _boardRoot);
+                    ReferenceManager.Instance.GameDirector.BossGenerated();
+                }
+                else
+                {
+                    newPanel = Instantiate(GetRandomPanel(), _boardRoot);
+                }
 
                 //  TODO: 落下アニメーションをつける
                 newPanel.transform.localPosition = new Vector3(x, y + 10, 0);
@@ -271,8 +282,8 @@ public class BoardManager : MonoBehaviour
 
         _panelDropManager.DropAll(droppedPanels);
 
-        if (!_isSkillUsed)
-            _director.SpawnNewPanelFinished();
+        //if (!_isSkillUsed)
+        //    _director.SpawnNewPanelFinished();
 
         _isSkillUsed = false;
     }
@@ -301,6 +312,15 @@ public class BoardManager : MonoBehaviour
         }
         //  念のため返す
         return _panelPrefabs.Length > 0 ? _panelPrefabs[0].PanelPrefab : null;
+    }
+
+    /// <summary>
+    /// ボスパネルを取得
+    /// </summary>
+    /// <returns></returns>
+    private BossPanel GetBossPanel()
+    {
+        return _bossPrefab;
     }
 
     #region LineRendrer関連

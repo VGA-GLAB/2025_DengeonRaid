@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,6 +40,7 @@ public class InGameStateMachine
         CurrentState.Enter();
 
         OnStateChanged?.Invoke(oldType, type);
+        ReferenceManager.Instance.GameDirector.CurrentState = typeof(T).ToString();
     }
 
     /// <summary>
