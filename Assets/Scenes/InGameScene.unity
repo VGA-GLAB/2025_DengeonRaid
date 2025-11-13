@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 280281288}
   - component: {fileID: 280281290}
   - component: {fileID: 280281292}
-  - component: {fileID: 280281291}
   - component: {fileID: 280281293}
   m_Layer: 0
   m_Name: ==System==
@@ -244,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d036d8b0697b69447a6ad773c6ed8c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
+  _enemyCountForBoss: 5
+  CurrentState: 
 --- !u!4 &280281287
 Transform:
   m_ObjectHideFlags: 0
@@ -295,18 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecb9514ffdcc7f49bde54d8af23213c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
---- !u!114 &280281291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280281282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da7369733205604abc6339c8550b5d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackController
 --- !u!114 &280281292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +486,6 @@ GameObject:
   - component: {fileID: 620723969}
   - component: {fileID: 620723968}
   - component: {fileID: 620723967}
-  - component: {fileID: 620723970}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -566,28 +554,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &620723970
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 620723966}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef63952108e3004419c8eb0231ab4146, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &663543056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1518,7 @@ GameObject:
   - component: {fileID: 1590212770}
   - component: {fileID: 1590212769}
   - component: {fileID: 1590212771}
+  - component: {fileID: 1590212772}
   m_Layer: 0
   m_Name: ==BoardManager==
   m_TagString: Untagged
@@ -1582,13 +1549,15 @@ MonoBehaviour:
   - PanelPrefab: {fileID: 1010363264004800150, guid: db2518c952cf5964f8a8bf15fa72cdc6, type: 3}
     Weight: 10
   - PanelPrefab: {fileID: -1984394713350848579, guid: e7efeadb00e408a4c8c1b9f64bc0f0b2, type: 3}
-    Weight: 7
+    Weight: 8
   - PanelPrefab: {fileID: -3511616952413351084, guid: 40ebf721cc33c76418e7f8fc71b3e313, type: 3}
-    Weight: 4
+    Weight: 7
   _lineRenderer: {fileID: 1590212771}
   _arrowPrefab: {fileID: 5434484964152232612, guid: d5521738616f9564e8ae465f8b055c65, type: 3}
   _playerController: {fileID: 766836293}
+  _panelDropManager: {fileID: 1590212772}
   _boardRoot: {fileID: 924380703}
+  _bossPrefab: {fileID: -1706300619643160376, guid: 84acd9f530a56f844864946df5825301, type: 3}
 --- !u!4 &1590212770
 Transform:
   m_ObjectHideFlags: 0
@@ -1714,6 +1683,19 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1590212772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590212768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833d82e2c142ca546b61b043567c8760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelDropManager
+  _dropDelayInterval: 0.05
 --- !u!1 &1597526024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,7 +1823,6 @@ MonoBehaviour:
   ShopUIManager: {fileID: 1873196932}
   PlayerController: {fileID: 766836293}
   BoardPosition: {fileID: 924380703}
-  BossPanel: {fileID: 0}
 --- !u!4 &1621931222
 Transform:
   m_ObjectHideFlags: 0

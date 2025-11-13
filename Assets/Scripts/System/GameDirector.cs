@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -13,8 +14,11 @@ public class GameDirector : MonoBehaviour
     private InGameStateMachine _igsm;
     private EventBus _eventBus;
     private PlayerController _player;
-    private bool _bossDefeated = false;
-    private bool _bossExists = false;
+    private bool _bossDefeated;
+    private bool _bossExists;
+    private int _enemyCount;
+    [SerializeField, Header("ボスの出現条件（敵撃破数）")] private int _enemyCountForBoss;
+    [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
     public bool BossExists { get => _bossExists; private set => _bossExists = value; }
 
@@ -35,6 +39,10 @@ public class GameDirector : MonoBehaviour
         // TODO 本番ではSIGIntro
         _igsm.ChangeState<SIGIdle>();
         _igsm.States[typeof(SIGShop)].OnEnter += CheckOpenShop;
+
+        _enemyCount = 0;
+        _bossDefeated = false;
+        _bossExists = false;
     }
     #endregion
 
@@ -52,6 +60,7 @@ public class GameDirector : MonoBehaviour
         _igsm.RegisterState(new SIGShop());
         _igsm.RegisterState(new SIGLevelUp());
         _igsm.RegisterState(new SIGBusy());
+        _igsm.RegisterState(new SIGPending());
     }
 
     /// <summary>
@@ -103,7 +112,7 @@ public class GameDirector : MonoBehaviour
 
     public void LevelUpFinished()
     {
-        _igsm.ChangeState<SIGBusy>();
+        _igsm.ChangeState<SIGPending>();
     }
 
     /// <summary>
@@ -111,7 +120,7 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void ShopFinished()
     {
-        _igsm.ChangeState<SIGBusy>();
+        _igsm.ChangeState<SIGPending>();
     }
 
     /// <summary>
@@ -128,5 +137,34 @@ public class GameDirector : MonoBehaviour
         {
             _igsm.ChangeState<SIGBusy>();
         }
+    }
+
+    /// <summary>
+    /// 敵撃破数を累計する
+    /// </summary>
+    /// <param name="count"></param>
+    public void CountEnemyKill(int count)
+    {
+        _enemyCount += count;
+    }
+    /// <summary>
+    /// ボスを生成する条件を達しているか
+    /// </summary>
+    /// <returns></returns>
+    public bool CanGenerateBoss()
+    {
+        return _enemyCount >= _enemyCountForBoss && (!_bossExists);
+    }
+
+    public void BossGenerated()
+    {
+        _bossExists = true;
+    }
+    /// <summary>
+    /// ボス撃破
+    /// </summary>
+    public void BossDefeated()
+    {
+
     }
 }
