@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5085685963464608945}
   - component: {fileID: 1625946810168813193}
   - component: {fileID: -4260931707250557988}
+  - component: {fileID: 2745453509033305038}
   m_Layer: 0
   m_Name: CoinPanel
   m_TagString: Untagged
@@ -153,3 +154,18 @@ MonoBehaviour:
   _panelId: 0
   _panelGroup: 0
   _coin: 1
+--- !u!114 &2745453509033305038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97ea4aa774bba14a821f765a821ff3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelDropEffect
+  _dropHeight: 10
+  _dropDuration: 1
+  _expantion: 1.1

@@ -18,6 +18,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
 
     private GameObject _currentArrow;
@@ -35,6 +36,7 @@ public class BoardManager : MonoBehaviour
     public Stack<Panel> SelectedStack { get { return _selectedStack; } }
     public Panel[,] GetBoardArray { get { return _boardArray; } }
 
+    #region ライフサイクル
     private void Awake()
     {
         if (_lineRenderer == null)
@@ -64,15 +66,33 @@ public class BoardManager : MonoBehaviour
             _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter -= DropPanel;
         });
     }
+    #endregion
 
-    /// <summary>
-    ///         指定した座標のパネルを取得
-    /// </summary>
+        /// <summary>
+        ///         指定した座標のパネルを取得
+        /// </summary>
     public Panel GetPanel(int x, int y)
     {
         //　範囲チェック
         if (x < 0 || y < 0 || x >= _width || y >= _height) return null;
         return _boardArray[x, y];
+    }
+
+    /// <summary>
+    ///         ボードにある全ての敵パネルを取得
+    /// </summary>
+    /// <returns></returns>
+    public List<EnemyPanel> GetEnemyPanels()
+    {
+        List<EnemyPanel> rst = new List<EnemyPanel>();
+        foreach (var panel in _boardArray)
+        {
+            if (panel is EnemyPanel p)
+            {
+                rst.Add(p);
+            }
+        }
+        return rst;
     }
 
     /// <summary>
@@ -103,23 +123,7 @@ public class BoardManager : MonoBehaviour
         DropPanel();
     }
 
-    /// <summary>
-    ///         ボードにある全ての敵パネルを取得する
-    /// </summary>
-    /// <returns></returns>
-    public List<EnemyPanel> GetEnemyPanels()
-    {
-        List<EnemyPanel> rst = new List<EnemyPanel>();
-        foreach (var panel in _boardArray)
-        {
-            if (panel is EnemyPanel p)
-            {
-                rst.Add(p);
-            }
-        }
-        return rst;
-    }
-
+    #region なぞり処理
     /// <summary>
     ///         なぞり処理開始
     /// </summary>
@@ -199,7 +203,7 @@ public class BoardManager : MonoBehaviour
 
         ClearLine();
     }
-
+    #endregion
 
     /// <summary>
     ///         盤面の初期化
@@ -226,6 +230,8 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
+        List<Panel> droppedPanels = new List<Panel>();
+
         //  盤面の各列を左から順に処理
         for (int x = 0; x < _width; x++)
         {
@@ -256,11 +262,14 @@ public class BoardManager : MonoBehaviour
                 Panel newPanel = Instantiate(GetRandomPanel(), _boardRoot);
 
                 //  TODO: 落下アニメーションをつける
-                newPanel.transform.localPosition = new Vector3(x, -y, 0);
+                newPanel.transform.localPosition = new Vector3(x, y + 10, 0);
                 newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
+                droppedPanels.Add(newPanel);
             }
         }
+
+        _panelDropManager.DropAll(droppedPanels);
 
         if (!_isSkillUsed)
             _director.SpawnNewPanelFinished();
