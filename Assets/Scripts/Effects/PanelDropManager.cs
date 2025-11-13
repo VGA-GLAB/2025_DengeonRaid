@@ -19,17 +19,18 @@ public class PanelDropManager : MonoBehaviour
     /// <summary>
     ///         取得したリストの演出を再生する
     /// </summary>
-    public void DropAll(List<Panel> panels)
+    public void DropAll(List<(Panel panel, Vector3 from, Vector3 target)> panels)
     {
         _isPanelsDropping = true;
         _droppingPanelCount = panels.Count;
-        foreach (var panel in panels)
+        foreach (var info in panels)
         {
-            PanelDropEffect dropEffect = panel.GetComponent<PanelDropEffect>();
+            Panel dropPanel = info.panel;
+            PanelDropEffect dropEffect = dropPanel.GetComponent<PanelDropEffect>();
             if (dropEffect != null)
             {
-                float delay = -panel.BoardPos.y * _dropDelayInterval;
-                dropEffect.PlayDrop(panel.BoardPos, delay, OnePanelDropFinished);
+                float delay = -dropPanel.BoardPos.y * _dropDelayInterval;
+                dropEffect.PlayDrop(info.from, info.target, delay, OnePanelDropFinished);
             }
         }
     }
