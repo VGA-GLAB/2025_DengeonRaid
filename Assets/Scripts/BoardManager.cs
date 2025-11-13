@@ -231,7 +231,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
-        List<Panel> droppedPanels = new List<Panel>();
+        List<(Panel panel,Vector3 from,Vector3 target)> droppedPanels = new();
 
         //  盤面の各列を左から順に処理
         for (int x = 0; x < _width; x++)
@@ -247,12 +247,16 @@ public class BoardManager : MonoBehaviour
 
                 if (emptyY != y)
                 {
+                    Vector3 fromPos = panel.transform.localPosition;
+                    Vector3 targetPos = new Vector3(x, -emptyY, 0);
+
                     //  盤面配列の更新
                     _boardArray[x, emptyY] = panel;
                     _boardArray[x, y] = null;
 
                     panel.BoardPos = new Vector2Int(x, emptyY);
-                    panel.transform.localPosition = new Vector3Int(x, -emptyY, 0);
+
+                    droppedPanels.Add((panel, fromPos, targetPos));
                 }
                 emptyY--;
             }
@@ -272,11 +276,13 @@ public class BoardManager : MonoBehaviour
                     newPanel = Instantiate(GetRandomPanel(), _boardRoot);
                 }
 
-                //  TODO: 落下アニメーションをつける
-                newPanel.transform.localPosition = new Vector3(x, y + 10, 0);
+                Vector3 targetPos = new Vector3(x, -y, 0);
+                Vector3 fromPos = targetPos + Vector3.up * 10f;
+                ;
                 newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
-                droppedPanels.Add(newPanel);
+
+                droppedPanels.Add((newPanel,fromPos,targetPos));
             }
         }
 
