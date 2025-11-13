@@ -16,16 +16,15 @@ public class PanelDropEffect : MonoBehaviour
     /// <summary>
     ///         パネルの落下演出を再生する
     /// </summary>
-    /// <param name="targetPosition"></param>
-    public void PlayDrop(Vector2Int targetPosition, float delay, Action callback)
+    /// <param name="targetPos"></param>
+    public void PlayDrop(Vector3 fromPos, Vector3 targetPos, float delay, Action callback)
     {
-        Vector3 targetLocalPos = new Vector3(targetPosition.x, -targetPosition.y, 0);
-        transform.localPosition = targetLocalPos + Vector3.up * _dropHeight;
+        transform.localPosition = fromPos;
 
         _s = DOTween.Sequence()
             .AppendCallback(() => transform.localScale = Vector3.one * _expantion)
             .AppendInterval(delay /*  */)
-            .Append(transform.DOLocalMoveY(targetLocalPos.y, _dropDuration))
+            .Append(transform.DOLocalMove(targetPos, _dropDuration))
             .SetEase(Ease.OutBack)
             .OnComplete(() =>
             {
