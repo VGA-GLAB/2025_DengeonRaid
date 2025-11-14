@@ -29,7 +29,7 @@ public class InputController : MonoBehaviour
 
     private void Start()
     {
-        _rm =ReferenceManager.Instance;
+        _rm = ReferenceManager.Instance;
         _gameStateMachine = _rm.Igsm;
     }
 
@@ -91,13 +91,21 @@ public class InputController : MonoBehaviour
     /// </summary>
     private void HandleRelease(InputAction.CallbackContext ctx)
     {
-        if (_isDragging)
+        if (!_isDragging) return;
+        _isDragging = false;
+
+        int selectedCount = _boardManager.SelectedCount;
+        int neededCount = _boardManager.SelectThreshold;
+
+
+        if (_gameStateMachine.CurrentState is SIGDrawLine && selectedCount >= neededCount)
         {
-            _isDragging = false;
-            if (_gameStateMachine.CurrentState is SIGDrawLine)
-            {
-                _gameStateMachine.ChangeState<SIGEliminatePanel>();
-            }
+            _gameStateMachine.ChangeState<SIGEliminatePanel>();
+        }
+        else
+        {
+            _gameStateMachine.ChangeState<SIGIdle>();
+            _boardManager.ClearSelection();
         }
     }
 
