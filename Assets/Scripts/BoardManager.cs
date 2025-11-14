@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -38,6 +37,8 @@ public class BoardManager : MonoBehaviour
 
     public Stack<Panel> SelectedStack { get { return _selectedStack; } }
     public Panel[,] GetBoardArray { get { return _boardArray; } }
+    public int SelectedCount { get { return _selectedStack.Count; } }
+    public int SelectThreshold { get { return _selectCount; } }
 
     #region ライフサイクル
     private void Awake()
@@ -71,9 +72,9 @@ public class BoardManager : MonoBehaviour
     }
     #endregion
 
-        /// <summary>
-        ///         指定した座標のパネルを取得
-        /// </summary>
+    /// <summary>
+    ///         指定した座標のパネルを取得
+    /// </summary>
     public Panel GetPanel(int x, int y)
     {
         //　範囲チェック
@@ -96,6 +97,54 @@ public class BoardManager : MonoBehaviour
             }
         }
         return rst;
+    }
+
+    /// <summary>
+    /// ボードからランダムのパネルを一つ取得
+    /// </summary>
+    /// <returns></returns>
+    public Panel GetRandomPanelFromBoard()
+    {
+        int x = UnityEngine.Random.Range(0, _width);
+        int y = UnityEngine.Random.Range(0, _height);
+        return _boardArray[x, y];
+    }
+    /// <summary>
+    /// ボード内から、比較処理「comparer」で定義されたパネル種類以外の、ランダムのパネルを取得する
+    /// </summary>
+    /// <param name="comparer">比較用callback。戻り値がtrueの場合、除外となる</param>
+    /// <returns></returns>
+    public Panel GetRadomPanelExclusive(List<Panel> panels, Func<List<Panel>, Panel, bool> comparer)
+    {
+        Panel ret = null;
+        int loopCount = 0;
+        while (ret == null)
+        {
+            Panel panel = GetRandomPanelFromBoard();
+            if (comparer(panels, panel))
+            {
+                continue;
+            }
+            else
+            {
+                ret = panel;
+            }
+            if (loopCount > 1000)
+            {
+                Debug.LogWarning("ループ異常を検知した！！");
+                break;
+            }
+        }
+        return ret;
+    }
+
+    /// <summary>
+    /// ボスパネルを取得
+    /// </summary>
+    /// <returns></returns>
+    private BossPanel GetBossPanel()
+    {
+        return _bossPrefab;
     }
 
     /// <summary>
@@ -189,21 +238,23 @@ public class BoardManager : MonoBehaviour
         _isSelected = false;
 
         ClearHighLight();
+        ClearLine();
 
-        if (_selectedStack.Count >= _selectCount)
-        {
-            Debug.Log($"パネルを消去{_selectedStack.Count}個");
+        Debug.Log($"パネルを消去{_selectedStack.Count}個");
 
-            foreach (var selectPanel in _selectedStack)
-            {
-                Vector2Int pos = selectPanel.BoardPos;
-            }
+        _rm.PanelResolvingController.ProcessWrapped();
+        _selectedStack.Clear();
+        _director.PanelResolvingFinished();
+    }
 
-            _rm.PanelResolvingController.ProcessWrapped();
-            _selectedStack.Clear();
-            _director.PanelResolvingFinished();
-        }
-
+    /// <summary>
+    ///         選択しているパネル情報をクリア
+    /// </summary>
+    public void ClearSelection()
+    {
+        _isSelected = false;
+        _selectedStack.Clear();
+        ClearHighLight();
         ClearLine();
     }
     #endregion
@@ -233,7 +284,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
-        List<(Panel panel,Vector3 from,Vector3 target)> droppedPanels = new();
+        List<(Panel panel, Vector3 from, Vector3 target)> droppedPanels = new();
 
         //  盤面の各列を左から順に処理
         for (int x = 0; x < _width; x++)
@@ -285,7 +336,7 @@ public class BoardManager : MonoBehaviour
                 newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
 
-                droppedPanels.Add((newPanel,fromPos,targetPos));
+                droppedPanels.Add((newPanel, fromPos, targetPos));
             }
         }
 
@@ -321,54 +372,6 @@ public class BoardManager : MonoBehaviour
         }
         //  念のため返す
         return _panelPrefabs.Length > 0 ? _panelPrefabs[0].PanelPrefab : null;
-    }
-
-    /// <summary>
-    /// ボードからランダムのパネルを一つ取得
-    /// </summary>
-    /// <returns></returns>
-    public Panel GetRandomPanelFromBoard()
-    {
-        int x = UnityEngine.Random.Range(0, _width);
-        int y = UnityEngine.Random.Range(0, _height);
-        return _boardArray[x, y];
-    }
-    /// <summary>
-    /// ボード内から、比較処理「comparer」で定義されたパネル種類以外の、ランダムのパネルを取得する
-    /// </summary>
-    /// <param name="comparer">比較用callback。戻り値がtrueの場合、除外となる</param>
-    /// <returns></returns>
-    public Panel GetRadomPanelExclusive(List<Panel> panels, Func<List<Panel>, Panel, bool> comparer)
-    {
-        Panel ret = null;
-        int loopCount = 0;
-        while (ret == null)
-        {
-            Panel panel = GetRandomPanelFromBoard();
-            if(comparer(panels, panel))
-            {
-                continue;
-            }
-            else
-            {
-                ret = panel;
-            }
-            if (loopCount > 1000)
-            {
-                Debug.LogWarning("ループ異常を検知した！！");
-                break;
-            }
-        }
-        return ret;
-    }
-
-    /// <summary>
-    /// ボスパネルを取得
-    /// </summary>
-    /// <returns></returns>
-    private BossPanel GetBossPanel()
-    {
-        return _bossPrefab;
     }
 
     #region LineRendrer関連
