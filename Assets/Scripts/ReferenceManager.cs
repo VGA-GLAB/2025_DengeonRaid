@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,4 +39,5 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     [Header("ゲーム内要素")]
     public PlayerController PlayerController;
     public Transform BoardPosition;
+    public BossPanel BossPanel;
 }
