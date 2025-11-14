@@ -1,11 +1,10 @@
-using System;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
-/// 新しいパネルを生成する
+/// InGame状態：ショップ出現
 /// </summary>
-public class SIGSpawnNewPanel : IInGameState
+public class SIGShop : IInGameState
 {
     public event Action OnEnter;
     public event Action OnUpdate;

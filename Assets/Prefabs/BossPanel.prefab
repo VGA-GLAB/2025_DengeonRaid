@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 6577069989502047705}
   - component: {fileID: 5085685963464608945}
   - component: {fileID: 1625946810168813193}
-  - component: {fileID: -3511616952413351084}
-  - component: {fileID: 5679105269127256362}
+  - component: {fileID: -1706300619643160376}
+  - component: {fileID: -2090939483218876519}
+  - component: {fileID: 1808552410207205092}
   m_Layer: 0
-  m_Name: EnemyPanel
+  m_Name: BossPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4327897bb5d28bb40ae551083c46f5d8, type: 3}
+  m_Sprite: {fileID: -6538231969035130318, guid: 22fc1939b3a908f4298735b4b9c2b063, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +129,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.012169659, y: -0.019471705}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,9 +139,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6641123, y: 0.5910934}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-3511616952413351084
+--- !u!114 &-1706300619643160376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,20 +150,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 448241291402004874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c9cc63a78ab2e4aa3b57d0e0d6a56a, type: 3}
+  m_Script: {fileID: 11500000, guid: 031a99a4117e1014cae6c56b359e92a5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPanel
-  _panelId: 4
+  m_EditorClassIdentifier: Assembly-CSharp::BossPanel
+  _panelId: 5
   _panelGroup: 1
-  _attack: 5
-  _shield: 3
-  _shieldStrength: 1
-  _hp: 20
+  _attack: 10
+  _shield: 30
+  _shieldStrength: 3
+  _hp: 100
+  _killExp: 100
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}
   _uiTextShield: {fileID: 8255248087807754077}
   _uiTextHp: {fileID: 519385972716064363}
---- !u!114 &5679105269127256362
+  _enemyPanel: {fileID: -3511616952413351084, guid: 40ebf721cc33c76418e7f8fc71b3e313, type: 3}
+  _skillInterval: 3
+  _hpRecovery: 30
+  _panelAlterCount: 3
+--- !u!114 &-2090939483218876519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,8 +181,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelDropEffect
   _dropHeight: 10
-  _dropDuration: 1
+  _dropDuration: 0.5
   _expantion: 1.1
+--- !u!95 &1808552410207205092
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba74917a6dd01554397762057ae7e11b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2570931276006752375
 GameObject:
   m_ObjectHideFlags: 0

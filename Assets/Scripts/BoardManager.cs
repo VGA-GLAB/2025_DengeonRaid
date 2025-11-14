@@ -1,4 +1,6 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -14,11 +16,13 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private int _height = 6;
 
     [Header("参照")]
-    [SerializeField] private Panel[] _panelPrefabs;
+    [SerializeField] private PanelWeightData[] _panelPrefabs;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
+    [SerializeField] private BossPanel _bossPrefab;
 
     private GameObject _currentArrow;
     private Panel[,] _boardArray;
@@ -35,6 +39,7 @@ public class BoardManager : MonoBehaviour
     public Stack<Panel> SelectedStack { get { return _selectedStack; } }
     public Panel[,] GetBoardArray { get { return _boardArray; } }
 
+    #region ライフサイクル
     private void Awake()
     {
         if (_lineRenderer == null)
@@ -64,10 +69,11 @@ public class BoardManager : MonoBehaviour
             _gameStateMachine.States[typeof(SIGSpawnNewPanel)].OnEnter -= DropPanel;
         });
     }
+    #endregion
 
-    /// <summary>
-    ///         指定した座標のパネルを取得
-    /// </summary>
+        /// <summary>
+        ///         指定した座標のパネルを取得
+        /// </summary>
     public Panel GetPanel(int x, int y)
     {
         //　範囲チェック
@@ -76,35 +82,7 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    ///         指定した座標のパネルを置き換える
-    /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="panel"></param>
-    public void ReplacePanel(Vector2Int pos, Panel panel)
-    {
-        _boardArray[pos.x, pos.y].DestroyThis();
-        //  新しいパネルを生成、初期化
-        Panel newPanel = Instantiate(panel, _boardRoot);
-        newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
-        newPanel.Initialize(new Vector2Int(pos.x,pos.y));
-        _boardArray[pos.x, pos.y] = newPanel;
-    }
-
-    /// <summary>
-    ///         指定した座標のパネルを削除する
-    /// </summary>
-    /// <param name="pos"></param>
-    public void DeleatePanel(Vector2Int pos)
-    {
-        //  スキル使用フラグを立てて、パネル効果を発動
-        _isSkillUsed = true;
-        _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
-        _boardArray[pos.x, pos.y].DestroyThis();
-        DropPanel();
-    }
-
-    /// <summary>
-    ///         ボードにある全ての敵パネルを取得する
+    ///         ボードにある全ての敵パネルを取得
     /// </summary>
     /// <returns></returns>
     public List<EnemyPanel> GetEnemyPanels()
@@ -121,6 +99,35 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
+    ///         指定した座標のパネルを置き換える
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="panel"></param>
+    public void ReplacePanel(Vector2Int pos, Panel panel)
+    {
+        _boardArray[pos.x, pos.y].DestroyThis();
+        //  新しいパネルを生成、初期化
+        Panel newPanel = Instantiate(panel, _boardRoot);
+        newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
+        newPanel.Initialize(new Vector2Int(pos.x, pos.y));
+        _boardArray[pos.x, pos.y] = newPanel;
+    }
+
+    /// <summary>
+    ///         指定した座標のパネルを削除する
+    /// </summary>
+    /// <param name="pos"></param>
+    public void DeleatePanel(Vector2Int pos)
+    {
+        //  スキル使用フラグを立てて、パネル効果を発動
+        _isSkillUsed = true;
+        _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
+        _boardArray[pos.x, pos.y].DestroyThis();
+        DropPanel();
+    }
+
+    #region なぞり処理
+    /// <summary>
     ///         なぞり処理開始
     /// </summary>
     public void StartSelection(Panel panel)
@@ -130,6 +137,7 @@ public class BoardManager : MonoBehaviour
         _selectedStack.Push(panel);
         _isSelected = true;
 
+        ClearHighLight();
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
@@ -160,6 +168,7 @@ public class BoardManager : MonoBehaviour
             while (_selectedStack.Peek() != panel)
             {
                 Panel removed = _selectedStack.Pop();
+                UpdateLine();
             }
             return;
         }
@@ -192,12 +201,12 @@ public class BoardManager : MonoBehaviour
 
             _rm.PanelResolvingController.ProcessWrapped();
             _selectedStack.Clear();
+            _director.PanelResolvingFinished();
         }
 
         ClearLine();
-        _director.PanelResolvingFinished();
     }
-
+    #endregion
 
     /// <summary>
     ///         盤面の初期化
@@ -210,9 +219,7 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 0; y < _height; y++)
             {
-                //  後でランダムではなくして調整
-                int randomPanel = Random.Range(0, _panelPrefabs.Length);
-                Panel panel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
+                Panel panel = Instantiate(GetRandomPanel(), _boardRoot);
                 panel.transform.localPosition = new Vector3(x, -y, 0);
 
                 panel.Initialize(new Vector2Int(x, y));
@@ -226,6 +233,8 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
+        List<(Panel panel,Vector3 from,Vector3 target)> droppedPanels = new();
+
         //  盤面の各列を左から順に処理
         for (int x = 0; x < _width; x++)
         {
@@ -240,12 +249,16 @@ public class BoardManager : MonoBehaviour
 
                 if (emptyY != y)
                 {
+                    Vector3 fromPos = panel.transform.localPosition;
+                    Vector3 targetPos = new Vector3(x, -emptyY, 0);
+
                     //  盤面配列の更新
                     _boardArray[x, emptyY] = panel;
                     _boardArray[x, y] = null;
 
                     panel.BoardPos = new Vector2Int(x, emptyY);
-                    panel.transform.localPosition = new Vector3Int(x, -emptyY, 0);
+
+                    droppedPanels.Add((panel, fromPos, targetPos));
                 }
                 emptyY--;
             }
@@ -253,20 +266,109 @@ public class BoardManager : MonoBehaviour
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
             for (int y = emptyY; y >= 0; y--)
             {
-                int randomPanel = Random.Range(0, _panelPrefabs.Length);
-                Panel newPanel = Instantiate(_panelPrefabs[randomPanel], _boardRoot);
+                Panel newPanel;
+                // ボス出現条件を達している場合、Bossを生成する
+                if (ReferenceManager.Instance.GameDirector.CanGenerateBoss())
+                {
+                    newPanel = Instantiate(GetBossPanel(), _boardRoot);
+                    ReferenceManager.Instance.GameDirector.BossGenerated();
+                    _rm.BossPanel = newPanel as BossPanel;
+                }
+                else
+                {
+                    newPanel = Instantiate(GetRandomPanel(), _boardRoot);
+                }
 
-                //  TODO: 落下アニメーションをつける
-                newPanel.transform.localPosition = new Vector3(x, -y, 0);
+                Vector3 targetPos = new Vector3(x, -y, 0);
+                Vector3 fromPos = targetPos + Vector3.up * 10f;
+                ;
                 newPanel.Initialize(new Vector2Int(x, y));
                 _boardArray[x, y] = newPanel;
+
+                droppedPanels.Add((newPanel,fromPos,targetPos));
             }
         }
 
-        if(!_isSkillUsed)
-        _director.SpawnNewPanelFinished();
+        _panelDropManager.DropAll(droppedPanels);
+
+        //if (!_isSkillUsed)
+        //    _director.SpawnNewPanelFinished();
 
         _isSkillUsed = false;
+    }
+
+    /// <summary>
+    ///         重み付きランダムでパネルを取得
+    /// </summary>
+    /// <returns></returns>
+    private Panel GetRandomPanel()
+    {
+        int totalWeight = 0;
+        foreach (var panelData in _panelPrefabs)
+            totalWeight += panelData.Weight;
+
+        int randomValue = UnityEngine.Random.Range(0, totalWeight);
+        int currentWeight = 0;
+
+        //  ループで積み上げながら比較
+        foreach (var panelData in _panelPrefabs)
+        {
+            currentWeight += panelData.Weight;
+            if (randomValue < currentWeight)
+            {
+                return panelData.PanelPrefab;
+            }
+        }
+        //  念のため返す
+        return _panelPrefabs.Length > 0 ? _panelPrefabs[0].PanelPrefab : null;
+    }
+
+    /// <summary>
+    /// ボードからランダムのパネルを一つ取得
+    /// </summary>
+    /// <returns></returns>
+    public Panel GetRandomPanelFromBoard()
+    {
+        int x = UnityEngine.Random.Range(0, _width);
+        int y = UnityEngine.Random.Range(0, _height);
+        return _boardArray[x, y];
+    }
+    /// <summary>
+    /// ボード内から、比較処理「comparer」で定義されたパネル種類以外の、ランダムのパネルを取得する
+    /// </summary>
+    /// <param name="comparer">比較用callback。戻り値がtrueの場合、除外となる</param>
+    /// <returns></returns>
+    public Panel GetRadomPanelExclusive(List<Panel> panels, Func<List<Panel>, Panel, bool> comparer)
+    {
+        Panel ret = null;
+        int loopCount = 0;
+        while (ret == null)
+        {
+            Panel panel = GetRandomPanelFromBoard();
+            if(comparer(panels, panel))
+            {
+                continue;
+            }
+            else
+            {
+                ret = panel;
+            }
+            if (loopCount > 1000)
+            {
+                Debug.LogWarning("ループ異常を検知した！！");
+                break;
+            }
+        }
+        return ret;
+    }
+
+    /// <summary>
+    /// ボスパネルを取得
+    /// </summary>
+    /// <returns></returns>
+    private BossPanel GetBossPanel()
+    {
+        return _bossPrefab;
     }
 
     #region LineRendrer関連
