@@ -98,14 +98,17 @@ public class InputController : MonoBehaviour
         int neededCount = _boardManager.SelectThreshold;
 
 
-        if (_gameStateMachine.CurrentState is SIGDrawLine && selectedCount >= neededCount)
+        if (_gameStateMachine.CurrentState is SIGDrawLine)
         {
-            _gameStateMachine.ChangeState<SIGEliminatePanel>();
-        }
-        else
-        {
-            _gameStateMachine.ChangeState<SIGIdle>();
-            _boardManager.ClearSelection();
+            if (selectedCount >= neededCount)
+            {
+                _gameStateMachine.ChangeState<SIGEliminatePanel>();
+            }
+            else
+            {
+                _gameStateMachine.ChangeState<SIGIdle>();
+                _boardManager.ClearSelection();
+            }
         }
     }
 
