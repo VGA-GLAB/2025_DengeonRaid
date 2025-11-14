@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -270,6 +272,7 @@ public class BoardManager : MonoBehaviour
                 {
                     newPanel = Instantiate(GetBossPanel(), _boardRoot);
                     ReferenceManager.Instance.GameDirector.BossGenerated();
+                    _rm.BossPanel = newPanel as BossPanel;
                 }
                 else
                 {
@@ -304,7 +307,7 @@ public class BoardManager : MonoBehaviour
         foreach (var panelData in _panelPrefabs)
             totalWeight += panelData.Weight;
 
-        int randomValue = Random.Range(0, totalWeight);
+        int randomValue = UnityEngine.Random.Range(0, totalWeight);
         int currentWeight = 0;
 
         //  ループで積み上げながら比較
@@ -318,6 +321,45 @@ public class BoardManager : MonoBehaviour
         }
         //  念のため返す
         return _panelPrefabs.Length > 0 ? _panelPrefabs[0].PanelPrefab : null;
+    }
+
+    /// <summary>
+    /// ボードからランダムのパネルを一つ取得
+    /// </summary>
+    /// <returns></returns>
+    public Panel GetRandomPanelFromBoard()
+    {
+        int x = UnityEngine.Random.Range(0, _width);
+        int y = UnityEngine.Random.Range(0, _height);
+        return _boardArray[x, y];
+    }
+    /// <summary>
+    /// ボード内から、比較処理「comparer」で定義されたパネル種類以外の、ランダムのパネルを取得する
+    /// </summary>
+    /// <param name="comparer">比較用callback。戻り値がtrueの場合、除外となる</param>
+    /// <returns></returns>
+    public Panel GetRadomPanelExclusive(List<Panel> panels, Func<List<Panel>, Panel, bool> comparer)
+    {
+        Panel ret = null;
+        int loopCount = 0;
+        while (ret == null)
+        {
+            Panel panel = GetRandomPanelFromBoard();
+            if(comparer(panels, panel))
+            {
+                continue;
+            }
+            else
+            {
+                ret = panel;
+            }
+            if (loopCount > 1000)
+            {
+                Debug.LogWarning("ループ異常を検知した！！");
+                break;
+            }
+        }
+        return ret;
     }
 
     /// <summary>

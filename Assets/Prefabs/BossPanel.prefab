@@ -164,6 +164,7 @@ MonoBehaviour:
   _uiTextAttack: {fileID: 4643187983591604337}
   _uiTextShield: {fileID: 8255248087807754077}
   _uiTextHp: {fileID: 519385972716064363}
+  _enemyPanel: {fileID: -3511616952413351084, guid: 40ebf721cc33c76418e7f8fc71b3e313, type: 3}
   _skillInterval: 3
   _hpRecovery: 30
   _panelAlterCount: 3
