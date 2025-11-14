@@ -37,6 +37,8 @@ public class BoardManager : MonoBehaviour
 
     public Stack<Panel> SelectedStack { get { return _selectedStack; } }
     public Panel[,] GetBoardArray { get { return _boardArray; } }
+    public int SelectedCount { get { return _selectedStack.Count; } }
+    public int SelectThreshold { get { return _selectCount; } }
 
     #region ライフサイクル
     private void Awake()
@@ -235,23 +237,25 @@ public class BoardManager : MonoBehaviour
         if (!_isSelected) return;
         _isSelected = false;
 
-        Debug.Log("EndSelection動作");
         ClearHighLight();
         ClearLine();
 
-        if (_selectedStack.Count >= _selectCount)
-        {
-            Debug.Log($"パネルを消去{_selectedStack.Count}個");
+        Debug.Log($"パネルを消去{_selectedStack.Count}個");
 
-            _rm.PanelResolvingController.ProcessWrapped();
-            _selectedStack.Clear();
-            _director.PanelResolvingFinished();
-        }
-        else
-        {
-            _selectedStack.Clear();
-            _rm.Igsm.ChangeState<SIGIdle>();
-        }
+        _rm.PanelResolvingController.ProcessWrapped();
+        _selectedStack.Clear();
+        _director.PanelResolvingFinished();
+    }
+
+    /// <summary>
+    ///         選択しているパネル情報をクリア
+    /// </summary>
+    public void ClearSelection()
+    {
+        _isSelected = false;
+        _selectedStack.Clear();
+        ClearHighLight();
+        ClearLine();
     }
     #endregion
 
