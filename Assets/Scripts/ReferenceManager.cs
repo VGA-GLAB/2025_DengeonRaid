@@ -14,7 +14,7 @@ using UnityEngine.UI;
 public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
 {
     [Header("UI系")]
-    public UIController UIController;
+    //public UIController UIController;
     public TextMeshProUGUI UIText;
     public Text UIPlayerHp;
     public Text UIArmor;
