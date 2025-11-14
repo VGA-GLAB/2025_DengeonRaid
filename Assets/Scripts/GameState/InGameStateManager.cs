@@ -9,7 +9,7 @@ public class InGameStateManager : StaticInstanceMonoBehaviour<InGameStateManager
     public int Score = 0;
     
     [SerializeField] private PanelMovement _panelMovement;
-    [SerializeField] private UIController uiController;
+    //[SerializeField] private UIController uiController;
 
     #region ライフサイクル
     private void Start()
