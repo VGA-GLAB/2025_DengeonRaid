@@ -65,6 +65,10 @@ public class EnemyPanel : Panel
     {
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
+
+        // ミサイルエフェクト再生
+        MissileEffectManager.Instance.SetEnemySprite(this.GetComponent<SpriteRenderer>().sprite);
+        MissileEffectManager.Instance.PlayMissileEffect();
         Destroy(gameObject);
     }
 
