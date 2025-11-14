@@ -72,7 +72,6 @@ public class BossPanel : EnemyPanel
     /// <returns></returns>
     private Action PickSkill()
     {
-        return _skills[1];
         int skillIndex = UnityEngine.Random.Range(0, _skills.Count);
         return _skills[skillIndex];
     }
@@ -82,7 +81,6 @@ public class BossPanel : EnemyPanel
     /// </summary>
     private void SkillSelfRecovery()
     {
-        Debug.Log("ボススキル：回復");
         // TODO アニメーションかエフェクト
         _hp += _hpRecovery;
     }
@@ -92,7 +90,6 @@ public class BossPanel : EnemyPanel
     /// </summary>
     private void SkillChangePanels()
     {
-        Debug.Log("ボススキル：パネル変換");
         // TODO アニメーションかエフェクト
         List<Panel> panels = new List<Panel>();
         Func<List<Panel>, Panel, bool> comparer = (panels, panel) => IsPanelInExclusionList(panels, panel);
@@ -104,7 +101,6 @@ public class BossPanel : EnemyPanel
         // 取得したパネルを敵パネルに変換する
         foreach (Panel panel in panels)
         {
-            Debug.Log($"Replace Panel : {panel.BoardPos.x}, {panel.BoardPos.y}");
             _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel);
         }
     }
