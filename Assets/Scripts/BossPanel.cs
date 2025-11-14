@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 using Object = System.Object;
 
 public class BossPanel : EnemyPanel
 {
     private List<Action> _skills;
     private int _turnCounter;
+    private ReferenceManager _rm;
 
     [Header("スキル関連パラメータ"), Space(0.2f)]
+    [Header("スキル用敵Prefab")]
+    [SerializeField] private EnemyPanel _enemyPanel;
     [Header("スキル発動頻度（Xターンに1回）")]
     [SerializeField] private int _skillInterval;
     [Header("回復スキルの回復量")]
     [SerializeField] private int _hpRecovery;
     [Header("敵パネル変換数")]
     [SerializeField] private int _panelAlterCount;
+    // パネル変換スキルの除外対象
+    private List<Type> _excludePanelList;
 
     #region 
     private new void Start()
@@ -25,17 +32,23 @@ public class BossPanel : EnemyPanel
         _skills.Add(() => SkillSelfRecovery());
         _skills.Add(() => SkillChangePanels());
 
-        ReferenceManager.Instance.Igsm.States[typeof(SIGEnemyTurn)].OnExit += TurnEndBehaviour;
+        _excludePanelList = new List<Type>();
+        _excludePanelList.Add(typeof(EnemyPanel));
+        _excludePanelList.Add(typeof(BossPanel));
+
+        _rm = ReferenceManager.Instance;
+
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += TurnEndBehaviour;
     }
     private void OnDestroy()
     {
-        ReferenceManager.Instance.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= TurnEndBehaviour;
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= TurnEndBehaviour;
     }
     #endregion
     public override void DestroyThis()
     {
-        ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
-        ReferenceManager.Instance.GameDirector.BossDefeated();
+        _rm.BoardManager.RemovePanelFromBoard(this);
+        _rm.GameDirector.BossDefeated();
         Destroy(gameObject);
     }
     /// <summary>
@@ -73,14 +86,40 @@ public class BossPanel : EnemyPanel
     }
 
     /// <summary>
-    /// ボススキル：ランダムのパネルを敵に変換する
+    /// ボススキル：ランダムのパネルを敵パネルに変換する
     /// </summary>
     private void SkillChangePanels()
     {
         // TODO アニメーションかエフェクト
-        Debug.Log("Bossスキル発動：パネル変換");
+        List<Panel> panels = new List<Panel>();
+        Func<List<Panel>, Panel, bool> comparer = (panels, panel) => IsPanelInExclusionList(panels, panel);
+        // ボードからランダムのパネルを取得する
+        for (int i = 0; i < _panelAlterCount; i++)
+        {
+            panels.Add(_rm.BoardManager.GetRadomPanelExclusive(panels, comparer));
+        }
+        // 取得したパネルを敵パネルに変換する
+        foreach (Panel panel in panels)
+        {
+            _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel);
+        }
     }
 
+    /// <summary>
+    /// 指定したパネルが変換スキルの除外対象であるか判定する
+    /// 除外対象：特定なパネル種類、既に変換しようとするパネル
+    /// </summary>
+    /// <param name="panel"></param>
+    /// <returns></returns>
+    private bool IsPanelInExclusionList(List<Panel> panelsToAlter, Panel panel)
+    {
+        return _excludePanelList.Contains(panel.GetType())
+            || panelsToAlter.Contains(panel);
+    }
+
+    /// <summary>
+    /// 経過ターン数を加算
+    /// </summary>
     private void CountTurn()
     {
         _turnCounter++;
