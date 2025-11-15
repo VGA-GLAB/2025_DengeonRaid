@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -20,6 +21,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject _arrowPrefab;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PanelDropManager _panelDropManager;
+    [SerializeField] private DeletePanelEffectManager _deletePanelEffectManager;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
     [SerializeField] private BossPanel _bossPrefab;
 
@@ -205,6 +207,7 @@ public class BoardManager : MonoBehaviour
     public void StartSelection(Panel panel)
     {
         Debug.Log("選択開始", panel);
+        //  初期化して選択開始
         _selectedStack.Clear();
         _selectedStack.Push(panel);
         _isSelected = true;
@@ -213,6 +216,7 @@ public class BoardManager : MonoBehaviour
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
+        _deletePanelEffectManager.EffectScale(panel);
         UpdateLine();
     }
 
@@ -240,13 +244,16 @@ public class BoardManager : MonoBehaviour
             while (_selectedStack.Peek() != panel)
             {
                 Panel removed = _selectedStack.Pop();
+                _deletePanelEffectManager.EffectReturnScale(removed);
                 UpdateLine();
             }
             return;
         }
         else
         {
+            //  新規選択ならスタックに追加
             _selectedStack.Push(panel);
+            _deletePanelEffectManager.EffectScale(panel);
         }
 
         UpdateLine();
@@ -266,6 +273,11 @@ public class BoardManager : MonoBehaviour
         Debug.Log($"パネルを消去{_selectedStack.Count}個");
 
         _rm.PanelResolvingController.ProcessWrapped();
+
+        //  のちに追加予定
+        //List<Panel> panelsToDelete = _selectedStack.ToList();
+        //_deletePanelEffectManager.EffectMove(panelsToDelete);
+
         _selectedStack.Clear();
         _director.PanelResolvingFinished();
     }
@@ -276,6 +288,11 @@ public class BoardManager : MonoBehaviour
     public void ClearSelection()
     {
         _isSelected = false;
+
+        foreach (Panel panel in _selectedStack)
+        {
+            _deletePanelEffectManager.EffectReturnScale(panel);
+        }
         _selectedStack.Clear();
         ClearHighLight();
         ClearLine();
