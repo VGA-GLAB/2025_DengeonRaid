@@ -3848,7 +3848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1592718363460257477, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Size
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283789136010994688, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Pivot.x
@@ -3958,6 +3958,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5605503920701310995, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605503920701310995, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000030517578
+      objectReference: {fileID: 0}
     - target: {fileID: 7078097828657472494, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Name
       value: ShopUI
@@ -3972,6 +3980,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9020351975983914018, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020351975983914018, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
