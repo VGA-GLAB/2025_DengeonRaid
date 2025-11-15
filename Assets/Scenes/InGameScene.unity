@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeartCollectSkill
   _boardManager: {fileID: 1590212769}
+  _maxSkillUses: 3
 --- !u!114 &168464295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,7 +440,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 168464294}
         m_TargetAssemblyTypeName: HeartCollectSkill, Assembly-CSharp
-        m_MethodName: ActivateSkill
+        m_MethodName: TryUseSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -970,6 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShieldToSwordSkill
   _boardManager: {fileID: 1590212769}
+  _maxSkillUses: 1
   _swordPanelPrefab: {fileID: -1984394713350848579, guid: e7efeadb00e408a4c8c1b9f64bc0f0b2, type: 3}
 --- !u!114 &339945830
 MonoBehaviour:
@@ -1017,7 +1019,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 339945829}
         m_TargetAssemblyTypeName: ShieldToSwordSkill, Assembly-CSharp
-        m_MethodName: ActivateSkill
+        m_MethodName: TryUseSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3830,19 +3832,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 573178477142109970, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.99999994
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 573178477142109970, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1422488423554465037, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1422488423554465037, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1592718363460257477, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Size
@@ -3930,11 +3932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2883814568306750735, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2883814568306750735, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2992069988521556111, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: _playerController
@@ -3942,19 +3944,19 @@ PrefabInstance:
       objectReference: {fileID: 766836293}
     - target: {fileID: 3253566414208437934, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253566414208437934, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253566414208437934, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3253566414208437934, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7078097828657472494, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Name
@@ -3962,15 +3964,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7078097828657472494, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9020351975983914018, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9020351975983914018, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4305,6 +4307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemySkill
   _boardManager: {fileID: 1590212769}
+  _maxSkillUses: 10
   _skillDamageRatio: 3
 --- !u!114 &2007702128
 MonoBehaviour:
@@ -4352,7 +4355,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2007702127}
         m_TargetAssemblyTypeName: AttackEnemySkill, Assembly-CSharp
-        m_MethodName: ActivateSkill
+        m_MethodName: TryUseSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
