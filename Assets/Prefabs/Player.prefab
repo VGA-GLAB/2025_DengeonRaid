@@ -53,11 +53,11 @@ MonoBehaviour:
   _gold: 0
   _goldMax: 5
   _goldMaxIncrement: 5
-  _shield: 30
-  _shieldMax: 30
+  _shield: 20
+  _shieldMax: 20
   _shieldExp: 0
   _shieldExpMax: 0
-  _shieldStrength: 5
-  _baseAttack: 10
-  _weaponAttack: 10
+  _shieldStrength: 2
+  _baseAttack: 5
+  _weaponAttack: 5
   _isDead: 0
