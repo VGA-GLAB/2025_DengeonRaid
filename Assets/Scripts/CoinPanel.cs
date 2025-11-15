@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoinPanel : Panel
 {
@@ -7,7 +7,7 @@ public class CoinPanel : Panel
 
     public override void Effect(PreviewPlayerData preview)
     {
-        preview.Gold += _coin;
+        preview.Money += _coin;
     }
     public override void DestroyThis()
     {

@@ -14,13 +14,16 @@ using UnityEngine.UI;
 public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
 {
     [Header("UI系")]
-    //public UIController UIController;
-    public TextMeshProUGUI UIText;
-    public Text UIPlayerHp;
-    public Text UIArmor;
-    public Text UIArmorExp;
+    public UIController UIController;
+    public Text UIPlayerHpText;
+    public Slider UIPlayerHpGuage;
+    public Text UIPlayerShieldText;
+    public Slider UIPlayerShieldGuage;
     public Text UIExp;
-    public Text UIGold;
+    public Text UIMoneyText;
+    public Slider UIMoneyGuage;
+    public Text UIBaseAttackText;
+    public Text UIMissileAttackText;
     public GameObject UIEnemyAttackPanel;
     public TextMeshProUGUI UIEnemyDamageText;
     public GameObject ShopUI;

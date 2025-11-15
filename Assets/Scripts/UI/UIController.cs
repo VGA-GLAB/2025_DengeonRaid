@@ -1,0 +1,72 @@
+﻿using System;
+using System.Security.Cryptography;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIController : MonoBehaviour
+{
+    private ReferenceManager _rm;
+    private PlayerController _player;
+
+    #region  ライフサイクル
+    private void Start()
+    {
+        _rm = ReferenceManager.Instance;
+        _player = _rm.PlayerController;
+
+        _rm.Igsm.States[typeof(SIGEliminatePanel)].OnExit += UpdateUI;
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += UpdateUI;
+        _rm.Igsm.States[typeof(SIGShop)].OnExit += UpdateUI;
+        UpdateUI();
+    }
+    #endregion
+
+    #region Publicメソッド
+
+    public void UpdateUI()
+    {
+        UpdatePlayerHp();
+        UpdateShield();
+        UpdateMoney();
+        UpdateBaseAttack();
+        UpdateMissileAttack();
+    }
+    private void UpdatePlayerHp()
+    {
+        _rm.UIPlayerHpText.text = $"{_player.Hp}" + "/" + $"{_player.HpMax}";
+        _rm.UIPlayerHpGuage.value = (float)_player.Hp / (float)_player.HpMax;
+    }
+
+    private void UpdateShield()
+    {
+        _rm.UIPlayerShieldText.text = $"{_player.Shield}" + "/" + $"{_player.ShieldMax}";
+        _rm.UIPlayerShieldGuage.value = (float)_player.Shield / (float)_player.ShieldMax;
+    }
+
+    private void UpdateShieldExp()
+    {
+    }
+
+    private void UpdateExp()
+    {
+    }
+
+    private void UpdateMoney()
+    {
+        _rm.UIMoneyText.text = $"{_player.Money}" + "/" + $"{_player.MoneyMax}";
+        _rm.UIMoneyGuage.value = (float)_player.Money / (float)_player.MoneyMax;
+    }
+
+    private void UpdateBaseAttack()
+    {
+        _rm.UIBaseAttackText.text = $"{_player.BaseAttack}";
+    }
+
+    private void UpdateMissileAttack()
+    {
+        _rm.UIMissileAttackText.text = $"{_player.WeaponAttack}";
+    }
+
+    #endregion
+}
