@@ -34,7 +34,7 @@ public class ShopUIManager : MonoBehaviour
                 _previewPlayerData.Hp = Mathf.Min(_previewPlayerData.Hp + item.Value, _previewPlayerData.HpMax);
                 break;
             case ShopEffectType.Attack:
-                _previewPlayerData.BaseAttack += item.Value;
+                _previewPlayerData.WeaponAttack += item.Value; // 話し合いで決めたいですこちらの方が面白くなると感じたため修正
                 break;
             case ShopEffectType.MaxShild:
                 _previewPlayerData.ShieldMax += item.Value;
