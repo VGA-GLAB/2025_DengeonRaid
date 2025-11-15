@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// ゲーム全体の調達をする立場
@@ -14,6 +15,7 @@ public class GameDirector : MonoBehaviour
     private InGameStateMachine _igsm;
     private EventBus _eventBus;
     private PlayerController _player;
+    private bool _playerDefeated;
     private bool _bossDefeated;
     private bool _bossExists;
     private int _enemyCount;
@@ -83,6 +85,11 @@ public class GameDirector : MonoBehaviour
 
     private IEnumerator PanelResolvingFinishedSequence()
     {
+        if(_bossDefeated)
+        {
+            _rm.UIController.WipeIn(LoadWinResultScene);
+            yield break;
+        }
         // TODO レベルアップシステム未実装
         //_igsm.ChangeState<SIGLevelUp>();
         //yield return new WaitUntil(() => !(_igsm.CurrentState is SIGLevelUp));
@@ -105,6 +112,10 @@ public class GameDirector : MonoBehaviour
     public void EnemyAttackFinished()
     {
         _rm.Igsm.ChangeState<SIGIdle>();
+        if (_rm.PlayerController.IsDead)
+        {
+            _rm.UIController.WipeIn(LoadLoseResultScene);
+        }
     }
     /// <summary>
     /// レベルアップ完了
@@ -165,6 +176,30 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void BossDefeated()
     {
+        _bossDefeated = true;
+    }
 
+    /// <summary>
+    /// プレイヤー敗北
+    /// </summary>
+    public void PlayerDefeated()
+    {
+        _rm.UIController.WipeIn(LoadLoseResultScene);
+    }
+
+    /// <summary>
+    /// リザルトシーンに遷移＿勝利
+    /// </summary>
+    private void LoadWinResultScene()
+    {
+        SceneManager.LoadScene("ResultWin");
+    }
+
+    /// <summary>
+    /// リザルトシーンに遷移＿敗北
+    /// </summary>
+    private void LoadLoseResultScene()
+    {
+        SceneManager.LoadScene("ResultLose");
     }
 }

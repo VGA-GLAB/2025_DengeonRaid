@@ -26,6 +26,7 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public Text UIMissileAttackText;
     public GameObject UIEnemyAttackPanel;
     public TextMeshProUGUI UIEnemyDamageText;
+    public GameObject UIWipeImage;
     public GameObject ShopUI;
 
     [Header("システム系")]

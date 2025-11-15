@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
@@ -32,6 +33,15 @@ public class UIController : MonoBehaviour
         UpdateBaseAttack();
         UpdateMissileAttack();
     }
+
+    public void WipeIn(Action callback)
+    {
+        _rm.UIWipeImage.SetActive(true);
+        _rm.UIWipeImage.transform.DOMoveY(0, 1f).OnComplete(callback.Invoke);
+    }
+    #endregion
+
+    #region Privateメソッド
     private void UpdatePlayerHp()
     {
         _rm.UIPlayerHpText.text = $"{_player.Hp}" + "/" + $"{_player.HpMax}";
