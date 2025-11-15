@@ -72,6 +72,7 @@ public class BoardManager : MonoBehaviour
     }
     #endregion
 
+    #region パネル取得
     /// <summary>
     ///         指定した座標のパネルを取得
     /// </summary>
@@ -146,6 +147,7 @@ public class BoardManager : MonoBehaviour
     {
         return _bossPrefab;
     }
+    #endregion
 
     /// <summary>
     ///         指定した座標のパネルを置き換える
@@ -166,12 +168,33 @@ public class BoardManager : MonoBehaviour
     ///         指定した座標のパネルを削除する
     /// </summary>
     /// <param name="pos"></param>
-    public void DeleatePanel(Vector2Int pos)
+    public void DeleatePanel(Panel panel)
+    {
+        //  敵パネルでなければ、プレイヤー効果を発動
+        if (!(panel is EnemyPanel))
+        {
+            _boardArray[panel.BoardPos.x, panel.BoardPos.y].Effect(new PreviewPlayerData(_playerController));
+        }
+
+        _boardArray[panel.BoardPos.x, panel.BoardPos.y].DestroyThis();
+    }
+
+    /// <summary>
+    ///         パネル二次元配列にて、指定されたパネルをnullに設定する
+    /// </summary>
+    /// <param name="panel"></param>
+    public void RemovePanelFromBoard(Panel panel)
+    {
+        _boardArray[panel.BoardPos.x, panel.BoardPos.y] = null;
+    }
+
+    /// <summary>
+    ///         外部がDopPanelを強制的に呼び出すための関数(主にスキル使用時)
+    /// </summary>
+    public void ForceDropPanel()
     {
         //  スキル使用フラグを立てて、パネル効果を発動
         _isSkillUsed = true;
-        _boardArray[pos.x, pos.y].Effect(new PreviewPlayerData(_playerController));
-        _boardArray[pos.x, pos.y].DestroyThis();
         DropPanel();
     }
 
@@ -284,6 +307,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void DropPanel()
     {
+        Debug.Log("パネル落とし開始");
         List<(Panel panel, Vector3 from, Vector3 target)> droppedPanels = new();
 
         //  盤面の各列を左から順に処理
@@ -340,11 +364,7 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        _panelDropManager.DropAll(droppedPanels);
-
-        //if (!_isSkillUsed)
-        //    _director.SpawnNewPanelFinished();
-
+        _panelDropManager.DropAll(droppedPanels,_isSkillUsed);
         _isSkillUsed = false;
     }
 
@@ -525,14 +545,5 @@ public class BoardManager : MonoBehaviour
                 panel.SetHighlight(false);
         }
         _highlightedPanels.Clear();
-    }
-
-    /// <summary>
-    ///         パネル二次元配列にて、指定されたパネルをnullに設定する
-    /// </summary>
-    /// <param name="panel"></param>
-    public void RemovePanelFromBoard(Panel panel)
-    {
-        _boardArray[panel.BoardPos.x, panel.BoardPos.y] = null;
     }
 }
