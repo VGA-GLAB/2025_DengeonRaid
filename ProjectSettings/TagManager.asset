@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -38,6 +38,29 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3877712789
+    locked: 0
+  - name: BehindBoard
+    uniqueID: 1609199543
+    locked: 0
+  - name: Board
+    uniqueID: 1721039641
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PanelBackground
+    uniqueID: 446246169
+    locked: 0
+  - name: PanelImage
+    uniqueID: 1692082987
+    locked: 0
+  - name: PanelUI
+    uniqueID: 1324289025
+    locked: 0
+  - name: AboveBoard
+    uniqueID: 2887495401
+    locked: 0
+  m_RenderingLayers:
+  - Default

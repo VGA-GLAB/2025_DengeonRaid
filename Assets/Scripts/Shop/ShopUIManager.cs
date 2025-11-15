@@ -41,7 +41,7 @@ public class ShopUIManager : MonoBehaviour
                 _previewPlayerData.Shield = Mathf.Min(_previewPlayerData.Shield + item.Value, _previewPlayerData.ShieldMax);
                 break;
             case ShopEffectType.Gold:
-                _previewPlayerData.Gold += item.Value;
+                _previewPlayerData.Money += item.Value;
                 break;
         }
         _playerController.SetResolvePreview(_previewPlayerData);

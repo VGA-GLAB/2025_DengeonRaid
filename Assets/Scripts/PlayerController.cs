@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public int Lv { get => _lv; private set => _hp = value; }
     public int Exp { get => _exp; private set => _exp = value; }
     public int ExpMax { get => _expMax; private set => _expMax = value; }
-    public int Gold { get => _gold; private set => _gold = value; }
-    public int GoldMax { get => _goldMax; private set => _goldMax = value; }
+    public int Money { get => _gold; private set => _gold = value; }
+    public int MoneyMax { get => _goldMax; private set => _goldMax = value; }
     public int Shield { get => _shield; private set => _shield = value; }
     public int ShieldMax { get => _shieldMax; private set => _shieldMax = value; }
     public int ShieldExp { get => _shieldExp; private set => _shieldExp = value; }
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
         Hp = _preview.Hp > HpMax ? HpMax : _preview.Hp;
         Exp = _preview.Exp;
         ExpMax = _preview.ExpMax;
-        Gold = _preview.Gold;
-        GoldMax = _preview.GoldMax;
+        Money = _preview.Money;
+        MoneyMax = _preview.MoneyMax;
         ShieldMax = _preview.ShieldMax;
         Shield = _preview.Shield > ShieldMax ? ShieldMax : _preview.Shield;
         ShieldExp = _preview.ShieldExp;
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public bool CheckEnterShop()
     {
-        if (Gold >= GoldMax)
+        if (Money >= MoneyMax)
         {
             return true;
         }
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     public void ProcessEnterShop()
     {
         // ゴールドを上限分引いて、ゴールド上限値を増やす
-        Gold -= GoldMax;
-        GoldMax += _goldMaxIncrement;
+        Money -= MoneyMax;
+        MoneyMax += _goldMaxIncrement;
     }
 }

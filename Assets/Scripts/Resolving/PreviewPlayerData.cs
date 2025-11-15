@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// パネル消去後の結果プレビューデータ_プレイヤー側
@@ -9,8 +9,8 @@ public class PreviewPlayerData
     public int Hp;
     public int Exp;
     public int ExpMax;
-    public int Gold;
-    public int GoldMax;
+    public int Money;
+    public int MoneyMax;
     public int Shield;
     public int ShieldMax;
     public int ShieldExp;
@@ -28,8 +28,8 @@ public class PreviewPlayerData
         HpMax = player.HpMax;
         Exp = player.Exp;
         ExpMax = player.ExpMax;
-        Gold = player.Gold;
-        GoldMax = player.GoldMax;
+        Money = player.Money;
+        MoneyMax = player.MoneyMax;
         Shield = player.Shield;
         ShieldMax = player.ShieldMax;
         ShieldExp = player.ShieldExp;
