@@ -33,6 +33,7 @@ public class PanelDropManager : MonoBehaviour
                 dropEffect.PlayDrop(info.from, info.target, delay, OnePanelDropFinished);
             }
         }
+        ReferenceManager.Instance.GameDirector.SpawnNewPanelFinished();
     }
 
     private void OnePanelDropFinished()
@@ -41,7 +42,6 @@ public class PanelDropManager : MonoBehaviour
         if (_isPanelsDropping && _droppingPanelCount == 0)
         {
             _isPanelsDropping = false;
-            ReferenceManager.Instance.GameDirector.SpawnNewPanelFinished();
         }
     }
 }
