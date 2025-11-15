@@ -32,7 +32,7 @@ public class MissileEffect : MonoBehaviour
             .SetEase(_missileEase)
             .OnComplete(() =>
             {
-                Instantiate(_explosionEffectPrefab, this.transform.position, Quaternion.identity);
+                Instantiate(_explosionEffectPrefab, this.transform.position,Quaternion.Euler(0,0,180));
                 OnHit?.Invoke();
 
                 Destroy(gameObject);
