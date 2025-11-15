@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 1010363264004800150}
   - component: {fileID: 8616947282621469217}
   - component: {fileID: -7209675579189649082}
+  - component: {fileID: -6916386907706361724}
   m_Layer: 0
   m_Name: ShieldPanel
   m_TagString: Untagged
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShieldPanel
   _panelId: 2
   _panelGroup: 0
+  _deletePanelEffect: {fileID: -6916386907706361724}
   _shield: 5
 --- !u!61 &8616947282621469217
 BoxCollider2D:
@@ -260,3 +262,23 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
+--- !u!114 &-6916386907706361724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705542876679796301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
+  _moveSpeed: 1
+  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSpeed: 1
+  _panelReturnSpeed: 1
+  _panelMoveMinimalizeSize: 0.5
+  _panelMoveMinimalizeSpeed: 1
+  _panelExpantionSize: 2
+  _panelExpantionSpeed: 1

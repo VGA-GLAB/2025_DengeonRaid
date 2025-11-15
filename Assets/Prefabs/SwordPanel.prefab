@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1984394713350848579}
   - component: {fileID: -3303256531299770696}
   - component: {fileID: -1019985716650151663}
+  - component: {fileID: 6367396364687777153}
   m_Layer: 0
   m_Name: SwordPanel
   m_TagString: Untagged
@@ -108,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordPanel
   _panelId: 3
   _panelGroup: 1
+  _deletePanelEffect: {fileID: 6367396364687777153}
   _weaponAmount: 1
 --- !u!61 &-3303256531299770696
 BoxCollider2D:
@@ -170,6 +172,26 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
+--- !u!114 &6367396364687777153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705542876679796301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
+  _moveSpeed: 1
+  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSpeed: 1
+  _panelReturnSpeed: 1
+  _panelMoveMinimalizeSize: 0.5
+  _panelMoveMinimalizeSpeed: 1
+  _panelExpantionSize: 2
+  _panelExpantionSpeed: 1
 --- !u!1 &3825356913158173624
 GameObject:
   m_ObjectHideFlags: 0
