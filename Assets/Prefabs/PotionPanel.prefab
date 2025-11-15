@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 263918383826840547}
   - component: {fileID: 8298974069918889336}
   - component: {fileID: -359406755513462176}
+  - component: {fileID: 2587490401837125820}
   m_Layer: 0
   m_Name: PotionPanel
   m_TagString: Untagged
@@ -355,6 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PotionPanel
   _panelId: 1
   _panelGroup: 0
+  _deletePanelEffect: {fileID: 2587490401837125820}
   _heal: 1
 --- !u!114 &-359406755513462176
 MonoBehaviour:
@@ -371,3 +373,23 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
+--- !u!114 &2587490401837125820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218359526877018153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
+  _moveSpeed: 1
+  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSpeed: 1
+  _panelReturnSpeed: 1
+  _panelMoveMinimalizeSize: 0.5
+  _panelMoveMinimalizeSpeed: 1
+  _panelExpantionSize: 2
+  _panelExpantionSpeed: 1

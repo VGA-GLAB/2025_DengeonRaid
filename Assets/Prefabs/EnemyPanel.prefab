@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1625946810168813193}
   - component: {fileID: -3511616952413351084}
   - component: {fileID: 5679105269127256362}
+  - component: {fileID: 5022056280354635626}
   m_Layer: 0
   m_Name: EnemyPanel
   m_TagString: Untagged
@@ -155,10 +156,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPanel
   _panelId: 4
   _panelGroup: 1
-  _attack: 1
+  _deletePanelEffect: {fileID: 5022056280354635626}
+  _attack: 10
   _shield: 3
   _shieldStrength: 1
-  _hp: 10
+  _hp: 15
   _killExp: 3
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}
@@ -179,6 +181,26 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
+--- !u!114 &5022056280354635626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
+  _moveSpeed: 1
+  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSpeed: 1
+  _panelReturnSpeed: 1
+  _panelMoveMinimalizeSize: 0.5
+  _panelMoveMinimalizeSpeed: 1
+  _panelExpantionSize: 2
+  _panelExpantionSpeed: 1
 --- !u!1 &2570931276006752375
 GameObject:
   m_ObjectHideFlags: 0
