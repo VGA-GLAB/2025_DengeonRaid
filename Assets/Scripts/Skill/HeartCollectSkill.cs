@@ -12,6 +12,7 @@ public class HeartCollectSkill : SkillBase
                 _boardManager.DeleatePanel(panel);
             }
         }
+        // 1回だけパネル落下を実行
         _boardManager.ForceDropPanel();
     }
 }
