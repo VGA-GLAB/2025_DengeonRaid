@@ -5,13 +5,13 @@ public class HeartCollectSkill : SkillBase
 {
     public override void ActivateSkill()
     {
-        Panel[,] panels = _boardManager.GetBoardArray;
-        foreach (var panel in panels)
+        foreach (Panel panel in _boardManager.GetBoardArray)
         {
             if (panel is PotionPanel potionPanel)
             {
-                _boardManager.DeleatePanel(potionPanel.BoardPos);
+                _boardManager.DeleatePanel(panel);
             }
         }
+        _boardManager.ForceDropPanel();
     }
 }
