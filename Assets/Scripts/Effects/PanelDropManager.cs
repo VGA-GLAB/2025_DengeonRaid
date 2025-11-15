@@ -19,7 +19,7 @@ public class PanelDropManager : MonoBehaviour
     /// <summary>
     ///         取得したリストの演出を再生する
     /// </summary>
-    public void DropAll(List<(Panel panel, Vector3 from, Vector3 target)> panels)
+    public void DropAll(List<(Panel panel, Vector3 from, Vector3 target)> panels, bool isSkillUsed)
     {
         _isPanelsDropping = true;
         _droppingPanelCount = panels.Count;
@@ -33,7 +33,11 @@ public class PanelDropManager : MonoBehaviour
                 dropEffect.PlayDrop(info.from, info.target, delay, OnePanelDropFinished);
             }
         }
-        ReferenceManager.Instance.GameDirector.SpawnNewPanelFinished();
+
+        if (!isSkillUsed)
+            ReferenceManager.Instance.GameDirector.SpawnNewPanelFinished();
+        else
+            ReferenceManager.Instance.Igsm.ChangeState<SIGIdle>();
     }
 
     private void OnePanelDropFinished()
