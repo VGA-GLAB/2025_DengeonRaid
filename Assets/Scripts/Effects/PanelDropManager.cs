@@ -40,6 +40,7 @@ public class PanelDropManager : MonoBehaviour
             ReferenceManager.Instance.Igsm.ChangeState<SIGIdle>();
     }
 
+    //  現在使用していないが、将来的にパネルの落下演出が完了したことを知る必要がある場合に備えて残しておく
     private void OnePanelDropFinished()
     {
         _droppingPanelCount -= 1;

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1416c310c6e100d458b2802164a85670, type: 3}
-  m_Name: Shild
+  m_Name: Shield
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
   ShopEffectType: 1
   ItemName: Shild
-  Icon: {fileID: 21300000, guid: 811b4703b76f1f34193307d5a6dd0ed0, type: 3}
+  Icon: {fileID: 21300000, guid: 63f1f1d72039c2246b3e618b1db8dc8c, type: 3}
   Value: 3
   Description: "\u6700\u5927\u30B7\u30FC\u30EB\u30C9\u5897\u3084\u3057\u307E\u3059"
