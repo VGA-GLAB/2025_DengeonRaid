@@ -284,6 +284,10 @@ public class BoardManager : MonoBehaviour
         //List<Panel> panelsToDelete = _selectedStack.ToList();
         //_deletePanelEffectManager.EffectMove(panelsToDelete);
 
+        foreach (Panel panel in _selectedStack)
+        {
+            _deletePanelEffectManager.EffectReturnScale(panel);
+        }
         _selectedStack.Clear();
         _director.PanelResolvingFinished();
     }
