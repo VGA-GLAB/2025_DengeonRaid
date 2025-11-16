@@ -22,6 +22,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField] private DeletePanelEffectManager _deletePanelEffectManager;
+    [SerializeField] private UIController _uiController;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
     [SerializeField] private BossPanel _bossPrefab;
 
@@ -172,13 +173,18 @@ public class BoardManager : MonoBehaviour
     /// <param name="pos"></param>
     public void DeleatePanel(Panel panel)
     {
+        PreviewPlayerData playerData = new PreviewPlayerData(_playerController);
         //  敵パネルでなければ、プレイヤー効果を発動
-        if (!(panel is EnemyPanel))
+        if (panel is not EnemyPanel)
         {
-            _boardArray[panel.BoardPos.x, panel.BoardPos.y].Effect(new PreviewPlayerData(_playerController));
+            _boardArray[panel.BoardPos.x, panel.BoardPos.y].Effect(playerData);
         }
 
         _boardArray[panel.BoardPos.x, panel.BoardPos.y].DestroyThis();
+        _playerController.SetResolvePreview(playerData);
+        _playerController.ApplyPreview();
+        _uiController.UpdateUI();
+
     }
 
     /// <summary>
