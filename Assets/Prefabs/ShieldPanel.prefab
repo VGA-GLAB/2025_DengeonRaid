@@ -199,8 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShieldPanel
   _panelId: 2
   _panelGroup: 0
-  _deletePanelEffect: {fileID: -6916386907706361724}
-  _shield: 5
+  _shield: 2
 --- !u!61 &8616947282621469217
 BoxCollider2D:
   m_ObjectHideFlags: 0

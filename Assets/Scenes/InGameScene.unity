@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeartCollectSkill
   _boardManager: {fileID: 2139942493}
-  _maxSkillUses: 3
+  _maxSkillUses: 1
 --- !u!114 &168464295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d036d8b0697b69447a6ad773c6ed8c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDirector
-  _enemyCountForBoss: 5
+  _enemyCountForBoss: 50
   CurrentState: 
 --- !u!4 &280281287
 Transform:
@@ -4299,7 +4299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemySkill
   _boardManager: {fileID: 2139942493}
-  _maxSkillUses: 10
+  _maxSkillUses: 1
   _skillDamageRatio: 3
 --- !u!114 &2007702128
 MonoBehaviour:
@@ -4546,9 +4546,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 766836293}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _deletePanelEffectManager
       value: 
       objectReference: {fileID: 578461729}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[0].Weight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[1].Weight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[2].Weight
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[3].Weight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[4].Weight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[5].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[6].Weight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[5].PanelPrefab
+      value: 
+      objectReference: {fileID: -3511616952413351084, guid: 8992b9c4f5894af47a8b78c25b81e663, type: 3}
+    - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
+      propertyPath: _panelPrefabs.Array.data[6].PanelPrefab
+      value: 
+      objectReference: {fileID: -3511616952413351084, guid: 756baac70183865499829e3e6b665ea0, type: 3}
     - target: {fileID: 4822209415587583396, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.79745
@@ -4613,6 +4653,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 83989855684100858, guid: 7a96a227f211e924d9a6634f694c71c7, type: 3}
+      propertyPath: _shield
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 83989855684100858, guid: 7a96a227f211e924d9a6634f694c71c7, type: 3}
+      propertyPath: _goldMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 83989855684100858, guid: 7a96a227f211e924d9a6634f694c71c7, type: 3}
+      propertyPath: _shieldMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 83989855684100858, guid: 7a96a227f211e924d9a6634f694c71c7, type: 3}
+      propertyPath: _shieldStrength
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2724858501711297192, guid: 7a96a227f211e924d9a6634f694c71c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 648.5205

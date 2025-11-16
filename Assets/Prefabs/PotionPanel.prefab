@@ -356,8 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PotionPanel
   _panelId: 1
   _panelGroup: 0
-  _deletePanelEffect: {fileID: 2587490401837125820}
-  _heal: 1
+  _heal: 2
 --- !u!114 &-359406755513462176
 MonoBehaviour:
   m_ObjectHideFlags: 0

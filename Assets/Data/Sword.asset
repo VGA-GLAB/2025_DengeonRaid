@@ -15,5 +15,5 @@ MonoBehaviour:
   ShopEffectType: 2
   ItemName: Missile
   Icon: {fileID: 21300000, guid: cce39c8499c85e245a13b7d50551cd2b, type: 3}
-  Value: 3
-  Description: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u3075\u3084\u3059\u305C"
+  Value: 1
+  Description: "\u30DF\u30B5\u30A4\u30EB\u30C0\u30E1\u30FC\u30B8\u3092\u3075\u3084\u3059"
