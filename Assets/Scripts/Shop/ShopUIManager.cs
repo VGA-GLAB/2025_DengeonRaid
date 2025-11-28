@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using static UnityEditor.Experimental.GraphView.GraphView;
-
+#endif
 /// <summary>
 ///         UI生成＆購入処理
 /// </summary>
