@@ -1,15 +1,15 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using UnityEngine;
 
 public class ChangePanelEffect : MonoBehaviour
 {
-    [SerializeField, Header("ƒpƒlƒ‹•ÏX‚Ì–Ú•WƒTƒCƒY")]
+    [SerializeField, Header("ãƒ‘ãƒãƒ«å¤‰æ›´æ™‚ã®ç›®æ¨™ã‚µã‚¤ã‚º")]
     private Vector3 _panelTargetSize;
 
-    [SerializeField, Header("ƒpƒlƒ‹•ÏX‚ÌƒTƒCƒY•ÏX‘¬“x")]
+    [SerializeField, Header("ãƒ‘ãƒãƒ«å¤‰æ›´æ™‚ã®ã‚µã‚¤ã‚ºå¤‰æ›´é€Ÿåº¦")]
     private float _panelChangeSpeed;
 
-    [SerializeField, Header("ƒpƒlƒ‹•ÏX‚ÌFade‘¬“x")]
+    [SerializeField, Header("ãƒ‘ãƒãƒ«å¤‰æ›´æ™‚ã®Fadeé€Ÿåº¦")]
     private float _panelFadeSpeed;
 
     public void PanelChange()
