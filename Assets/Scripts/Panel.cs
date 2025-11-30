@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Panel : MonoBehaviour
@@ -17,6 +18,9 @@ public class Panel : MonoBehaviour
 
     [SerializeField, Header("パネル変更時のサイズ変更速度")]
     float _panelChangeSpeed;
+
+    [SerializeField, Header("パネル変更時のFade速度")]
+    float _panelFadeSpeed;
 
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
@@ -62,5 +66,6 @@ public class Panel : MonoBehaviour
     public void PanelChange()
     {
         transform.DOScale(_panelTargetSize, _panelChangeSpeed);
+        GetComponent<Renderer>().material.DOFade(0, _panelFadeSpeed);
     }
 }
