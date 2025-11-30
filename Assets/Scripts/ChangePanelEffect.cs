@@ -1,16 +1,20 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ChangePanelEffect : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField, Header("パネル変更時の目標サイズ")]
+    private Vector3 _panelTargetSize;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField, Header("パネル変更時のサイズ変更速度")]
+    private float _panelChangeSpeed;
+
+    [SerializeField, Header("パネル変更時のFade速度")]
+    private float _panelFadeSpeed;
+
+    public void PanelChange()
     {
-        
+        transform.DOScale(_panelTargetSize, _panelChangeSpeed);
+        GetComponent<Renderer>().material.DOFade(0, _panelFadeSpeed);
     }
 }
