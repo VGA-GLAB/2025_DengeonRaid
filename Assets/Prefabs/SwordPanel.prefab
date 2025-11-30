@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 1692082987
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cce39c8499c85e245a13b7d50551cd2b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9345f642ba2ce0c4bb5e9b4ba7c71331, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,7 +109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordPanel
   _panelId: 3
   _panelGroup: 1
-  _deletePanelEffect: {fileID: 6367396364687777153}
   _weaponAmount: 1
 --- !u!61 &-3303256531299770696
 BoxCollider2D:
@@ -149,7 +148,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.96, y: 0.96}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
