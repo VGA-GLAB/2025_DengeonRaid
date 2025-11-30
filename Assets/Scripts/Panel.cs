@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class Panel : MonoBehaviour
@@ -11,15 +10,6 @@ public class Panel : MonoBehaviour
 
     [SerializeField,Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
-
-    [SerializeField, Header("パネル変更時の目標サイズ")]
-    private Vector3 _panelTargetSize;
-
-    [SerializeField, Header("パネル変更時のサイズ変更速度")]
-    private float _panelChangeSpeed;
-
-    [SerializeField, Header("パネル変更時のFade速度")]
-    private float _panelFadeSpeed;
 
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
@@ -60,11 +50,5 @@ public class Panel : MonoBehaviour
     public virtual void DestroyThis()
     {
         Debug.Log("DestroyThisメソッドが未実装");
-    }
-
-    public void PanelChange()
-    {
-        transform.DOScale(_panelTargetSize, _panelChangeSpeed);
-        GetComponent<Renderer>().material.DOFade(0, _panelFadeSpeed);
     }
 }
