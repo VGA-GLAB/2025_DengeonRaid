@@ -1,6 +1,5 @@
 ﻿using CriWare;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CRISEManager
 {
@@ -37,6 +36,9 @@ public class CRISEManager
             free.Play(cueName);
     }
 
+    /// <summary>
+    ///         
+    /// </summary>
     public void DisposeAll()
     {
         foreach (var p in _pool)
