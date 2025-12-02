@@ -7,7 +7,7 @@
 public static class SoundSettings
 {
     private const string KEY_BGM = "Audio_BGM_Volume";
-    private const string KEY_SE = "Aduio_SE_Volume";
+    private const string KEY_SE = "Audio_SE_Volume";
 
     public static float BGMVolume
     {
