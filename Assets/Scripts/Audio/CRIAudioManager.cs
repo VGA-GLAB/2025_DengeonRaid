@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class CRIAudioManager
 {
@@ -21,5 +22,6 @@ public class CRIAudioManager
             Debug.LogError("CriAtomがシーン内に存在しない");
             return;
         }
+        await Awaitable.WaitForSecondsAsync(0.1f);
     }
 }
