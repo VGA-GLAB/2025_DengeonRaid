@@ -5,7 +5,7 @@
 /// </summary>
 public abstract class SkillBase : MonoBehaviour
 {
-    [SerializeField] protected BoardManager _boardManager;
+    protected BoardManager _boardManager;
 
     [Header("スキル使用回数")]
     [SerializeField] private int _maxSkillUses = 1;
@@ -13,6 +13,7 @@ public abstract class SkillBase : MonoBehaviour
 
     private void Start()
     {
+        _boardManager = ReferenceManager.Instance.BoardManager;
         _remainingSkillUses = _maxSkillUses;
     }
 

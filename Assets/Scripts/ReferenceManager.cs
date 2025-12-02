@@ -28,6 +28,8 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public TextMeshProUGUI UIEnemyDamageText;
     public GameObject UIWipeImage;
     public GameObject ShopUI;
+    public GameObject LevelUpUI;
+    public GameObject SkillPanel;
 
     [Header("システム系")]
     public Camera MainCamera;
@@ -39,6 +41,8 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public PanelResolvingController PanelResolvingController;
     public EnemyAttackController EnemyAttackController;
     public ShopUIManager ShopUIManager;
+    public SkillUnlockManager SkillUnlockManager;
+    public LevelUpUIManager LevelUpUIManager;
 
     [Header("ゲーム内要素")]
     public PlayerController PlayerController;

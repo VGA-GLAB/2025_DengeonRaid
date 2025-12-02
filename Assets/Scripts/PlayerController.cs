@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     #region プロパティー
     public int Hp { get => _hp; private set => _hp = value; }
     public int HpMax { get => _hpMax; private set => _hpMax = value; }
-    public int Lv { get => _lv; private set => _hp = value; }
+    public int Lv { get => _lv; private set => _lv = value; }
     public int Exp { get => _exp; private set => _exp = value; }
     public int ExpMax { get => _expMax; private set => _expMax = value; }
     public int Money { get => _gold; private set => _gold = value; }

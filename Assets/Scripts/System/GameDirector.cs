@@ -41,6 +41,7 @@ public class GameDirector : MonoBehaviour
         // TODO 本番ではSIGIntro
         _igsm.ChangeState<SIGIdle>();
         _igsm.States[typeof(SIGShop)].OnEnter += CheckOpenShop;
+        _igsm.States[typeof(SIGLevelUp)].OnEnter += CheckLevelUp;
 
         _enemyCount = 0;
         _bossDefeated = false;
@@ -90,9 +91,8 @@ public class GameDirector : MonoBehaviour
             _rm.UIController.WipeIn(LoadWinResultScene);
             yield break;
         }
-        // TODO レベルアップシステム未実装
-        //_igsm.ChangeState<SIGLevelUp>();
-        //yield return new WaitUntil(() => !(_igsm.CurrentState is SIGLevelUp));
+        _igsm.ChangeState<SIGLevelUp>();
+        yield return new WaitUntil(() => !(_igsm.CurrentState is SIGLevelUp));
         _igsm.ChangeState<SIGShop>();
         yield return new WaitUntil(() => !(_igsm.CurrentState is SIGShop));
         _igsm.ChangeState<SIGSpawnNewPanel>();
@@ -143,6 +143,21 @@ public class GameDirector : MonoBehaviour
         {
             _player.ProcessEnterShop();
             _rm.ShopUIManager.OpenShop();
+        }
+        else
+        {
+            _igsm.ChangeState<SIGBusy>();
+        }
+    }
+    /// <summary>
+    /// レベルアップ条件を判定し、レベルアップ処理を行う
+    /// </summary>
+    public void CheckLevelUp()
+    {
+        if (_player.CheckLevelUp())
+        {
+            _player.ProcessLevelUp();
+            _rm.LevelUpUIManager.OpenLevelUp();
         }
         else
         {
