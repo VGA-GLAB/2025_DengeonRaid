@@ -5,37 +5,46 @@ using UnityEngine;
 public class SkillUnlockManager : MonoBehaviour
 {
     private ReferenceManager _rm;
-    private List<LevelUpItem> _unlockedSkills;
+    private List<SkillEnum> _unlockedSkills;
+    [SerializeField] List<GameObject> _skills;
 
-    public List<LevelUpItem> UnlockedSkills => _unlockedSkills;
+    public List<SkillEnum> UnlockedSkills => _unlockedSkills;
 
     #region ライフサイクル
     private void Start()
     {
         _rm = ReferenceManager.Instance;
-        _unlockedSkills = new List<LevelUpItem>();
+        _unlockedSkills = new List<SkillEnum>();
     }
     #endregion
 
     #region Publicメソッド
     /// <summary>
-    /// スキルを開放する
+    /// スキルを解放する
     /// </summary>
-    /// <param name="skill"></param>
-    public void UnlockSkill(LevelUpItem skill)
+    /// <param name="lvupItem"></param>
+    public void UnlockSkill(LevelUpItem lvupItem)
     {
-        GameObject skillInstance = Instantiate(skill.SkillPrefab, _rm.SkillPanel.transform);
-        _unlockedSkills.Add(skill);
+        foreach(GameObject go in _skills)
+        {
+            SkillBase skill = go.GetComponent<SkillBase>();
+            if(skill.SkillEnum == lvupItem.SkillToUnlock)
+            {
+                skill.Unlock();
+                _unlockedSkills.Add(lvupItem.SkillToUnlock);
+                break;
+            }
+        }
     }
 
     /// <summary>
-    /// スキルが開放済みか判定する
+    /// スキルが解放済みか判定する
     /// </summary>
     /// <param name="skill"></param>
-    /// <returns>true:開放済み, false：未開放</returns>
+    /// <returns>true:解放済み, false：未解放</returns>
     public bool IsSkillUnlocked(LevelUpItem skill)
     {
-        return _unlockedSkills.Contains(skill);
+        return _unlockedSkills.Contains(skill.SkillToUnlock);
     }
     #endregion
 }

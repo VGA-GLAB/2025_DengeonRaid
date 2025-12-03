@@ -7,9 +7,21 @@ public abstract class SkillBase : MonoBehaviour
 {
     protected BoardManager _boardManager;
 
+    [Header("スキルEnum")]
+    [SerializeField] private SkillEnum _skillEnum = SkillEnum.None;
+    [Header("解放フラグ")]
+    [SerializeField] private bool _isUnlocked = false;
     [Header("スキル使用回数")]
     [SerializeField] private int _maxSkillUses = 1;
+
+    [Header("参照")]
+    [SerializeField, Tooltip("スキルアイコン")] private GameObject _icon;
+    [SerializeField, Tooltip("ロックアイコン")] private GameObject _lock;
+
     private int _remainingSkillUses;
+
+    /// <summary>スキル識別Enum</summary>
+    public SkillEnum SkillEnum => _skillEnum;
 
     private void Start()
     {
@@ -22,6 +34,13 @@ public abstract class SkillBase : MonoBehaviour
     /// </summary>
     public void TryUseSkill()
     {
+        // 解放状態の確認
+        if (!_isUnlocked)
+        {
+            Debug.LogWarning("スキルが解放されていません。");
+            return;
+        }
+
         // スキル使用回数の確認
         if (_remainingSkillUses <= 0)
         {
@@ -31,6 +50,15 @@ public abstract class SkillBase : MonoBehaviour
 
         ActivateSkill();
         _remainingSkillUses--;
+    }
+
+    /// <summary>
+    /// スキルを解放する
+    /// </summary>
+    public void Unlock()
+    {
+        _isUnlocked = true;
+        if (_lock != null) _lock.SetActive(false);
     }
 
     /// <summary>
