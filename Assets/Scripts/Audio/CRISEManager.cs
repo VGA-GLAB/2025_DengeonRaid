@@ -1,12 +1,20 @@
 ﻿using CriWare;
 using System.Collections.Generic;
 
+/// <summary>
+///         SEの再生を統括するクラス
+/// </summary>
 public class CRISEManager
 {
     private List<SEPlayer> _pool = new List<SEPlayer>();
     private CriAtomExAcb _criAtomExAcb;
     private int _poolSize = 10;
 
+
+    /// <summary>
+    ///         ListのSEPlayerを初期化
+    /// </summary>
+    /// <param name="criAtomExAcb"></param>
     public void Initialize(CriAtomExAcb criAtomExAcb)
     {
         _criAtomExAcb = criAtomExAcb;
@@ -17,7 +25,11 @@ public class CRISEManager
         }
     }
 
-    public void SetVolome(float volume)
+    /// <summary>
+    ///         音量を設定
+    /// </summary>
+    /// <param name="volume"></param>
+    public void SetVolume(float volume)
     {
         foreach (var p in _pool)
         {
@@ -26,10 +38,10 @@ public class CRISEManager
     }
 
     /// <summary>
-    ///         
+    ///         指定したSEの再生
     /// </summary>
     /// <param name="cueName"></param>
-    public void PlaySEDesignation(string cueName)
+    public void Play(string cueName)
     {
         SEPlayer free = _pool.Find(p => !p.IsPlaying);
         if (free != null)
@@ -37,7 +49,7 @@ public class CRISEManager
     }
 
     /// <summary>
-    ///         
+    ///         すべてのSEを止める
     /// </summary>
     public void DisposeAll()
     {
