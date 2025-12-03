@@ -1,35 +1,35 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using UnityEngine;
 
 public class BossDestroyEffect : MonoBehaviour
 {
     SpriteRenderer _renderer;
 
-    [SerializeField, Header("ˆê‰ñ–Ú‚ÌƒtƒF[ƒhƒAƒEƒg‘¬“x")]
+    [SerializeField, Header("ä¸€å›ç›®ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆé€Ÿåº¦")]
     private float _firstFadeOutTime;
 
-    [SerializeField, Header("ˆê‰ñ–Ú‚Ì“_–Å‚Æ“ñ‰ñ–Ú‚Ì“_–Å‚ÌŠÔ‚ÌŠÔ")]
+    [SerializeField, Header("ä¸€å›ç›®ã®ç‚¹æ»…ã¨äºŒå›ç›®ã®ç‚¹æ»…ã®é–“ã®æ™‚é–“")]
     private float _firstInterval;
 
-    [SerializeField, Header("ˆê‰ñ–Ú‚ÌƒtƒF[ƒhƒCƒ“‘¬“x")]
+    [SerializeField, Header("ä¸€å›ç›®ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³é€Ÿåº¦")]
     private float _firstFadeInTime;
 
-    [SerializeField, Header("“ñ‰ñ–Ú‚Ì“_–Å‚Ì‘±ŠÔ")]
+    [SerializeField, Header("äºŒå›ç›®ã®ç‚¹æ»…ã®æŒç¶šæ™‚é–“")]
     private float _secondDuration;
 
-    [SerializeField, Header("“ñ‰ñ–Ú‚ÌƒtƒF[ƒhƒAƒEƒg‘¬“x")]
+    [SerializeField, Header("äºŒå›ç›®ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆé€Ÿåº¦")]
     private float _secondFadeOutTime;
 
-    [SerializeField, Header("“ñ‰ñ–Ú‚Ì“_–Å‚ÆO‰ñ–Ú‚Ì“_–Å‚ÌŠÔ‚ÌŠÔ")]
+    [SerializeField, Header("äºŒå›ç›®ã®ç‚¹æ»…ã¨ä¸‰å›ç›®ã®ç‚¹æ»…ã®é–“ã®æ™‚é–“")]
     private float _secondInterval;
 
-    [SerializeField, Header("“ñ‰ñ–Ú‚ÌƒtƒF[ƒhƒCƒ“‘¬“x")]
+    [SerializeField, Header("äºŒå›ç›®ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³é€Ÿåº¦")]
     private float _secondFadeInTime;
 
-    [SerializeField, Header("O‰ñ–Ú‚Ì“_–Å‚Ì‘±ŠÔ")]
+    [SerializeField, Header("ä¸‰å›ç›®ã®ç‚¹æ»…ã®æŒç¶šæ™‚é–“")]
     private float _thirdDuration;
 
-    [SerializeField, Header("O‰ñ–Ú‚ÌƒtƒF[ƒhƒAƒEƒg‘¬“x")]
+    [SerializeField, Header("ä¸‰å›ç›®ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆé€Ÿåº¦")]
     private float _thirdFadeOutTime;
     public void BossDeathEffect()
     {
