@@ -14,7 +14,7 @@ public class CRIBGMManager
     ///         初期化
     /// </summary>
     /// <param name="criAtomExAcb"></param>
-    public void Init(CriAtomExAcb criAtomExAcb)
+    public void Initialize(CriAtomExAcb criAtomExAcb)
     {
         _criAtomExAcb = criAtomExAcb;
         if (_player == null) _player = new CriAtomExPlayer();
@@ -38,6 +38,9 @@ public class CRIBGMManager
     {
         if (_criAtomExAcb == null) return;
 
+        _player.Stop();
+
+        // CriAtomExから長く音楽を探して再生
         CriAtomEx.CueInfo[] cueArray = _criAtomExAcb.GetCueInfoList();
         CriAtomEx.CueInfo info = Array.Find(cueArray, ci => ci.name == cueName);
         _player.SetCue(_criAtomExAcb, info.id);
