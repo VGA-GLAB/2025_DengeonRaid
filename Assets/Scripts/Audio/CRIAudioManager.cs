@@ -1,27 +1,69 @@
 ﻿using CriWare;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-public class CRIAudioManager
+/// <summary>
+///         Audioの統括クラス
+/// </summary>
+public class CRIAudioManager : MonoBehaviour
 {
-    public static CRIAudioManager _instance { get; } = new CRIAudioManager();
+    public static CRIAudioManager Instance { get; private set; }
 
-    public CRIBGMManager BGMManager { get; private set; } = new CRIBGMManager();
-    public CRISEManager SEManager { get; private set; } = new CRISEManager();
+    public CRIBGMManager BGMManager { get; private set; }
+    public CRISEManager SEManager { get; private set; }
 
-    private bool _isReady = false;  
-    private Queue<Action> _deferredActions = new Queue<Action>();
+    private Dictionary<string, CriAtomExAcb> _acbDic = new();
+    private bool _isReady = false;
 
-    public async void InitializeAsync(CriAtomExAcb bgmAcb, CriAtomExAcb seAcb)
+    public bool IsReady => _isReady;
+
+    private async void Awake()
     {
-        CriAtom atom = GameObject.FindObjectOfType<CriAtom>();
-        if (atom == null)
+        // インスタンス生成
+        if (Instance != null)
         {
-            Debug.LogError("CriAtomがシーン内に存在しない");
+            Destroy(this.gameObject);
             return;
         }
-        await Awaitable.WaitForSecondsAsync(0.1f);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        BGMManager = new CRIBGMManager();
+        SEManager = new CRISEManager();
+
+        await LoadcueSheets();
+    }
+
+    /// <summary>
+    ///         cuesheetのロードをする
+    /// </summary>
+    /// <returns></returns>
+    private async UniTask LoadcueSheets()
+    {
+        CriAtom criAtom = FindAnyObjectByType<CriAtom>();
+        if (criAtom == null)
+        {
+            Debug.LogError("CriAtom がシーンに存在しません！");
+            return;
+        }
+
+        // cueSheetの読み込み完了待ち
+        await UniTask.WaitUntil(() => criAtom.cueSheets.All(cs => cs.IsLoading == false));
+
+        foreach (var sheet in criAtom.cueSheets)
+        {
+            _acbDic[sheet.name] = sheet.acb;
+        }
+
+        _isReady = true;
+
+        // 初期化
+        SEManager.Initialize(_acbDic["SE"]);
+        BGMManager.Initialize(_acbDic["BGM"]);
+
+        BGMManager.SetVolume(SoundSettings.BGMVolume);
+        SEManager.SetVolume(SoundSettings.SEVolume);
     }
 }
