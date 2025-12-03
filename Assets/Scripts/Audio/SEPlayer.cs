@@ -1,7 +1,9 @@
 ﻿using CriWare;
 using System;
-using UnityEngine;
 
+/// <summary>
+///         SE一つを再生するクラス
+/// </summary>
 public class SEPlayer
 {
     private CriAtomExPlayer _player;
@@ -45,6 +47,9 @@ public class SEPlayer
     /// </summary>
     public void Dispose()
     {
+        if (_player == null) return;
+
+        _player.Stop();
         _player?.Dispose();
         _player = null;
     }
