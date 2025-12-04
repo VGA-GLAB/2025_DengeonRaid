@@ -88,7 +88,7 @@ public class GameDirector : MonoBehaviour
     {
         if(_bossDefeated)
         {
-            _rm.UIController.WipeIn(LoadWinResultScene);
+            _rm.BossDestroyEffect.BossDeathEffect(WipeToWinResultScene);
             yield break;
         }
         _igsm.ChangeState<SIGLevelUp>();
@@ -216,5 +216,10 @@ public class GameDirector : MonoBehaviour
     private void LoadLoseResultScene()
     {
         SceneManager.LoadScene("ResultLose");
+    }
+
+    private void WipeToWinResultScene()
+    {
+        _rm.UIController.WipeIn(LoadWinResultScene);
     }
 }
