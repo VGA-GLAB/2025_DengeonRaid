@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUnlockAtkAll
   m_EditorClassIdentifier: Assembly-CSharp::SkillUnlockItem
   Type: 4
-  ItemName: "\u30B9\u30AD\u30EB\u958B\u653E\uFF1A\u5168\u4F53\u653B\u6483"
+  ItemName: "\u30B9\u30AD\u30EB\u89E3\u653E\uFF1A\n\u5168\u4F53\u653B\u6483"
   Icon: {fileID: 21300000, guid: 2dd9dfd415048ff4880d7e5794006a1f, type: 3}
   Value: 0
-  SkillPrefab: {fileID: 1154451633028667171, guid: 42aaa7ab0e2864748882e9edfc4a75e4, type: 3}
+  SkillToUnlock: 1
   Description: "\u30DC\u30FC\u30C9\u306B\u5B58\u5728\u3059\u308B\n\u6575\u5168\u4F53\u306B\u653B\u6483\u3059\u308B"

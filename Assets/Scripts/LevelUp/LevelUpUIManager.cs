@@ -63,10 +63,7 @@ public class LevelUpUIManager : MonoBehaviour
                 _player.ApplyPreview();
                 break;
             case LevelUpEffectType.SkillUnlock:
-                if (item.SkillPrefab != null)
-                {
-                    _rm.SkillUnlockManager.UnlockSkill(item);
-                }
+                _rm.SkillUnlockManager.UnlockSkill(item);
                 break;
             default:
                 Debug.LogWarning("Unknown LevelUpEffectType: " + item.Type);
@@ -80,7 +77,7 @@ public class LevelUpUIManager : MonoBehaviour
     public void OpenLevelUp()
     {
         gameObject.SetActive(true);
-        foreach(RectTransform item in _itemTransform.GetComponentInChildren<RectTransform>())
+        foreach (RectTransform item in _itemTransform.GetComponentInChildren<RectTransform>())
         {
             Destroy(item.gameObject);
         }
@@ -89,7 +86,6 @@ public class LevelUpUIManager : MonoBehaviour
         foreach (LevelUpItem skill in _skillItems.SkillItems)
         {
             if (_skillUnlockManager.IsSkillUnlocked(skill)) continue;
-            
             items.Add(skill);
         }
 
@@ -123,7 +119,7 @@ public class LevelUpUIManager : MonoBehaviour
     {
         List<LevelUpItem> rtn = new List<LevelUpItem>();
         List<LevelUpItem> items = _attrItems.AttrItems.ToList();
-        while(count > 0)
+        while (count > 0)
         {
             int index = Random.Range(0, items.Count);
             rtn.Add(items[index]);
