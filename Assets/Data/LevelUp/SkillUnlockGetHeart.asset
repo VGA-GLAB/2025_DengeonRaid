@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUnlockGetHeart
   m_EditorClassIdentifier: Assembly-CSharp::SkillUnlockItem
   Type: 4
-  ItemName: "\u30B9\u30AD\u30EB\u958B\u653E\uFF1A\u30CF\u30FC\u30C8\u56DE\u53CE"
+  ItemName: "\u30B9\u30AD\u30EB\u89E3\u653E\uFF1A\n\u30CF\u30FC\u30C8\u56DE\u53CE"
   Icon: {fileID: 21300000, guid: 0108f4cb94d84ca429a405596024bb7e, type: 3}
   Value: 0
-  SkillPrefab: {fileID: 2549047578343221337, guid: 8aab2d07e7ef4d541893f87a20a957d2, type: 3}
+  SkillToUnlock: 2
   Description: "\u30DC\u30FC\u30C9\u306B\u5B58\u5728\u3059\u308B\n\u30CF\u30FC\u30C8\u3092\u5168\u90E8\u56DE\u53CE\u3059\u308B"

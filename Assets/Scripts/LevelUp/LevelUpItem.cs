@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelUpItem", menuName = "Scriptable Objects/LevelUpItem")]
 public class LevelUpItem : ScriptableObject
 {
     public LevelUpEffectType Type;
-    public string ItemName;
+    [TextArea] public string ItemName;
     public Sprite Icon;
     public int Value;
-    public GameObject SkillPrefab;
+    public SkillEnum SkillToUnlock;
     [TextArea, Range(0, 2)] public string Description;
 }
 
@@ -18,4 +19,12 @@ public enum LevelUpEffectType
     BaseAttack,
     WeaponAttack,
     SkillUnlock
+}
+
+public enum SkillEnum
+{
+    None,
+    AttackAll,
+    GetHeart,
+    ShieldToMissile
 }

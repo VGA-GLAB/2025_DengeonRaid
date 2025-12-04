@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillUnlockShieldToMissile
   m_EditorClassIdentifier: Assembly-CSharp::SkillUnlockItem
   Type: 4
-  ItemName: "\u30B9\u30AD\u30EB\u958B\u653E\uFF1A\u30B7\u30FC\u30EB\u30C9\u5909\u63DB"
+  ItemName: "\u30B9\u30AD\u30EB\u89E3\u653E\uFF1A\n\u30B7\u30FC\u30EB\u30C9\u5909\u63DB"
   Icon: {fileID: 21300000, guid: 11f850ca7f0492f40870353e4c78cff3, type: 3}
   Value: 0
-  SkillPrefab: {fileID: 7459271520603759925, guid: 94e27310786d5da42a7e65138c8b3590, type: 3}
-  Description: "\u30DC\u30FC\u30C9\u306B\u5B58\u5728\u3059\u308B\n\u30B7\u30FC\u30EB\u30C9\u3092\u30DF\u30B5\u30A4\u30EB\u306B\u5909\u63DB\u3059\u308B"
+  SkillToUnlock: 3
+  Description: "\u30DC\u30FC\u30C9\u306B\u3042\u308B\u30B7\u30FC\u30EB\u30C9\u3092\n\u30DF\u30B5\u30A4\u30EB\u306B\u5909\u63DB\u3059\u308B"
