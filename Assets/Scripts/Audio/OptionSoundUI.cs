@@ -35,7 +35,7 @@ public class OptionSoundUI : MonoBehaviour
         if (CRIAudioManager.Instance != null && CRIAudioManager.Instance.IsReady)
         {
             // 反映
-            CRIAudioManager.Instance.BGMManager.SetVolume(value);
+            CRIAudioManager.Instance.CRIBGMManager.SetVolume(value);
         }
     }
 
@@ -52,7 +52,7 @@ public class OptionSoundUI : MonoBehaviour
         // 反映
         if (CRIAudioManager.Instance != null && CRIAudioManager.Instance.IsReady)
         {
-            CRIAudioManager.Instance.SEManager.SetVolume(value);
+            CRIAudioManager.Instance.CRISEManager.SetVolume(value);
         }
     }
 }
