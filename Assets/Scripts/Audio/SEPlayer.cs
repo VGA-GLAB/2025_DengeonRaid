@@ -6,17 +6,17 @@ using System;
 /// </summary>
 public class SEPlayer
 {
-    private CriAtomExPlayer _player;
-    private CriAtomExAcb _criAtomExAcb;
-
-    public bool IsPlaying => _player != null && _player.GetStatus() == CriAtomExPlayer.Status.Playing;
-
     public SEPlayer(CriAtomExAcb criAtomExAcb)
     {
         _criAtomExAcb = criAtomExAcb;
         _player = new CriAtomExPlayer();
         _player.SetVolume(SoundSettings.SEVolume);
     }
+
+    private CriAtomExPlayer _player;
+    private CriAtomExAcb _criAtomExAcb;
+
+    public bool IsPlaying => _player != null && _player.GetStatus() == CriAtomExPlayer.Status.Playing;
 
     /// <summary>
     ///         CriAtomExPlayerに音量を設定
@@ -50,7 +50,7 @@ public class SEPlayer
         if (_player == null) return;
 
         _player.Stop();
-        _player?.Dispose();
+        _player.Dispose();
         _player = null;
     }
 }
