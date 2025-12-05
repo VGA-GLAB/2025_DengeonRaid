@@ -6,16 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class CRISEManager
 {
-    private List<SEPlayer> _pool = new List<SEPlayer>();
-    private CriAtomExAcb _criAtomExAcb;
-    private int _poolSize = 10;
-
-
-    /// <summary>
-    ///         ListのSEPlayerを初期化
-    /// </summary>
-    /// <param name="criAtomExAcb"></param>
-    public void Initialize(CriAtomExAcb criAtomExAcb)
+    public CRISEManager(CriAtomExAcb criAtomExAcb) 
     {
         _criAtomExAcb = criAtomExAcb;
 
@@ -24,6 +15,10 @@ public class CRISEManager
             _pool.Add(new SEPlayer(_criAtomExAcb));
         }
     }
+
+    private List<SEPlayer> _pool = new();
+    private CriAtomExAcb _criAtomExAcb;
+    private int _poolSize = 10;
 
     /// <summary>
     ///         音量を設定
