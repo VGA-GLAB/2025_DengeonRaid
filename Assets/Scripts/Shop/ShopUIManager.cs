@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 #if UNITY_EDITOR
-using static UnityEditor.Experimental.GraphView.GraphView;
 #endif
 /// <summary>
 ///         UI生成＆購入処理
@@ -11,14 +10,13 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private Transform _shopItemTransform;
     [SerializeField] private GameObject _shopItemPrefab;
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private ShopPlayerStatusUI _shopPlayerStutsUI;
 
     private PreviewPlayerData _previewPlayerData;
     private bool _isInit = false;
 
     private void Start()
     {
-        _playerController = ReferenceManager.Instance.PlayerController; 
+        _playerController = ReferenceManager.Instance.PlayerController;
         this.gameObject.SetActive(false);
         InitShop();
     }
@@ -27,7 +25,7 @@ public class ShopUIManager : MonoBehaviour
     {
         _previewPlayerData = new PreviewPlayerData(_playerController);
 
-         //  対象ステータスを直接操作
+        //  対象ステータスを直接操作
         switch (item.ShopEffectType)
         {
             case ShopEffectType.MaxHp:
@@ -54,7 +52,6 @@ public class ShopUIManager : MonoBehaviour
     /// </summary>
     public void OpenShop()
     {
-        _shopPlayerStutsUI.SetUp(new PreviewPlayerData(_playerController));
         InitShop();
         gameObject.SetActive(true);
     }
