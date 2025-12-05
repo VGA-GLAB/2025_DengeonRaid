@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class BossDestroyEffect : MonoBehaviour
@@ -31,8 +33,14 @@ public class BossDestroyEffect : MonoBehaviour
 
     [SerializeField, Header("三回目のフェードアウト速度")]
     private float _thirdFadeOutTime;
-    public void BossDeathEffect()
+
+    private BossPanel _boss;
+
+
+    public void BossDeathEffect(Action callback)
     {
+        _boss = ReferenceManager.Instance.BossPanel;
+        _boss.gameObject.GetComponent<BossExplosionEffectController>().PlayExplosions();
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.color = new Color(1, 1, 1, 1);
         DOTween.Sequence()
@@ -44,6 +52,13 @@ public class BossDestroyEffect : MonoBehaviour
             .AppendInterval(_secondInterval)
             .Append(_renderer.material.DOFade(1, _secondFadeInTime))
             .AppendInterval(_thirdDuration)
-            .Append(_renderer.material.DOFade(0, _thirdFadeOutTime));
+            .AppendCallback(() => DestroyBoss())
+            .Append(_renderer.material.DOFade(0, _thirdFadeOutTime))
+            .OnComplete(callback.Invoke);
+    }
+
+    private void DestroyBoss()
+    {
+        Destroy(_boss.gameObject);
     }
 }

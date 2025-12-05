@@ -48,4 +48,7 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public PlayerController PlayerController;
     public Transform BoardPosition;
     public BossPanel BossPanel;
+
+    [Header("エフェクト系")]
+    public BossDestroyEffect BossDestroyEffect;
 }
