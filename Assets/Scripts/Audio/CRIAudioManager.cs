@@ -60,8 +60,8 @@ public class CRIAudioManager : MonoBehaviour
         _isReady = true;
 
         // 初期化
-        SEManager.Initialize(_acbDic["SE"]);
-        BGMManager.Initialize(_acbDic["BGM"]);
+        //SEManager.Initialize(_acbDic["SE"]);
+        //BGMManager.Initialize(_acbDic["BGM"]);
 
         BGMManager.SetVolume(SoundSettings.BGMVolume);
         SEManager.SetVolume(SoundSettings.SEVolume);
