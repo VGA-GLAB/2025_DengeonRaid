@@ -7,19 +7,16 @@ using System;
 /// </summary>
 public class CRIBGMManager
 {
-    private CriAtomExPlayer _player;
-    private CriAtomExAcb _criAtomExAcb;
-
-    /// <summary>
-    ///         初期化
-    /// </summary>
-    /// <param name="criAtomExAcb"></param>
-    public void Initialize(CriAtomExAcb criAtomExAcb)
+    public CRIBGMManager(CriAtomExAcb criAtomExAcb)
     {
+        // 初期化
         _criAtomExAcb = criAtomExAcb;
         if (_player == null) _player = new CriAtomExPlayer();
         SetVolume(SoundSettings.BGMVolume);
     }
+
+    private readonly CriAtomExPlayer _player;
+    private readonly CriAtomExAcb _criAtomExAcb;
 
     /// <summary>
     ///         CriAtomExPlayerに音量を設定
