@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pendant
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
   ShopEffectType: 0
-  ItemName: Heart
-  Icon: {fileID: 21300000, guid: afe3b33dcdf40ce4aad29b01b5be25f2, type: 3}
+  ItemName: HP
+  Icon: {fileID: 1361756782407511637, guid: 5b9e01ff98b7a7549813dd90aed0e604, type: 3}
   Value: 5
-  Description: "\u6700\u5927HP\u5897\u3084\u3059\u305C"
+  Description: "\u30B9\u30FC\u30C4\u6539\u9020"
