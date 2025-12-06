@@ -26,10 +26,13 @@ public class DeletePanelEffect : MonoBehaviour
     /// </summary>
     public void PanelMove(Transform viaObj, Transform targetObj)
     {
+        ReferenceManager rm = ReferenceManager.Instance;
+        GameDirector director = rm.GameDirector;
         transform.DOPath(new Vector3[] { viaObj.position, targetObj.position }, _moveSpeed, PathType.CatmullRom);
         DOTween.Sequence()
             .Append(transform.DOScale(_panelExpantionSize, _panelExpantionSpeed))
             .Append(transform.DOScale(_panelMoveMinimalizeSize, _panelMoveMinimalizeSpeed)
-            .OnComplete(() => Destroy(gameObject)));
+            .OnComplete(() => director.PanelResolvingFinished()))
+            .OnComplete(() => Destroy(gameObject));
     }
 }
