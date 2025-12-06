@@ -12,6 +12,7 @@ public class PotionPanel : Panel
     public override void DestroyThis()
     {
         DeletePanelEffectManager.Instance.EffectMove(this);
+        CRIAudioManager.CRISEManager.Play("SE_ActionPotion");
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
