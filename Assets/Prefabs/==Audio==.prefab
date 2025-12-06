@@ -99,6 +99,10 @@ MonoBehaviour:
     acbFile: SE.acb
     awbFile: SE.awb
     loaderStatus: 0
+  - name: ME
+    acbFile: ME.acb
+    awbFile: ME.awb
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
