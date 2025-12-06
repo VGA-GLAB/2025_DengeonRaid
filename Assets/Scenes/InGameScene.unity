@@ -1431,6 +1431,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &625151923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2039572878348379466, guid: 7996cb193dc24984388ff67107830aee, type: 3}
+  m_PrefabInstance: {fileID: 1313521896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &628032640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,9 +1825,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2009584758}
     - target: {fileID: 5582030274990951419, guid: 1beb2de1a2763644ebb037ac37b60ae0, type: 3}
-      propertyPath: _targetObj
+      propertyPath: _targetHpObj
       value: 
       objectReference: {fileID: 1372861378}
+    - target: {fileID: 5582030274990951419, guid: 1beb2de1a2763644ebb037ac37b60ae0, type: 3}
+      propertyPath: _targetCoinObj
+      value: 
+      objectReference: {fileID: 625151923}
+    - target: {fileID: 5582030274990951419, guid: 1beb2de1a2763644ebb037ac37b60ae0, type: 3}
+      propertyPath: _targetShieldObj
+      value: 
+      objectReference: {fileID: 2043728118}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4160,7 +4173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115189223479462341, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1422488423554465037, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4172,6 +4185,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1592718363460257477, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
       propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592718363460257477, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
+      propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283789136010994688, guid: 3f81bec101fa96042b5be0c2f1a73b93, type: 3}
@@ -4741,6 +4758,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031801581}
   m_CullTransparentMesh: 1
+--- !u!4 &2043728118 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3369322014789375832, guid: 7996cb193dc24984388ff67107830aee, type: 3}
+  m_PrefabInstance: {fileID: 1313521896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077580551
 GameObject:
   m_ObjectHideFlags: 0
