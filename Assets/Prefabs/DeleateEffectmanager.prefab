@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792a8e4ea2d013f46ac041315b152039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffectManager
-  _targetObj: {fileID: 0}
+  _targetHpObj: {fileID: 0}
+  _targetCoinObj: {fileID: 0}
+  _targetShieldObj: {fileID: 0}
   _viaObj: {fileID: 0}
+  _deleateEffectHpPrefabs: {fileID: 8523506551058681961, guid: 3bd3b4750e85e1a41ac74c24f2a8eba2, type: 3}
+  _deleateEffectCoinPrefabs: {fileID: 1092470365550750133, guid: 2723051ca72242f429d583f2b121de47, type: 3}
+  _deleateEffectShieldPrefabs: {fileID: 7043083023505894775, guid: 3206fc63f5bea0649851427cab0864db, type: 3}
