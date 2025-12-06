@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1625946810168813193}
   - component: {fileID: -4260931707250557988}
   - component: {fileID: 2745453509033305038}
-  - component: {fileID: -704357936430637312}
+  - component: {fileID: -4531813340046379520}
   m_Layer: 0
   m_Name: CoinPanel
   m_TagString: Untagged
@@ -156,6 +156,7 @@ MonoBehaviour:
   _panelId: 0
   _panelGroup: 0
   _coin: 1
+  _deleateEffectPrefabs: {fileID: 0}
 --- !u!114 &2745453509033305038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
---- !u!114 &-704357936430637312
+--- !u!114 &-4531813340046379520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,17 +181,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 448241291402004874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Script: {fileID: 11500000, guid: d003bdd829918f543afa27bc423392b6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
-  _moveSpeed: 1
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionScaleEffect
   _panelMinimalizeSize: 0.8
   _panelMinimalizeSpeed: 1
   _panelReturnSpeed: 1
-  _panelMoveMinimalizeSize: 0.5
-  _panelMoveMinimalizeSpeed: 1
-  _panelExpantionSize: 2
-  _panelExpantionSpeed: 1
 --- !u!1 &7988218076069100537
 GameObject:
   m_ObjectHideFlags: 0

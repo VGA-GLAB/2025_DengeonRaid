@@ -11,6 +11,8 @@ public class PotionPanel : Panel
     }
     public override void DestroyThis()
     {
+        DeletePanelEffectManager.Instance.EffectMove(this);
+
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
     }
