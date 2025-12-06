@@ -15,12 +15,15 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
 {
     [Header("UI系")]
     public UIController UIController;
-    public Text UIPlayerHpText;
+    public TextMeshProUGUI UIPlayerHpText;
+    public TextMeshProUGUI UIPlayerMaxHpText;
     public Slider UIPlayerHpGuage;
-    public Text UIPlayerShieldText;
+    public TextMeshProUGUI UIPlayerShieldText;
+    public TextMeshProUGUI UIPlayerMaxShieldText;
     public Slider UIPlayerShieldGuage;
     public Text UIExp;
-    public Text UIMoneyText;
+    public TextMeshProUGUI UIMoneyText;
+    public TextMeshProUGUI UIMaxMoneyText;
     public Slider UIMoneyGuage;
     public Text UIBaseAttackText;
     public Text UIMissileAttackText;
