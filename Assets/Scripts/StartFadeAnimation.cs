@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class StartFadeAnimation : MonoBehaviour
 {
-    [SerializeField] private TMP_Text pressStartText;
+    [SerializeField] private TMP_Text  _pressStartText;
 
     void Start()
     {
-        pressStartText.DOFade(0, 0.7f)
+        _pressStartText.DOFade(0, 0.7f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.Linear);
     }
