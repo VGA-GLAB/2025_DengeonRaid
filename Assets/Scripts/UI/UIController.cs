@@ -46,14 +46,20 @@ public class UIController : MonoBehaviour
     {
         _rm.UIPlayerHpText.text = $"{_player.Hp:000}";
         _rm.UIPlayerMaxHpText.text = $"{_player.HpMax:000}";
+
+        _rm.UIPlayerHpLossGuage.value = _rm.UIPlayerHpGuage.value;
         _rm.UIPlayerHpGuage.value = (float)_player.Hp / (float)_player.HpMax;
+        _rm.UIPlayerHpLossGuage.DOValue(_rm.UIPlayerHpGuage.value, 1f).SetEase(Ease.OutExpo);
     }
 
     private void UpdateShield()
     {
         _rm.UIPlayerShieldText.text = $"{_player.Shield:000}";
         _rm.UIPlayerMaxShieldText.text = $"{_player.ShieldMax:000}";
+
+        _rm.UIPlayerShieldLossGuage.value = _rm.UIPlayerShieldGuage.value;
         _rm.UIPlayerShieldGuage.value = (float)_player.Shield / (float)_player.ShieldMax;
+        _rm.UIPlayerShieldLossGuage.DOValue(_rm.UIPlayerShieldGuage.value, 1f).SetEase(Ease.OutExpo);
     }
 
     private void UpdateShieldExp()

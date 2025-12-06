@@ -18,9 +18,11 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public TextMeshProUGUI UIPlayerHpText;
     public TextMeshProUGUI UIPlayerMaxHpText;
     public Slider UIPlayerHpGuage;
+    public Slider UIPlayerHpLossGuage;
     public TextMeshProUGUI UIPlayerShieldText;
     public TextMeshProUGUI UIPlayerMaxShieldText;
     public Slider UIPlayerShieldGuage;
+    public Slider UIPlayerShieldLossGuage;
     public Text UIExp;
     public TextMeshProUGUI UIMoneyText;
     public TextMeshProUGUI UIMaxMoneyText;
