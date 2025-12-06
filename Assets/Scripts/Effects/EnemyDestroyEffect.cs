@@ -1,16 +1,16 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyDestroyEffect : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField,Header("移動速度")]
+    private float _moveSpeed;
+    [SerializeField, Header("経由地点")]
+    private Transform viaPos;
+    [SerializeField, Header("目標地点")]
+    private Transform targetPos;
+    public void EnemyDebrisMove()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        transform.DOPath(new Vector3[] { viaPos.position, targetPos.position }, _moveSpeed, PathType.CatmullRom);
     }
 }
