@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5eae8ac4d5df24a9ea1c8153304f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  pressStartText: {fileID: 2115862386}
+  _pressStartText: {fileID: 2115862386}
 --- !u!1 &791835435
 GameObject:
   m_ObjectHideFlags: 0
