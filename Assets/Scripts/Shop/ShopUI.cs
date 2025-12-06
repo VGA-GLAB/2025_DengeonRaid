@@ -26,8 +26,8 @@ public class ShopUI : MonoBehaviour
         _shopUIManager = manager;
 
         _icon.sprite = _shopItemData.Icon;
-        _nameText.text = _shopItemData.ItemName;
-        _descText.text = $"{_shopItemData.Description} {_shopItemData.Value}";
+        _nameText.text = $"{_shopItemData.ItemName} +{_shopItemData.Value}";
+        _descText.text = $"{_shopItemData.Description}";
 
         _buyButton.onClick.AddListener(HandleBuy);
     }
