@@ -11,6 +11,7 @@ public class ShieldPanel : Panel
     }
     public override void DestroyThis()
     {
+        CRIAudioManager.CRISEManager.Play("SE_ActionShield");
         DeletePanelEffectManager.Instance.EffectMove(this);
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
