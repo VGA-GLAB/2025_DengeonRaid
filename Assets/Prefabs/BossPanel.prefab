@@ -51,8 +51,8 @@ GameObject:
   - component: {fileID: -1706300619643160376}
   - component: {fileID: -2090939483218876519}
   - component: {fileID: 1808552410207205092}
-  - component: {fileID: -3265640982121792587}
   - component: {fileID: 5696620266026397888}
+  - component: {fileID: -2437602233323525302}
   m_Layer: 0
   m_Name: BossPanel
   m_TagString: Untagged
@@ -246,26 +246,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3265640982121792587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448241291402004874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
-  _moveSpeed: 1
-  _panelMinimalizeSize: 0.8
-  _panelMinimalizeSpeed: 1
-  _panelReturnSpeed: 1
-  _panelMoveMinimalizeSize: 0
-  _panelMoveMinimalizeSpeed: 0
-  _panelExpantionSize: 0
-  _panelExpantionSpeed: 0
 --- !u!114 &5696620266026397888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +266,21 @@ MonoBehaviour:
   - {fileID: 2902059241993626056}
   - {fileID: 7278703942623338402}
   _explosionInterval: 0.3
+--- !u!114 &-2437602233323525302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d003bdd829918f543afa27bc423392b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionScaleEffect
+  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSpeed: 1
+  _panelReturnSpeed: 1
 --- !u!1 &1029786972708488799
 GameObject:
   m_ObjectHideFlags: 0
