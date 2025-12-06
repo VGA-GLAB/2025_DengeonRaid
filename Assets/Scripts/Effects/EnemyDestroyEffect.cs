@@ -6,11 +6,11 @@ public class EnemyDestroyEffect : MonoBehaviour
     [SerializeField,Header("移動速度")]
     private float _moveSpeed;
     [SerializeField, Header("経由地点")]
-    private Transform viaPos;
+    private Transform _viaPos;
     [SerializeField, Header("目標地点")]
-    private Transform targetPos;
+    private Transform _targetPos;
     public void EnemyDebrisMove()
     {
-        transform.DOPath(new Vector3[] { viaPos.position, targetPos.position }, _moveSpeed, PathType.CatmullRom);
+        transform.DOPath(new Vector3[] { _viaPos.position, _targetPos.position }, _moveSpeed, PathType.CatmullRom);
     }
 }
