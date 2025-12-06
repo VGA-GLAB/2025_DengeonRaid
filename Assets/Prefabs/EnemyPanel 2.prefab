@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1625946810168813193}
   - component: {fileID: -3511616952413351084}
   - component: {fileID: 5679105269127256362}
-  - component: {fileID: 5022056280354635626}
+  - component: {fileID: -5527759319636978690}
   m_Layer: 0
   m_Name: EnemyPanel 2
   m_TagString: Untagged
@@ -180,7 +180,7 @@ MonoBehaviour:
   _dropHeight: 10
   _dropDuration: 1
   _expantion: 1.1
---- !u!114 &5022056280354635626
+--- !u!114 &-5527759319636978690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,17 +189,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 448241291402004874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
+  m_Script: {fileID: 11500000, guid: d003bdd829918f543afa27bc423392b6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
-  _moveSpeed: 1
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionScaleEffect
   _panelMinimalizeSize: 0.8
   _panelMinimalizeSpeed: 1
   _panelReturnSpeed: 1
-  _panelMoveMinimalizeSize: 0.5
-  _panelMoveMinimalizeSpeed: 1
-  _panelExpantionSize: 2
-  _panelExpantionSpeed: 1
 --- !u!1 &2570931276006752375
 GameObject:
   m_ObjectHideFlags: 0
