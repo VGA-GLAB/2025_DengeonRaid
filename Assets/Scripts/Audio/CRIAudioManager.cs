@@ -15,8 +15,11 @@ public class CRIAudioManager : MonoBehaviour
 
     public static CRISEManager CRISEManager => Instance._seManager;
 
+    public static SoundSettingDataSO SoundSettings => Instance._soundSettings;
+
     public bool IsReady => _isReady;
 
+    [SerializeField] private SoundSettingDataSO _soundSettings;
     private CRIBGMManager _bgmManager;
     private CRISEManager _seManager;
     private Dictionary<string, CriAtomExAcb> _acbDic = new();
@@ -39,6 +42,7 @@ public class CRIAudioManager : MonoBehaviour
         foreach (var cueSheet in criAtom.cueSheets)
         {
             dic[cueSheet.name] = cueSheet.acb;
+            Debug.Log($"CueSheet Loaded: {cueSheet.name}");
         }
 
         return dic;
@@ -64,12 +68,13 @@ public class CRIAudioManager : MonoBehaviour
 
         _acbDic = await LoadcueSheets(criAtom);
 
-        // 初期化
-        //_seManager = new CRISEManager(_acbDic["SE"]);
-        //_bgmManager = new CRIBGMManager(_acbDic["BGM"]);
 
-        _bgmManager.SetVolume(SoundSettings.BGMVolume);
-        CRISEManager.SetVolume(SoundSettings.SEVolume);
+        // 初期化
+        _seManager = new CRISEManager(_acbDic["SE"]);
+        _bgmManager = new CRIBGMManager(_acbDic["BGM"]);
+
+        _seManager.SetVolume(_soundSettings.LoadSEVolume());
+        _bgmManager.SetVolume(_soundSettings.LoadBGMVolume());
 
         _isReady = true;
     }
