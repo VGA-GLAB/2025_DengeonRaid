@@ -1,13 +1,13 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using UnityEngine;
 
 public class EnemyDestroyEffect : MonoBehaviour
 {
-    [SerializeField,Header("ˆÚ“®‘¬“x")]
+    [SerializeField,Header("ç§»å‹•é€Ÿåº¦")]
     private float _moveSpeed;
-    [SerializeField, Header("Œo—R’n“_")]
+    [SerializeField, Header("çµŒç”±åœ°ç‚¹")]
     private Transform viaPos;
-    [SerializeField, Header("–Ú•W’n“_")]
+    [SerializeField, Header("ç›®æ¨™åœ°ç‚¹")]
     private Transform targetPos;
     public void EnemyDebrisMove()
     {
