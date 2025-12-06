@@ -23,6 +23,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField] private DeletePanelEffectManager _deletePanelEffectManager;
     [SerializeField] private UIController _uiController;
+    [SerializeField] private SelectionScaleEffect _selectionScaleEffect;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
     [SerializeField] private BossPanel _bossPrefab;
 
@@ -222,7 +223,9 @@ public class BoardManager : MonoBehaviour
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
-        _deletePanelEffectManager.EffectScale(panel);
+        //  選択エフェクト開始
+        panel.GetComponent<SelectionScaleEffect>()?.PanelScale();
+
         UpdateLine();
     }
 
@@ -250,7 +253,7 @@ public class BoardManager : MonoBehaviour
             while (_selectedStack.Peek() != panel)
             {
                 Panel removed = _selectedStack.Pop();
-                _deletePanelEffectManager.EffectReturnScale(removed);
+                removed.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
                 UpdateLine();
             }
             return;
@@ -259,7 +262,7 @@ public class BoardManager : MonoBehaviour
         {
             //  新規選択ならスタックに追加
             _selectedStack.Push(panel);
-            _deletePanelEffectManager.EffectScale(panel);
+            panel.GetComponent<SelectionScaleEffect>()?.PanelScale();
         }
 
         UpdateLine();
@@ -280,14 +283,12 @@ public class BoardManager : MonoBehaviour
 
         _rm.PanelResolvingController.ProcessWrapped();
 
-        //  のちに追加予定
-        //List<Panel> panelsToDelete = _selectedStack.ToList();
-        //_deletePanelEffectManager.EffectMove(panelsToDelete);
-
+        //  敵が死ななかった場合の保険でScaleを元に戻す
         foreach (Panel panel in _selectedStack)
         {
-            _deletePanelEffectManager.EffectReturnScale(panel);
+            panel.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
         }
+
         _selectedStack.Clear();
         _director.PanelResolvingFinished();
     }
@@ -301,7 +302,7 @@ public class BoardManager : MonoBehaviour
 
         foreach (Panel panel in _selectedStack)
         {
-            _deletePanelEffectManager.EffectReturnScale(panel);
+            panel.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
         }
         _selectedStack.Clear();
         ClearHighLight();
