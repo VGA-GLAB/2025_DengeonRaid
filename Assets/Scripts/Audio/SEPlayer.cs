@@ -25,6 +25,7 @@ public class SEPlayer
     public void SetVolume(float volume)
     {
         _player?.SetVolume(volume);
+        _player.UpdateAll();
     }
 
     /// <summary>

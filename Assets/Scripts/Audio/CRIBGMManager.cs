@@ -1,6 +1,6 @@
 ﻿using CriWare;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 /// <summary>
 ///         単一BGMの管理クラス
@@ -24,7 +24,11 @@ public class CRIBGMManager
     /// <param name="volume">SoundSettingsに設定している音量</param>
     public void SetVolume(float volume)
     {
-        if (_player != null) _player.SetVolume(Mathf.Clamp01(volume));
+        if (_player != null)
+        {
+            _player.SetVolume(Mathf.Clamp01(volume));
+            _player.UpdateAll();
+        }
     }
 
     /// <summary>
@@ -37,7 +41,7 @@ public class CRIBGMManager
 
         _player.Stop();
 
-        // CriAtomExから長く音楽を探して再生
+        // CriAtomExから音楽を探して再生
         CriAtomEx.CueInfo[] cueArray = _criAtomExAcb.GetCueInfoList();
         CriAtomEx.CueInfo info = Array.Find(cueArray, ci => ci.name == cueName);
         _player.SetCue(_criAtomExAcb, info.id);

@@ -29,12 +29,10 @@ public class OptionSoundUI : MonoBehaviour
     {
         if (!_initialized) return;
 
-        // 保存
-        SoundSettings.BGMVolume = value;
-
         if (CRIAudioManager.Instance != null && CRIAudioManager.Instance.IsReady)
         {
-            // 反映
+            // 保存と反映
+            CRIAudioManager.SoundSettings.SaveBGMVolume(value);
             CRIAudioManager.CRIBGMManager.SetVolume(value);
         }
     }
@@ -46,12 +44,10 @@ public class OptionSoundUI : MonoBehaviour
     {
         if (!_initialized) return;
 
-        // 保存
-        SoundSettings.SEVolume = value;
-
         // 反映
         if (CRIAudioManager.Instance != null && CRIAudioManager.Instance.IsReady)
         {
+            CRIAudioManager.SoundSettings.SaveSEVolume(value);
             CRIAudioManager.CRISEManager.SetVolume(value);
         }
     }
