@@ -44,13 +44,15 @@ public class UIController : MonoBehaviour
     #region Privateメソッド
     private void UpdatePlayerHp()
     {
-        _rm.UIPlayerHpText.text = $"{_player.Hp}" + "/" + $"{_player.HpMax}";
+        _rm.UIPlayerHpText.text = $"{_player.Hp:000}";
+        _rm.UIPlayerMaxHpText.text = $"{_player.HpMax:000}";
         _rm.UIPlayerHpGuage.value = (float)_player.Hp / (float)_player.HpMax;
     }
 
     private void UpdateShield()
     {
-        _rm.UIPlayerShieldText.text = $"{_player.Shield}" + "/" + $"{_player.ShieldMax}";
+        _rm.UIPlayerShieldText.text = $"{_player.Shield:000}";
+        _rm.UIPlayerMaxShieldText.text = $"{_player.ShieldMax:000}";
         _rm.UIPlayerShieldGuage.value = (float)_player.Shield / (float)_player.ShieldMax;
     }
 
@@ -64,7 +66,8 @@ public class UIController : MonoBehaviour
 
     private void UpdateMoney()
     {
-        _rm.UIMoneyText.text = $"{_player.Money}" + "/" + $"{_player.MoneyMax}";
+        _rm.UIMoneyText.text = $"{_player.Money:000}";
+        _rm.UIMaxMoneyText.text = $"{_player.MoneyMax:000}";
         _rm.UIMoneyGuage.value = (float)_player.Money / (float)_player.MoneyMax;
     }
 
