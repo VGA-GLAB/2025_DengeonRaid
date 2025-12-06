@@ -30,6 +30,7 @@ public class UIController : MonoBehaviour
         UpdatePlayerHp();
         UpdateShield();
         UpdateMoney();
+        UpdateExp();
         UpdateBaseAttack();
         UpdateMissileAttack();
     }
@@ -68,6 +69,7 @@ public class UIController : MonoBehaviour
 
     private void UpdateExp()
     {
+        _rm.ExpGuage.value = (float)_player.Exp / (float)_player.ExpMax;
     }
 
     private void UpdateMoney()
