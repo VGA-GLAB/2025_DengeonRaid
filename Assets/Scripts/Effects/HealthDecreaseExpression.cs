@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +14,7 @@ public class HealthDecreaseExpression : MonoBehaviour
     private float _beforeHp;
 
     /// <summary>
-    /// Œ¸­‘O‚ÌHP‚ğæ“¾(ƒpƒlƒ‹Á‚·‘O‚ÉÀs‚µ‚Ä‚à‚ç‚¤‚Â‚à‚è‚Å‘‚¢‚½‚â‚Â)
+    /// æ¸›å°‘å‰ã®HPã‚’å–å¾—(ãƒ‘ãƒãƒ«æ¶ˆã™å‰ã«å®Ÿè¡Œã—ã¦ã‚‚ã‚‰ã†ã¤ã‚‚ã‚Šã§æ›¸ã„ãŸã‚„ã¤)
     /// </summary>
     public void GetBeforeHP()
     {
