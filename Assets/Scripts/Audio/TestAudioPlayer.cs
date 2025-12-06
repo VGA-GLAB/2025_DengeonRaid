@@ -11,7 +11,7 @@ public class TestAudioPlayer : MonoBehaviour
         Debug.Log("AudioManager Ready!");
 
         // BGM 再生
-        CRIAudioManager.CRIBGMManager.Play("ME_Gameover");
+        CRIAudioManager.CRIBGMManager.Play("BGM_Ingame1");
 
         // 1秒後に SE 再生
         await UniTask.Delay(1000);
