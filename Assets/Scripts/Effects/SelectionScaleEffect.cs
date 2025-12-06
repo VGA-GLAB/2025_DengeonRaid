@@ -21,6 +21,18 @@ public class SelectionScaleEffect : MonoBehaviour
     public void PanelScale()
     {
         transform.DOScale(_panelMinimalizeSize, _panelMinimalizeSpeed);
+        Panel judgePanel = this.gameObject.GetComponent<Panel>();
+
+        if (judgePanel is PotionPanel)
+            CRIAudioManager.CRISEManager.Play("SE_TouchPotion");
+        else if (judgePanel is SwordPanel)
+            CRIAudioManager.CRISEManager.Play("SE_TouchRocket");
+        else if (judgePanel is ShieldPanel)
+            CRIAudioManager.CRISEManager.Play("SE_TouchShield");
+        else if (judgePanel is CoinPanel)
+            CRIAudioManager.CRISEManager.Play("SE_TouchMoney");
+        else if (judgePanel is EnemyPanel)
+            CRIAudioManager.CRISEManager.Play("SE_TouchEnemy");
     }
 
     /// <summary>

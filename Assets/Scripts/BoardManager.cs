@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -289,8 +288,13 @@ public class BoardManager : MonoBehaviour
             panel.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
         }
 
+        Panel judgePanel = _selectedStack.Peek();
         _selectedStack.Clear();
-        _director.PanelResolvingFinished();
+
+        //  剣、敵、ボスパネルの場合、パネル解決処理完了を通知
+        //  それ以外はEffect完了後に通知する
+        if (judgePanel is SwordPanel || judgePanel is EnemyPanel || judgePanel is BossPanel)
+            _director.PanelResolvingFinished();
     }
 
     /// <summary>
@@ -376,6 +380,7 @@ public class BoardManager : MonoBehaviour
                     newPanel = Instantiate(GetBossPanel(), _boardRoot);
                     ReferenceManager.Instance.GameDirector.BossGenerated();
                     _rm.BossPanel = newPanel as BossPanel;
+                    CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
                 }
                 else
                 {
@@ -392,7 +397,7 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        _panelDropManager.DropAll(droppedPanels,_isSkillUsed);
+        _panelDropManager.DropAll(droppedPanels, _isSkillUsed);
         _isSkillUsed = false;
     }
 

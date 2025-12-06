@@ -63,6 +63,7 @@ public class EnemyPanel : Panel
 
     public override void DestroyThis()
     {
+        CRIAudioManager.CRISEManager.Play("SE_ActionEnemy");
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
 

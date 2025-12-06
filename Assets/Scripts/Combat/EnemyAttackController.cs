@@ -41,6 +41,7 @@ public class EnemyAttackController : MonoBehaviour
     /// </summary>
     public void ProcessEnemyAttack()
     {
+        CRIAudioManager.CRISEManager.Play("SE_EnemyAttack");
         StartCoroutine(ProcessCoroutine());
     }
 

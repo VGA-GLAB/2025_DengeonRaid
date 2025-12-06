@@ -55,6 +55,7 @@ public class UIController : MonoBehaviour
 
     private void UpdateShield()
     {
+        CRIAudioManager.CRISEManager.Play("SE_ActivationShield");
         _rm.UIPlayerShieldText.text = $"{_player.Shield:000}";
         _rm.UIPlayerMaxShieldText.text = $"{_player.ShieldMax:000}";
 
