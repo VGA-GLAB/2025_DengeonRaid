@@ -15,5 +15,5 @@ MonoBehaviour:
   ShopEffectType: 1
   ItemName: "\u30B7\u30FC\u30EB\u30C9"
   Icon: {fileID: -1156027145709021489, guid: aa94d68dee1a439469f1c79c19584f8d, type: 3}
-  Value: 2
-  Description: "\u30D0\u30C3\u30C6\u30EA\u30FC\u767A\u751F\u88C5\u7F6E"
+  Value: 5
+  Description: "\u30B7\u30FC\u30EB\u30C9\u767A\u751F\u88C5\u7F6E"
