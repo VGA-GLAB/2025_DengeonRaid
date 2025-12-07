@@ -7308,38 +7308,6 @@ PrefabInstance:
       propertyPath: _deletePanelEffectManager
       value: 
       objectReference: {fileID: 578461729}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 5041
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.06222059
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.06222059
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.06918234
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.29999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 4707849184922748696, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.33750007
-      objectReference: {fileID: 0}
     - target: {fileID: 4822209415587583396, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.79745
