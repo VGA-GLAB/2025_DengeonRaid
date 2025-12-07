@@ -24,7 +24,7 @@ public class DeletePanelEffect : MonoBehaviour
     /// <summary>
     ///         消去したパネルをアニメーションで移動させる
     /// </summary>
-    public void PanelMove(Transform viaObj, Transform targetObj)
+    public void PanelMove(Transform viaObj, Transform targetObj,Panel panel)
     {
         ReferenceManager rm = ReferenceManager.Instance;
         GameDirector director = rm.GameDirector;
@@ -34,6 +34,9 @@ public class DeletePanelEffect : MonoBehaviour
             .Append(transform.DOScale(_panelMoveMinimalizeSize, _panelMoveMinimalizeSpeed)
             .OnComplete(() =>
             {
+                if(panel is ShieldPanel)
+                    CRIAudioManager.CRISEManager.Play("SE_ActivationShield");
+
                 director.PanelResolvingFinished();
                 Destroy(gameObject);
             }));
