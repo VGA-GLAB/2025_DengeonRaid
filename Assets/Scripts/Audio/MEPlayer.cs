@@ -8,8 +8,9 @@ public class MEPlayer : MonoBehaviour
 {
     [SerializeField] private string meCueName;
 
-    private void Start()
+    async void Start()
     {
+        await CRIAudioManager.ReadyTask();
         CRIAudioManager.CRIBGMManager.Stop();
         CRIAudioManager.CRISEManager.DisposeAll();
 
