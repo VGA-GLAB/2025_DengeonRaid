@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleButtonEvent
   _fadeInImage: {fileID: 2070840488}
+  _onPreseButton: {fileID: 904881379}
 --- !u!4 &17215506
 Transform:
   m_ObjectHideFlags: 0
@@ -842,6 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   _pressStartText: {fileID: 2115862386}
+  _onPressButton: {fileID: 904881379}
 --- !u!1 &791835435
 GameObject:
   m_ObjectHideFlags: 0
