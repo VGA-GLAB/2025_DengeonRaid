@@ -29,17 +29,17 @@ public class DeletePanelEffectManager : MonoBehaviour
         if (panel is PotionPanel)
         {
             GameObject instPanel = Instantiate(_deleateEffectHpPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj,panel);
         }
         else if (panel is CoinPanel)
         {
             GameObject instPanel = Instantiate(_deleateEffectCoinPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetCoinObj);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetCoinObj,panel);
         }
         else if (panel is ShieldPanel)
         {
             GameObject instPanel = Instantiate(_deleateEffectShieldPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetShieldObj);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetShieldObj, panel);
         }
     }
 
