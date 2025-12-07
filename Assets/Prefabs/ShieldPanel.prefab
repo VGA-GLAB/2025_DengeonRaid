@@ -200,7 +200,6 @@ MonoBehaviour:
   _panelId: 2
   _panelGroup: 0
   _shield: 2
-  _deleateEffectPrefabs: {fileID: 7043083023505894775, guid: 3206fc63f5bea0649851427cab0864db, type: 3}
 --- !u!61 &8616947282621469217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -274,6 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d003bdd829918f543afa27bc423392b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionScaleEffect
-  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSize: 0.9
   _panelMinimalizeSpeed: 1
   _panelReturnSpeed: 1

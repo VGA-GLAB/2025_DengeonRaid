@@ -32,7 +32,10 @@ public class DeletePanelEffect : MonoBehaviour
         DOTween.Sequence()
             .Append(transform.DOScale(_panelExpantionSize, _panelExpantionSpeed))
             .Append(transform.DOScale(_panelMoveMinimalizeSize, _panelMoveMinimalizeSpeed)
-            .OnComplete(() => director.PanelResolvingFinished()))
-            .OnComplete(() => Destroy(gameObject));
+            .OnComplete(() =>
+            {
+                director.PanelResolvingFinished();
+                Destroy(gameObject);
+            }));
     }
 }
