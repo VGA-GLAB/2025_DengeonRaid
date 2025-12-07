@@ -30,7 +30,7 @@ public class DeletePanelEffectManager : MonoBehaviour
         {
             GameObject instPanel = Instantiate(_deleateEffectHpPrefabs);
             instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj);
-         }
+        }
         else if (panel is CoinPanel)
         {
             GameObject instPanel = Instantiate(_deleateEffectCoinPrefabs);
