@@ -196,19 +196,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossPanel
   _panelId: 5
   _panelGroup: 1
-  _attack: 5
-  _shield: 25
-  _shieldStrength: 3
-  _hp: 50
+  _attack: 2
+  _shield: 10
+  _shieldStrength: 1
+  _hp: 90
   _killExp: 100
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}
   _uiTextShield: {fileID: 8255248087807754077}
   _uiTextHp: {fileID: 519385972716064363}
   _enemyPanel: {fileID: -3511616952413351084, guid: 40ebf721cc33c76418e7f8fc71b3e313, type: 3}
-  _skillInterval: 3
-  _hpRecovery: 10
-  _panelAlterCount: 3
+  _skillInterval: 5
+  _hpRecovery: 15
+  _panelAlterCount: 2
 --- !u!114 &-2090939483218876519
 MonoBehaviour:
   m_ObjectHideFlags: 0
