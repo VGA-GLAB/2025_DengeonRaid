@@ -357,7 +357,6 @@ MonoBehaviour:
   _panelId: 1
   _panelGroup: 0
   _heal: 2
-  _deleateEffectPrefabs: {fileID: 0}
 --- !u!114 &-359406755513462176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d003bdd829918f543afa27bc423392b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionScaleEffect
-  _panelMinimalizeSize: 0.8
+  _panelMinimalizeSize: 0.9
   _panelMinimalizeSpeed: 1
   _panelReturnSpeed: 1
