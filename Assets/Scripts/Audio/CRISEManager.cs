@@ -18,7 +18,7 @@ public class CRISEManager
 
     private List<SEPlayer> _pool = new();
     private CriAtomExAcb _criAtomExAcb;
-    private int _poolSize = 10;
+    private int _poolSize = 30;
 
     /// <summary>
     ///         音量を設定
