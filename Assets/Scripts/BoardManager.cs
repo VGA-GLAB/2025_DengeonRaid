@@ -213,12 +213,21 @@ public class BoardManager : MonoBehaviour
     public void StartSelection(Panel panel)
     {
         Debug.Log("選択開始", panel);
+
         //  初期化して選択開始
         _selectedStack.Clear();
         _selectedStack.Push(panel);
         _isSelected = true;
-
         ClearHighLight();
+
+        //  盤面全体を暗くする
+        foreach (Panel onePanel in _boardArray)
+        {
+            if (onePanel != null)
+                onePanel.SetDarken(true);
+        }
+
+        //  接続可能なパネルをハイライト
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
@@ -529,13 +538,13 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    ///         選択できるものをハイライトするクラス
+    ///         選択できるものをハイライト( 暗くなっているものを解除する )するクラス
     /// </summary>
     /// <param name="rootPanel">マウスで最初に選んだパネル</param>
     /// <param name="startPanel">探索の中心パネル</param>
     private void HighlightConnectablePanels(Panel rootPanel, Panel startPanel)
     {
-        startPanel.SetHighlight(true);
+        startPanel.SetDarken(false);
         _highlightedPanels.Add(startPanel);
 
         // 8方向探索
@@ -572,11 +581,12 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void ClearHighLight()
     {
-        foreach (var panel in _highlightedPanels)
+        foreach (var panel in _boardArray)
         {
             if (panel != null)
-                panel.SetHighlight(false);
+                panel.SetDarken(false);
         }
+
         _highlightedPanels.Clear();
     }
 }
