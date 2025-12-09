@@ -12,14 +12,12 @@ public class DeletePanelEffectManager : MonoBehaviour
     [SerializeField] private Transform _targetCoinObj;
     [SerializeField] private Transform _targetShieldObj;
 
-    [SerializeField, Header("経由地点")]
-    private Transform _viaObj;
-
     [Header("生成エフェクト")]
     [SerializeField] private GameObject _deleateEffectHpPrefabs;
     [SerializeField] private GameObject _deleateEffectCoinPrefabs;
     [SerializeField] private GameObject _deleateEffectShieldPrefabs;
 
+    // 再生中のエフェクトの数
     private int _effectCnt = 0;
     private ReferenceManager _rm;
 
@@ -39,7 +37,7 @@ public class DeletePanelEffectManager : MonoBehaviour
     public void OnOneEffectEnd()
     {
         _effectCnt--;
-        if(_effectCnt == 0)
+        if (_effectCnt == 0)
         {
             _rm.GameDirector.PanelResolvingFinished();
         }
@@ -54,18 +52,18 @@ public class DeletePanelEffectManager : MonoBehaviour
         GameObject instPanel;
         if (panel is PotionPanel)
         {
-            instPanel = Instantiate(_deleateEffectHpPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj, panel, OnOneEffectEnd);
+            instPanel = Instantiate(_deleateEffectHpPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetHpObj, panel, OnOneEffectEnd);
         }
         else if (panel is CoinPanel)
         {
-            instPanel = Instantiate(_deleateEffectCoinPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetCoinObj, panel, OnOneEffectEnd);
+            instPanel = Instantiate(_deleateEffectCoinPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetCoinObj, panel, OnOneEffectEnd);
         }
         else if (panel is ShieldPanel)
         {
-            instPanel = Instantiate(_deleateEffectShieldPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetShieldObj, panel, OnOneEffectEnd);
+            instPanel = Instantiate(_deleateEffectShieldPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetShieldObj, panel, OnOneEffectEnd);
         }
     }
 

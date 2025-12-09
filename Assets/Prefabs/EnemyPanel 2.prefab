@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 7166124024316378415}
   - component: {fileID: 6370307553836335931}
   - component: {fileID: 8255248087807754077}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 136307758412481755}
   - component: {fileID: 4931335704466421827}
   - component: {fileID: 519385972716064363}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 7041632402722263531}
   - component: {fileID: 6437895291093607260}
   - component: {fileID: 4643187983591604337}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 4706773223569196554}
   - component: {fileID: 280308972318798865}
   - component: {fileID: 4467228583139868889}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
