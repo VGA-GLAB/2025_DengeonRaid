@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1299821313066479385}
   - component: {fileID: 7319893898938755559}
   - component: {fileID: 3043094841526414107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShieldDeleateEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,8 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
-  _moveSpeed: 1
   _panelMoveMinimalizeSize: 0.5
   _panelMoveMinimalizeSpeed: 1
   _panelExpantionSize: 2
   _panelExpantionSpeed: 1
+  _effectPlayTime: 0.75
+  _playTimeFluctuation: 0.276
+  _pathBend: 1.77

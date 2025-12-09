@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3776522057625628973}
   - component: {fileID: 5287475221958291950}
   - component: {fileID: 5236884675099298940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PotionDeleateEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,8 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfd17ac6f027cb45aee87ae33d8df8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeletePanelEffect
-  _moveSpeed: 1
   _panelMoveMinimalizeSize: 0.5
   _panelMoveMinimalizeSpeed: 1
   _panelExpantionSize: 2
   _panelExpantionSpeed: 1
+  _effectPlayTime: 0.75
+  _playTimeFluctuation: 0.276
+  _pathBend: 1.77
