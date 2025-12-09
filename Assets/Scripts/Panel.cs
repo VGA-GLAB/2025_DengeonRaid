@@ -8,7 +8,7 @@ public class Panel : MonoBehaviour
     [SerializeField, Tooltip("同じ種類パネルを区別するためのID")]
     private int _panelId;
 
-    [SerializeField,Tooltip("このパネルが属するグループ")]
+    [SerializeField, Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
 
     private SpriteRenderer _spriteRenderer;
@@ -26,20 +26,30 @@ public class Panel : MonoBehaviour
 
     private void Awake()
     {
-        if(_spriteRenderer == null)
+        if (_spriteRenderer == null)
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _defaultColor = _spriteRenderer.color;
     }
 
+    /// <summary>
+    ///         初期化して位置を設定する
+    /// </summary>
+    /// <param name="pos"></param>
     public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
     }
 
-    public void SetHighlight(bool isOn)
+    /// <summary>
+    ///         パネルを暗くする
+    /// </summary>
+    /// <param name="isOn"></param>
+    public void SetDarken(bool isOn)
     {
-        _spriteRenderer.color = isOn ? Color.yellow : _defaultColor;
+        _spriteRenderer.color = isOn
+            ? new Color(_defaultColor.r * 0.4f, _defaultColor.g * 0.4f, _defaultColor.b * 0.4f, 1f)
+            : _defaultColor;
     }
 
     public virtual void Effect(PreviewPlayerData preview)
