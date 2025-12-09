@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShieldPanel : Panel
 {
@@ -12,7 +12,7 @@ public class ShieldPanel : Panel
     public override void DestroyThis()
     {
         CRIAudioManager.CRISEManager.Play("SE_ActionShield");
-        DeletePanelEffectManager.Instance.EffectMove(this);
+        DeletePanelEffectManager.Instance.OnOneEffectGenerate(this);
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);

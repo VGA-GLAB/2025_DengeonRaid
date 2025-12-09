@@ -131,7 +131,7 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void ShopFinished()
     {
-        //_igsm.ChangeState<SIGPending>();
+        _igsm.ChangeState<SIGPending>();
     }
 
     /// <summary>
