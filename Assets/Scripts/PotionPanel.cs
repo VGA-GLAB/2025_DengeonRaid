@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PotionPanel : Panel
 {
@@ -11,7 +11,7 @@ public class PotionPanel : Panel
     }
     public override void DestroyThis()
     {
-        DeletePanelEffectManager.Instance.EffectMove(this);
+        DeletePanelEffectManager.Instance.OnOneEffectGenerate(this);
         CRIAudioManager.CRISEManager.Play("SE_ActionPotion");
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);

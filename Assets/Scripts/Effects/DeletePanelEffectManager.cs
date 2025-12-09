@@ -20,26 +20,52 @@ public class DeletePanelEffectManager : MonoBehaviour
     [SerializeField] private GameObject _deleateEffectCoinPrefabs;
     [SerializeField] private GameObject _deleateEffectShieldPrefabs;
 
+    private int _effectCnt = 0;
+    private ReferenceManager _rm;
+
+    /// <summary>
+    /// 消去エフェクト1個分生成時の処理
+    /// </summary>
+    /// <param name="panel"></param>
+    public void OnOneEffectGenerate(Panel panel)
+    {
+        EffectMove(panel);
+        _effectCnt++;
+    }
+
+    /// <summary>
+    /// 消去エフェクト1個分終了時処理
+    /// </summary>
+    public void OnOneEffectEnd()
+    {
+        _effectCnt--;
+        if(_effectCnt == 0)
+        {
+            _rm.GameDirector.PanelResolvingFinished();
+        }
+    }
+
     /// <summary>
     ///         UIパネル移動演出
     /// </summary>
     /// <param name="panel"></param>
-    public void EffectMove(Panel panel)
+    private void EffectMove(Panel panel)
     {
+        GameObject instPanel;
         if (panel is PotionPanel)
         {
-            GameObject instPanel = Instantiate(_deleateEffectHpPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj,panel);
+            instPanel = Instantiate(_deleateEffectHpPrefabs);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetHpObj, panel, OnOneEffectEnd);
         }
         else if (panel is CoinPanel)
         {
-            GameObject instPanel = Instantiate(_deleateEffectCoinPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetCoinObj,panel);
+            instPanel = Instantiate(_deleateEffectCoinPrefabs);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetCoinObj, panel, OnOneEffectEnd);
         }
         else if (panel is ShieldPanel)
         {
-            GameObject instPanel = Instantiate(_deleateEffectShieldPrefabs);
-            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetShieldObj, panel);
+            instPanel = Instantiate(_deleateEffectShieldPrefabs);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_viaObj, _targetShieldObj, panel, OnOneEffectEnd);
         }
     }
 
@@ -53,5 +79,11 @@ public class DeletePanelEffectManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        _rm = ReferenceManager.Instance;
+        _effectCnt = 0;
     }
 }

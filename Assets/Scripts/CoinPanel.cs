@@ -11,7 +11,7 @@ public class CoinPanel : Panel
     }
     public override void DestroyThis()
     {
-        DeletePanelEffectManager.Instance.EffectMove(this);
+        DeletePanelEffectManager.Instance.OnOneEffectGenerate(this);
         CRIAudioManager.CRISEManager.Play("SE_ActionMoney");
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);

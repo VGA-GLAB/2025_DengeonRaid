@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -24,7 +25,7 @@ public class DeletePanelEffect : MonoBehaviour
     /// <summary>
     ///         消去したパネルをアニメーションで移動させる
     /// </summary>
-    public void PanelMove(Transform viaObj, Transform targetObj,Panel panel)
+    public void PanelMove(Transform viaObj, Transform targetObj,Panel panel, Action callBack)
     {
         ReferenceManager rm = ReferenceManager.Instance;
         GameDirector director = rm.GameDirector;
@@ -37,7 +38,7 @@ public class DeletePanelEffect : MonoBehaviour
                 if(panel is ShieldPanel)
                     CRIAudioManager.CRISEManager.Play("SE_ActivationShield");
 
-                director.PanelResolvingFinished();
+                callBack.Invoke();
                 Destroy(gameObject);
             }));
     }
