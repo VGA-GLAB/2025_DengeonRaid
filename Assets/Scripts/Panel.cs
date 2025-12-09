@@ -35,7 +35,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     ///         初期化して位置を設定する
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="pos">座標</param>
     public void Initialize(Vector2Int pos)
     {
         BoardPos = pos;
@@ -44,7 +44,7 @@ public class Panel : MonoBehaviour
     /// <summary>
     ///         パネルを暗くする
     /// </summary>
-    /// <param name="isOn"></param>
+    /// <param name="isOn">暗くする場合はtrue</param>
     public void SetDarken(bool isOn)
     {
         _spriteRenderer.color = isOn
