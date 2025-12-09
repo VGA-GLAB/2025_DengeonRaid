@@ -157,9 +157,13 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="panel"></param>
-    public void ReplacePanel(Vector2Int pos, Panel panel)
+    public void ReplacePanel(Vector2Int pos, Panel panel, bool isPlayer)
     {
-        _boardArray[pos.x, pos.y].DestroyThis();
+        if (isPlayer)
+            _boardArray[pos.x, pos.y].DestroyThis();
+        else
+            Destroy(_boardArray[pos.x, pos.y]);
+
         //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
         newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
