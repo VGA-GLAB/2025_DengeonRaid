@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
+using UnityEngine;
 
 /// <summary>
 ///         敵が死んだ時に呼ばれるエフェクト
@@ -35,7 +35,7 @@ public class MissileEffect : MonoBehaviour
             .OnComplete(() =>
             {
                 CRIAudioManager.CRISEManager.Play("SE_AttackRocket");
-                Instantiate(_explosionEffectPrefab, this.transform.position,Quaternion.Euler(0,0,180));
+                Instantiate(_explosionEffectPrefab, this.transform.position, Quaternion.Euler(0, 0, 90));
                 OnHit?.Invoke();
 
                 Destroy(gameObject);
