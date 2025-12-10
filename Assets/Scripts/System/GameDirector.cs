@@ -86,7 +86,9 @@ public class GameDirector : MonoBehaviour
 
     private IEnumerator PanelResolvingFinishedSequence()
     {
-        if(_bossDefeated)
+        MissileEffectManager.Instance.PlayMissileEffect();
+
+        if (_bossDefeated)
         {
             _rm.BossDestroyEffect.BossDeathEffect(WipeToWinResultScene);
             yield break;
