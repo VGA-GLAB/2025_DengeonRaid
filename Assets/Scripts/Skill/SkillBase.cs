@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 ///         スキルの基底クラス
@@ -13,10 +14,15 @@ public abstract class SkillBase : MonoBehaviour
     [SerializeField] private bool _isUnlocked = false;
     [Header("スキル使用回数")]
     [SerializeField] private int _maxSkillUses = 1;
+    [Header("使用可能時の色")]
+    [SerializeField] private Color _availableColor = Color.yellow;
+    [Header("使用不可時の色")]
+    [SerializeField] private Color _unavailableColor = Color.gray6;
 
     [Header("参照")]
     [SerializeField, Tooltip("スキルアイコン")] private GameObject _icon;
     [SerializeField, Tooltip("ロックアイコン")] private GameObject _lock;
+    
 
     private int _remainingSkillUses;
 
@@ -27,6 +33,7 @@ public abstract class SkillBase : MonoBehaviour
     {
         _boardManager = ReferenceManager.Instance.BoardManager;
         _remainingSkillUses = _maxSkillUses;
+        _icon.GetComponent<Image>().color = _availableColor;
     }
 
     /// <summary>
@@ -50,6 +57,10 @@ public abstract class SkillBase : MonoBehaviour
 
         ActivateSkill();
         _remainingSkillUses--;
+        if( _remainingSkillUses <= 0)
+        {
+            _icon.GetComponent<Image>().color = _unavailableColor;
+        }
     }
 
     /// <summary>
