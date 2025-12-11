@@ -1,16 +1,16 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyCounterUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private Image _enemyCountGauge;
+    [SerializeField]
+    private TextMeshProUGUI _enmeyCountText;
+    public void EnemyCount()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _enemyCountGauge.fillAmount = 0;
+        _enmeyCountText.text = "a";
     }
 }
