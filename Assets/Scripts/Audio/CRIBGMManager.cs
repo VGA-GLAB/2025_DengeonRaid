@@ -55,4 +55,15 @@ public class CRIBGMManager
     {
         _player?.Stop();
     }
+
+    /// <summary>
+    ///         BGMを切り替える
+    /// </summary>
+    /// <param name="selector"></param>
+    /// <param name="label"></param>
+    public void SelectTrack(string selector, string label)
+    {
+        _player.SetSelectorLabel(selector, label);
+        _player.UpdateAll();
+    }
 }
