@@ -2,6 +2,7 @@
 using System;
 using System.Security.Cryptography;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,18 @@ public class UIController : MonoBehaviour
 {
     private ReferenceManager _rm;
     private PlayerController _player;
+
+    [Header("ゲージ揺れパラメータ：揺れ時間")]
+    [SerializeField] private float _guageShakeDuration = 0.2f;
+
+    [Header("ゲージ揺れパラメータ：強さ")]
+    [SerializeField] private float _guageShakeStrength = 20f;
+
+    [Header("ゲージ揺れパラメータ：揺れの頻度")]
+    [SerializeField] private int _guageShakeVibrato = 50;
+
+    [Header("ゲージ揺れパラメータ：乱れ具合")]
+    [SerializeField, Range(0f, 180f)] private float _guageShakeRandomness = 30f;
 
     #region  ライフサイクル
     private void Start()
@@ -39,6 +52,16 @@ public class UIController : MonoBehaviour
     {
         _rm.UIWipeImage.SetActive(true);
         _rm.UIWipeImage.transform.DOMoveY(0, 1f).OnComplete(callback.Invoke);
+    }
+
+    public void PlayHpGuageShake()
+    {
+        _rm.UIPlayerHpGuage.transform.DOShakePosition(_guageShakeDuration, _guageShakeStrength, _guageShakeVibrato, _guageShakeRandomness, false, false);
+    }
+
+    public void PlayShieldGuageShake()
+    {
+        _rm.UIPlayerShieldGuage.transform.DOShakePosition(_guageShakeDuration, _guageShakeStrength, _guageShakeVibrato, _guageShakeRandomness, false, false);
     }
     #endregion
 
