@@ -62,13 +62,14 @@ public class PanelResolver
         {
             enemy.ApplyPreview();
         }
-        foreach(Panel panel in _panels)
+        foreach (Panel panel in _panels)
         {
-            if(panel is EnemyPanel)
+            if (panel is EnemyPanel)
             {
                 EnemyPanel enemy = panel as EnemyPanel;
                 if (enemy.IsDead)
                 {
+                    MissileEffectManager.Instance.SetSprite(enemy.GetComponent<SpriteRenderer>().sprite);
                     enemy.DestroyThis();
                 }
                 else
@@ -103,7 +104,7 @@ public class PanelResolver
 
         enemyPreview.Shield = enemyShieldRemain;
         enemyPreview.Hp -= enemyHpDamage;
-        if(enemyPreview.Hp <= 0)
+        if (enemyPreview.Hp <= 0)
         {
             _playerPreview.Exp += enemyPreview.KillExp;
             enemyPreview.IsDead = true;

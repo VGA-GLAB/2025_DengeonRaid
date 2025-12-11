@@ -49,14 +49,15 @@ public class EnemyPanel : Panel
             Debug.LogWarning("敵パネルプレビューデータ無し！！");
             return;
         }
-        if (_preview.IsDead)
-        {
-            DestroyThis();
-        }
+        //if (_preview.IsDead)
+        //{
+        //    DestroyThis();
+        //}
         else
         {
             Hp = _preview.Hp;
             Shield = _preview.Shield;
+            IsDead = _preview.IsDead;
         }
         _preview = null;
     }
@@ -66,10 +67,7 @@ public class EnemyPanel : Panel
         CRIAudioManager.CRISEManager.Play("SE_ActionEnemy");
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
-
-        // ミサイルエフェクト再生
-        MissileEffectManager.Instance.SetEnemySprite(this.GetComponent<SpriteRenderer>().sprite);
-        MissileEffectManager.Instance.PlayMissileEffect();
+  
         Destroy(gameObject);
     }
 
