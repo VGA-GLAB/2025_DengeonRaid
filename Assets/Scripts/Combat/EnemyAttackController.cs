@@ -67,6 +67,19 @@ public class EnemyAttackController : MonoBehaviour
             damageText.fontSize = _originalFontSize;
             _rm.UIEnemyAttackPanel.SetActive(false);
 
+            if(_processor.FinalDamage > 0)
+            {
+                _rm.UIController.PlayHpGuageShake();
+                if (_rm.PlayerController.Shield > 0)
+                {
+                    _rm.UIController.PlayShieldGuageShake();
+                }
+            }
+            else
+            {
+                _rm.UIController.PlayShieldGuageShake();
+            }
+
             _processor.ApplyDamageToPlayer();
         }
 
