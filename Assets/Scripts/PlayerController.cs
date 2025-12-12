@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int _baseAttack;
     [SerializeField] private int _weaponAttack;
     [SerializeField] private bool _isDead;
+    [Header("HP危険閾値")]
+    [SerializeField, Range(0f, 1f)] private float _hpDangerRatio = 0.2f;
     private PreviewPlayerData _preview;
 
     #region プロパティー
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
         WeaponAttack = _preview.WeaponAttack;
         IsDead = _preview.IsDead;
         _preview = null;
+        HpRelatedEvents();
     }
 
     /// <summary>
@@ -114,5 +118,22 @@ public class PlayerController : MonoBehaviour
         // ゴールドを上限分引いて、ゴールド上限値を増やす
         Money -= MoneyMax;
         MoneyMax += _goldMaxIncrement;
+    }
+
+    /// <summary>
+    /// HPに関連する処理
+    /// </summary>
+    private void HpRelatedEvents()
+    {
+        if (Hp >= HpMax * _hpDangerRatio)
+        {
+            // HPが危険閾値以上の場合、楽器多め版BGMを再生
+            CRIAudioManager.CRIBGMManager.SelectTrack(Constants.CRI_BGM_SELECTOR_NAME, Constants.CRI_BGM_LABEL_NAME_VER2);
+        }
+        else
+        {
+            // HPが危険閾値を下回る場合、楽器少なめ版BGMを再生
+            CRIAudioManager.CRIBGMManager.SelectTrack(Constants.CRI_BGM_SELECTOR_NAME, Constants.CRI_BGM_LABEL_NAME_VER1);
+        }
     }
 }
