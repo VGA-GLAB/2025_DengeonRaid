@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameDirector : MonoBehaviour
 {
+    public int EnemyCountForBoss => _enemyCountForBoss;
+    public int EnemyCount => _enemyCount;
+
     private ReferenceManager _rm;
     private InGameStateMachine _igsm;
     private EventBus _eventBus;
