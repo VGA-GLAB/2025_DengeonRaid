@@ -12,5 +12,7 @@ public class SceneBGMPlayer : MonoBehaviour
 
         // BGM 再生
         CRIAudioManager.CRIBGMManager.Play(_bgmName);
+        // 最初に楽器多め版を再生する
+        CRIAudioManager.CRIBGMManager.SelectTrack(Constants.CRI_BGM_SELECTOR_NAME, Constants.CRI_BGM_LABEL_NAME_VER2);
     }
 }
