@@ -150,6 +150,23 @@ public class BoardManager : MonoBehaviour
     {
         return _bossPrefab;
     }
+
+    /// <summary>
+    ///         選択中の武器パネルの数を取得
+    /// </summary>
+    /// <returns></returns>
+    private int GetWeponAmountOnSelectedstack()
+    {
+        int count = 0;
+        foreach (var panel in _selectedStack)
+        {
+            if (panel is SwordPanel)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
     #endregion
 
     /// <summary>
@@ -266,8 +283,12 @@ public class BoardManager : MonoBehaviour
             {
                 Panel removed = _selectedStack.Pop();
                 removed.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
-                UpdateLine();
             }
+
+            UpdateEnemyDeathPreviews();
+            UpdateLine();
+
+            //  戻し処理をした時点で、このフレームの処理を終了するためのreturn
             return;
         }
         else
@@ -275,9 +296,10 @@ public class BoardManager : MonoBehaviour
             //  新規選択ならスタックに追加
             _selectedStack.Push(panel);
             panel.GetComponent<SelectionScaleEffect>()?.PanelScale();
-        }
 
-        UpdateLine();
+            UpdateEnemyDeathPreviews();
+            UpdateLine();
+        }
     }
 
     /// <summary>
@@ -539,6 +561,28 @@ public class BoardManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///         敵の撃破プレビューを更新
+    /// </summary>
+    private void UpdateEnemyDeathPreviews()
+    {
+        foreach (var panel in _selectedStack)
+        {
+            //  敵パネルの場合、倒せるかのプレビュー表示
+            if (panel is not EnemyPanel enemyPanel) continue;
+            bool isDead = EnemyDeathCheckUtility.EnemyDeathCheck(
+                    enemyPanel,
+                    _playerController,
+                    GetWeponAmountOnSelectedstack()
+                );
+
+            if (isDead)
+                enemyPanel.DeathEffect.EnemyCanBeKilledEffect();
+            else
+                enemyPanel.DeathEffect.ResetEffect();
+        }
     }
 
     /// <summary>
