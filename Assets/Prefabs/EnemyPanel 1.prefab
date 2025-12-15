@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3511616952413351084}
   - component: {fileID: 5679105269127256362}
   - component: {fileID: 3792165337562886151}
+  - component: {fileID: -2382779951001532554}
   m_Layer: 0
   m_Name: EnemyPanel 1
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4134807082231869573}
   - {fileID: 3007792596757519492}
   - {fileID: 775907857123469292}
   m_Father: {fileID: 0}
@@ -195,6 +197,22 @@ MonoBehaviour:
   _panelMinimalizeSize: 0.9
   _panelMinimalizeSpeed: 1
   _panelReturnSpeed: 1
+--- !u!114 &-2382779951001532554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448241291402004874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34383aefafc4a443942300b68884a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathPreviewEffect
+  _deathMark: {fileID: 627992983762897371}
+  _effectScale: 1.5
+  _effectDuration: 0.2
+  _backEffectDuration: 1
 --- !u!1 &2570931276006752375
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,3 +815,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &6054588424562889419
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6577069989502047705}
+    m_Modifications:
+    - target: {fileID: 6679168502154353424, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_Name
+      value: EnemyCanBeKilledSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679168502154353424, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+--- !u!1 &627992983762897371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6679168502154353424, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+  m_PrefabInstance: {fileID: 6054588424562889419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4134807082231869573 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7883534885429731918, guid: 74fc940c97dd3e242b45939baef213ff, type: 3}
+  m_PrefabInstance: {fileID: 6054588424562889419}
+  m_PrefabAsset: {fileID: 0}
