@@ -29,6 +29,7 @@ public class EnemyPanel : Panel
     public int Hp { get => _hp; protected set => _hp = value; }
     public int KillExp { get => _killExp; protected set => _killExp = value; }
     public bool IsDead { get => _isDead; protected set => _isDead = value; }
+    public EnemyDeathPreviewEffect DeathEffect => GetComponent<EnemyDeathPreviewEffect>();
 
     public void SetResolvePreview(PreviewEnemyData preview)
     {
