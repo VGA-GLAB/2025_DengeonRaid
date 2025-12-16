@@ -174,12 +174,10 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="panel"></param>
-    public void ReplacePanel(Vector2Int pos, Panel panel, bool isPlayer)
+    public void ReplacePanel(Vector2Int pos, Panel panel)
     {
-        if (isPlayer)
-            _boardArray[pos.x, pos.y].DestroyThis();
-        else
-            Destroy(_boardArray[pos.x, pos.y]);
+        Destroy(_boardArray[pos.x, pos.y].gameObject);
+        _boardArray[pos.x, pos.y] = null;
 
         //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
@@ -283,6 +281,8 @@ public class BoardManager : MonoBehaviour
             {
                 Panel removed = _selectedStack.Pop();
                 removed.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
+                if (removed is EnemyPanel enemyPanel)
+                    enemyPanel.DeathEffect.ResetEffect();
             }
 
             UpdateEnemyDeathPreviews();
