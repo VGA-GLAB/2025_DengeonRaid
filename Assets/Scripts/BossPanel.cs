@@ -100,7 +100,7 @@ public class BossPanel : EnemyPanel
         // 取得したパネルを敵パネルに変換する
         foreach (Panel panel in panels)
         {
-            _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel, false);
+            _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel);
         }
     }
 
