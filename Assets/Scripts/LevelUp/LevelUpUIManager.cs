@@ -22,7 +22,7 @@ public class LevelUpUIManager : MonoBehaviour
     private SkillUnlockManager _skillUnlockManager;
 
     private PreviewPlayerData _previewPlayerData;
-    //private bool _isInit = false;
+    private bool _isInit = false;
 
     #region ライフサイクル
     private void Start()
@@ -101,7 +101,7 @@ public class LevelUpUIManager : MonoBehaviour
             LevelUpUI itemUI = ui.GetComponent<LevelUpUI>();
             itemUI.Setup(item, this);
         }
-        _playerStatusUI.SetUp(new PreviewPlayerData(_player));
+        //_playerStatusUI.SetUp(new PreviewPlayerData(_player));
     }
 
     /// <summary>

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
   ShopEffectType: 1
-  ItemName: Shild
-  Icon: {fileID: 21300000, guid: 63f1f1d72039c2246b3e618b1db8dc8c, type: 3}
-  Value: 2
-  Description: "\u6700\u5927\u30B7\u30FC\u30EB\u30C9\u5897\u3084\u3057\u307E\u3059"
+  ItemName: "\u30B7\u30FC\u30EB\u30C9"
+  Icon: {fileID: -1156027145709021489, guid: aa94d68dee1a439469f1c79c19584f8d, type: 3}
+  Value: 5
+  Description: "\u30B7\u30FC\u30EB\u30C9\u767A\u751F\u88C5\u7F6E"

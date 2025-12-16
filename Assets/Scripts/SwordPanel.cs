@@ -11,6 +11,7 @@ public class SwordPanel : Panel
     }
     public override void DestroyThis()
     {
+        CRIAudioManager.CRISEManager.Play("SE_ActionRocket");
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
     }

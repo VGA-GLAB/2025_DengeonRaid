@@ -49,7 +49,6 @@ public class BossPanel : EnemyPanel
     {
         _rm.BoardManager.RemovePanelFromBoard(this);
         _rm.GameDirector.BossDefeated();
-        Destroy(gameObject);
     }
     /// <summary>
     /// ターン終了時の行動。
@@ -101,7 +100,7 @@ public class BossPanel : EnemyPanel
         // 取得したパネルを敵パネルに変換する
         foreach (Panel panel in panels)
         {
-            _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel);
+            _rm.BoardManager.ReplacePanel(panel.BoardPos, _enemyPanel, false);
         }
     }
 

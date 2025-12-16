@@ -1,57 +1,87 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 ///         パネル演出の管理クラス
 /// </summary>
 public class DeletePanelEffectManager : MonoBehaviour
 {
-    [SerializeField, Header("移動場所")]
-    private Transform _targetObj;
+    public static DeletePanelEffectManager Instance { get; private set; }
 
-    [SerializeField, Header("経由地点")]
-    private Transform _viaObj;
+    [Header("移動場所")]
+    [SerializeField] private Transform _targetHpObj;
+    [SerializeField] private Transform _targetCoinObj;
+    [SerializeField] private Transform _targetShieldObj;
 
-    [SerializeField, Header("演出時間差")]
-    private float _delay = 0.1f;
+    [Header("生成エフェクト")]
+    [SerializeField] private GameObject _deleateEffectHpPrefabs;
+    [SerializeField] private GameObject _deleateEffectCoinPrefabs;
+    [SerializeField] private GameObject _deleateEffectShieldPrefabs;
 
-    private float _currentDelay = 0f;
-
-    //  のちに追加予定
-    //public void ResetDelay()
-    //{
-    //    _currentDelay = 0f;
-    //}
-
-    //public void EffectMove(List<Panel> panels)
-    //{
-    //    foreach (var panel in panels)
-    //    {
-    //        _currentDelay += _delay;
-    //        DeletePanelEffect deletePanelEffect = panel.GetComponent<DeletePanelEffect>();
-    //        if (!deletePanelEffect)
-    //            deletePanelEffect.PanelMove(_viaObj, _targetObj, _currentDelay);
-    //    }
-    //    _currentDelay = 0f;
-    //}
+    // 再生中のエフェクトの数
+    private int _effectCnt = 0;
+    private ReferenceManager _rm;
 
     /// <summary>
-    ///         パネルを縮小する演出を再生する
+    /// 消去エフェクト1個分生成時の処理
     /// </summary>
     /// <param name="panel"></param>
-    public void EffectScale(Panel panel)
+    public void OnOneEffectGenerate(Panel panel)
     {
-        DeletePanelEffect deletePanelEffect = panel.GetComponent<DeletePanelEffect>();
-        deletePanelEffect.PanelScale();
+        EffectMove(panel);
+        _effectCnt++;
     }
 
     /// <summary>
-    ///         パネルを元のサイズに戻す演出を再生する
+    /// 消去エフェクト1個分終了時処理
+    /// </summary>
+    public void OnOneEffectEnd()
+    {
+        _effectCnt--;
+        if (_effectCnt == 0)
+        {
+            _rm.GameDirector.PanelResolvingFinished();
+        }
+    }
+
+    /// <summary>
+    ///         UIパネル移動演出
     /// </summary>
     /// <param name="panel"></param>
-    public void EffectReturnScale(Panel panel)
+    private void EffectMove(Panel panel)
     {
-        DeletePanelEffect deletePanelEffect = panel.GetComponent<DeletePanelEffect>();
-        deletePanelEffect.ReturnPanelScale();
+        GameObject instPanel;
+        if (panel is PotionPanel)
+        {
+            instPanel = Instantiate(_deleateEffectHpPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetHpObj, panel, OnOneEffectEnd);
+        }
+        else if (panel is CoinPanel)
+        {
+            instPanel = Instantiate(_deleateEffectCoinPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetCoinObj, panel, OnOneEffectEnd);
+        }
+        else if (panel is ShieldPanel)
+        {
+            instPanel = Instantiate(_deleateEffectShieldPrefabs, panel.transform.position, Quaternion.identity);
+            instPanel.GetComponent<DeletePanelEffect>()?.PanelMove(_targetShieldObj, panel, OnOneEffectEnd);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        _rm = ReferenceManager.Instance;
+        _effectCnt = 0;
     }
 }

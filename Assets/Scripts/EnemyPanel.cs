@@ -29,6 +29,7 @@ public class EnemyPanel : Panel
     public int Hp { get => _hp; protected set => _hp = value; }
     public int KillExp { get => _killExp; protected set => _killExp = value; }
     public bool IsDead { get => _isDead; protected set => _isDead = value; }
+    public EnemyDeathPreviewEffect DeathEffect => GetComponent<EnemyDeathPreviewEffect>();
 
     public void SetResolvePreview(PreviewEnemyData preview)
     {
@@ -49,26 +50,25 @@ public class EnemyPanel : Panel
             Debug.LogWarning("敵パネルプレビューデータ無し！！");
             return;
         }
-        if (_preview.IsDead)
-        {
-            DestroyThis();
-        }
+        //if (_preview.IsDead)
+        //{
+        //    DestroyThis();
+        //}
         else
         {
             Hp = _preview.Hp;
             Shield = _preview.Shield;
+            IsDead = _preview.IsDead;
         }
         _preview = null;
     }
 
     public override void DestroyThis()
     {
+        CRIAudioManager.CRISEManager.Play("SE_ActionEnemy");
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
-
-        // ミサイルエフェクト再生
-        MissileEffectManager.Instance.SetEnemySprite(this.GetComponent<SpriteRenderer>().sprite);
-        MissileEffectManager.Instance.PlayMissileEffect();
+  
         Destroy(gameObject);
     }
 

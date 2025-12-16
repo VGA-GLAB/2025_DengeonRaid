@@ -1,25 +1,22 @@
 ﻿using CriWare;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 /// <summary>
 ///         単一BGMの管理クラス
 /// </summary>
 public class CRIBGMManager
 {
-    private CriAtomExPlayer _player;
-    private CriAtomExAcb _criAtomExAcb;
-
-    /// <summary>
-    ///         初期化
-    /// </summary>
-    /// <param name="criAtomExAcb"></param>
-    public void Initialize(CriAtomExAcb criAtomExAcb)
+    public CRIBGMManager(CriAtomExAcb criAtomExAcb)
     {
+        // 初期化
         _criAtomExAcb = criAtomExAcb;
         if (_player == null) _player = new CriAtomExPlayer();
         SetVolume(SoundSettings.BGMVolume);
     }
+
+    private readonly CriAtomExPlayer _player;
+    private readonly CriAtomExAcb _criAtomExAcb;
 
     /// <summary>
     ///         CriAtomExPlayerに音量を設定
@@ -27,7 +24,11 @@ public class CRIBGMManager
     /// <param name="volume">SoundSettingsに設定している音量</param>
     public void SetVolume(float volume)
     {
-        if (_player != null) _player.SetVolume(Mathf.Clamp01(volume));
+        if (_player != null)
+        {
+            _player.SetVolume(Mathf.Clamp01(volume));
+            _player.UpdateAll();
+        }
     }
 
     /// <summary>
@@ -40,7 +41,7 @@ public class CRIBGMManager
 
         _player.Stop();
 
-        // CriAtomExから長く音楽を探して再生
+        // CriAtomExから音楽を探して再生
         CriAtomEx.CueInfo[] cueArray = _criAtomExAcb.GetCueInfoList();
         CriAtomEx.CueInfo info = Array.Find(cueArray, ci => ci.name == cueName);
         _player.SetCue(_criAtomExAcb, info.id);
@@ -53,5 +54,16 @@ public class CRIBGMManager
     public void Stop()
     {
         _player?.Stop();
+    }
+
+    /// <summary>
+    ///         BGMを切り替える
+    /// </summary>
+    /// <param name="selector"></param>
+    /// <param name="label"></param>
+    public void SelectTrack(string selector, string label)
+    {
+        _player.SetSelectorLabel(selector, label);
+        _player.UpdateAll();
     }
 }

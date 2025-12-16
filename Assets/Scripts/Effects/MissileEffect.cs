@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
+using UnityEngine;
 
 /// <summary>
 ///         敵が死んだ時に呼ばれるエフェクト
@@ -20,6 +20,8 @@ public class MissileEffect : MonoBehaviour
     /// <param name="OnHit">敵にミサイル到達時のイベント</param>
     public void PlayEffect(Vector3 targetPos, Action OnHit)
     {
+        CRIAudioManager.CRISEManager.Play("SE_FlyRocket");
+
         _targetPos = targetPos;
         // 向きをターゲットに合わせる
         Vector2 direction = (_targetPos - this.transform.position).normalized;
@@ -32,7 +34,8 @@ public class MissileEffect : MonoBehaviour
             .SetEase(_missileEase)
             .OnComplete(() =>
             {
-                Instantiate(_explosionEffectPrefab, this.transform.position,Quaternion.Euler(0,0,180));
+                CRIAudioManager.CRISEManager.Play("SE_AttackRocket");
+                Instantiate(_explosionEffectPrefab, this.transform.position, Quaternion.Euler(0, 0, 90));
                 OnHit?.Invoke();
 
                 Destroy(gameObject);

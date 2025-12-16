@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -23,6 +22,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private PanelDropManager _panelDropManager;
     [SerializeField] private DeletePanelEffectManager _deletePanelEffectManager;
     [SerializeField] private UIController _uiController;
+    [SerializeField] private SelectionScaleEffect _selectionScaleEffect;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
     [SerializeField] private BossPanel _bossPrefab;
 
@@ -150,6 +150,23 @@ public class BoardManager : MonoBehaviour
     {
         return _bossPrefab;
     }
+
+    /// <summary>
+    ///         選択中の武器パネルの数を取得
+    /// </summary>
+    /// <returns></returns>
+    private int GetWeponAmountOnSelectedstack()
+    {
+        int count = 0;
+        foreach (var panel in _selectedStack)
+        {
+            if (panel is SwordPanel)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
     #endregion
 
     /// <summary>
@@ -157,9 +174,13 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="panel"></param>
-    public void ReplacePanel(Vector2Int pos, Panel panel)
+    public void ReplacePanel(Vector2Int pos, Panel panel, bool isPlayer)
     {
-        _boardArray[pos.x, pos.y].DestroyThis();
+        if (isPlayer)
+            _boardArray[pos.x, pos.y].DestroyThis();
+        else
+            Destroy(_boardArray[pos.x, pos.y]);
+
         //  新しいパネルを生成、初期化
         Panel newPanel = Instantiate(panel, _boardRoot);
         newPanel.transform.localPosition = new Vector3(pos.x, -pos.y, 0);
@@ -213,16 +234,27 @@ public class BoardManager : MonoBehaviour
     public void StartSelection(Panel panel)
     {
         Debug.Log("選択開始", panel);
+
         //  初期化して選択開始
         _selectedStack.Clear();
         _selectedStack.Push(panel);
         _isSelected = true;
-
         ClearHighLight();
+
+        //  盤面全体を暗くする
+        foreach (Panel onePanel in _boardArray)
+        {
+            if (onePanel != null)
+                onePanel.SetDarken(true);
+        }
+
+        //  接続可能なパネルをハイライト
         _highlightedPanels.Clear();
         HighlightConnectablePanels(panel, panel);
 
-        _deletePanelEffectManager.EffectScale(panel);
+        //  選択エフェクト開始
+        panel.GetComponent<SelectionScaleEffect>()?.PanelScale();
+
         UpdateLine();
     }
 
@@ -250,19 +282,24 @@ public class BoardManager : MonoBehaviour
             while (_selectedStack.Peek() != panel)
             {
                 Panel removed = _selectedStack.Pop();
-                _deletePanelEffectManager.EffectReturnScale(removed);
-                UpdateLine();
+                removed.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
             }
+
+            UpdateEnemyDeathPreviews();
+            UpdateLine();
+
+            //  戻し処理をした時点で、このフレームの処理を終了するためのreturn
             return;
         }
         else
         {
             //  新規選択ならスタックに追加
             _selectedStack.Push(panel);
-            _deletePanelEffectManager.EffectScale(panel);
-        }
+            panel.GetComponent<SelectionScaleEffect>()?.PanelScale();
 
-        UpdateLine();
+            UpdateEnemyDeathPreviews();
+            UpdateLine();
+        }
     }
 
     /// <summary>
@@ -280,16 +317,19 @@ public class BoardManager : MonoBehaviour
 
         _rm.PanelResolvingController.ProcessWrapped();
 
-        //  のちに追加予定
-        //List<Panel> panelsToDelete = _selectedStack.ToList();
-        //_deletePanelEffectManager.EffectMove(panelsToDelete);
-
+        //  敵が死ななかった場合の保険でScaleを元に戻す
         foreach (Panel panel in _selectedStack)
         {
-            _deletePanelEffectManager.EffectReturnScale(panel);
+            panel.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
         }
+
+        Panel judgePanel = _selectedStack.Peek();
         _selectedStack.Clear();
-        _director.PanelResolvingFinished();
+
+        //  剣、敵、ボスパネルの場合、パネル解決処理完了を通知
+        //  それ以外はEffect完了後に通知する
+        if (judgePanel is SwordPanel || judgePanel is EnemyPanel || judgePanel is BossPanel)
+            _director.PanelResolvingFinished();
     }
 
     /// <summary>
@@ -301,7 +341,7 @@ public class BoardManager : MonoBehaviour
 
         foreach (Panel panel in _selectedStack)
         {
-            _deletePanelEffectManager.EffectReturnScale(panel);
+            panel.GetComponent<SelectionScaleEffect>()?.ReturnPanelScale();
         }
         _selectedStack.Clear();
         ClearHighLight();
@@ -375,6 +415,7 @@ public class BoardManager : MonoBehaviour
                     newPanel = Instantiate(GetBossPanel(), _boardRoot);
                     ReferenceManager.Instance.GameDirector.BossGenerated();
                     _rm.BossPanel = newPanel as BossPanel;
+                    CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
                 }
                 else
                 {
@@ -391,7 +432,7 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        _panelDropManager.DropAll(droppedPanels,_isSkillUsed);
+        _panelDropManager.DropAll(droppedPanels, _isSkillUsed);
         _isSkillUsed = false;
     }
 
@@ -523,13 +564,35 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
-    ///         選択できるものをハイライトするクラス
+    ///         敵の撃破プレビューを更新
+    /// </summary>
+    private void UpdateEnemyDeathPreviews()
+    {
+        foreach (var panel in _selectedStack)
+        {
+            //  敵パネルの場合、倒せるかのプレビュー表示
+            if (panel is not EnemyPanel enemyPanel) continue;
+            bool isDead = EnemyDeathCheckUtility.EnemyDeathCheck(
+                    enemyPanel,
+                    _playerController,
+                    GetWeponAmountOnSelectedstack()
+                );
+
+            if (isDead)
+                enemyPanel.DeathEffect.EnemyCanBeKilledEffect();
+            else
+                enemyPanel.DeathEffect.ResetEffect();
+        }
+    }
+
+    /// <summary>
+    ///         選択できるものをハイライト( 暗くなっているものを解除する )するクラス
     /// </summary>
     /// <param name="rootPanel">マウスで最初に選んだパネル</param>
     /// <param name="startPanel">探索の中心パネル</param>
     private void HighlightConnectablePanels(Panel rootPanel, Panel startPanel)
     {
-        startPanel.SetHighlight(true);
+        startPanel.SetDarken(false);
         _highlightedPanels.Add(startPanel);
 
         // 8方向探索
@@ -566,11 +629,12 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     private void ClearHighLight()
     {
-        foreach (var panel in _highlightedPanels)
+        foreach (var panel in _boardArray)
         {
             if (panel != null)
-                panel.SetHighlight(false);
+                panel.SetDarken(false);
         }
+
         _highlightedPanels.Clear();
     }
 }

@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameDirector : MonoBehaviour
 {
+    public int EnemyCountForBoss => _enemyCountForBoss;
+    public int EnemyCount => _enemyCount;
+
     private ReferenceManager _rm;
     private InGameStateMachine _igsm;
     private EventBus _eventBus;
@@ -86,9 +89,11 @@ public class GameDirector : MonoBehaviour
 
     private IEnumerator PanelResolvingFinishedSequence()
     {
-        if(_bossDefeated)
+        MissileEffectManager.Instance.PlayMissileEffect();
+
+        if (_bossDefeated)
         {
-            _rm.UIController.WipeIn(LoadWinResultScene);
+            _rm.BossDestroyEffect.BossDeathEffect(WipeToWinResultScene);
             yield break;
         }
         _igsm.ChangeState<SIGLevelUp>();
@@ -216,5 +221,10 @@ public class GameDirector : MonoBehaviour
     private void LoadLoseResultScene()
     {
         SceneManager.LoadScene("ResultLose");
+    }
+
+    private void WipeToWinResultScene()
+    {
+        _rm.UIController.WipeIn(LoadWinResultScene);
     }
 }

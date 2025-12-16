@@ -104,3 +104,7 @@ Assets/TextMesh Pro.meta
 # AssetStoreTools フォルダ以下をすべて無視
 Assets/AssetStoreTools/
 Assets/AssetTools/
+Assets/StreamingAssets/
+Assets/StreamingAssets.meta
+Assets/CriData/
+Assets/CriData.meta
