@@ -15,7 +15,7 @@ public class ShieldToSwordSkill : SkillBase
         {
             if (panel is ShieldPanel shieldPanel)
             {
-                _boardManager.ReplacePanel(shieldPanel.BoardPos, _swordPanelPrefab, true);
+                _boardManager.ReplacePanel(shieldPanel.BoardPos, _swordPanelPrefab);
             }
         }
     }
