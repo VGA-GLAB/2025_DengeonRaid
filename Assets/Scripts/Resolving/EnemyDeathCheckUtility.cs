@@ -17,8 +17,8 @@ public static class EnemyDeathCheckUtility
         // 敵Hpへのダメージ
         int enemyHpDamage = playerAttack > enemyShieldAbsorb ? playerAttack - enemyShieldAbsorb : 0;
 
-        bool isdead = enemy.Hp - enemyHpDamage <= 0;
+        bool isDead = enemy.Hp - enemyHpDamage <= 0;
 
-        return isdead;
+        return isDead;
     }
 }
