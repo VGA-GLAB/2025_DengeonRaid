@@ -203,6 +203,7 @@ MonoBehaviour:
   _shieldStrength: 1
   _hp: 90
   _killExp: 100
+  _freezeCount: 1
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}
   _uiTextShield: {fileID: 8255248087807754077}
