@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,21 +24,10 @@ public class BossPanel : EnemyPanel
     private List<Type> _excludePanelList;
 
     #region 
-    private new void Start()
+    private void Start()
     {
+        EnemyCustomStart();
         UpdateAttrDisplay();
-
-        _skills = new List<Action>();
-        _skills.Add(() => SkillSelfRecovery());
-        _skills.Add(() => SkillChangePanels());
-
-        _excludePanelList = new List<Type>();
-        _excludePanelList.Add(typeof(EnemyPanel));
-        _excludePanelList.Add(typeof(BossPanel));
-
-        _rm = ReferenceManager.Instance;
-
-        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += TurnEndBehaviour;
     }
     private void OnDestroy()
     {
@@ -47,6 +36,7 @@ public class BossPanel : EnemyPanel
     #endregion
     public override void DestroyThis()
     {
+        ReferenceManager.Instance.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
         _rm.BoardManager.RemovePanelFromBoard(this);
         _rm.GameDirector.BossDefeated();
     }
@@ -122,5 +112,21 @@ public class BossPanel : EnemyPanel
     private void CountTurn()
     {
         _turnCounter++;
+    }
+
+    protected override void EnemyCustomStart()
+    {
+        _skills = new List<Action>();
+        _skills.Add(() => SkillSelfRecovery());
+        _skills.Add(() => SkillChangePanels());
+
+        _excludePanelList = new List<Type>();
+        _excludePanelList.Add(typeof(EnemyPanel));
+        _excludePanelList.Add(typeof(BossPanel));
+
+        _rm = ReferenceManager.Instance;
+
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += OnTurnEnd;
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += TurnEndBehaviour;
     }
 }

@@ -30,6 +30,7 @@ public class Panel : MonoBehaviour
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _defaultColor = _spriteRenderer.color;
+        CustomAwake();
     }
 
     /// <summary>
@@ -60,5 +61,14 @@ public class Panel : MonoBehaviour
     public virtual void DestroyThis()
     {
         Debug.Log("DestroyThisメソッドが未実装");
+    }
+
+    /// <summary>
+    /// Panelクラスを継承する場合、親クラスのAwake処理以外で何かしたい時、
+    /// 子クラスにてCustomAwakeメソッドをoverrideして書く
+    /// </summary>
+    protected virtual void CustomAwake()
+    {
+        // 処理なし
     }
 }

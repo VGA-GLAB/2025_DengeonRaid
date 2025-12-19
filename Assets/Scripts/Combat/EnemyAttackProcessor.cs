@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -23,7 +23,15 @@ public class EnemyAttackProcessor
     public bool EnemyExists()
     {
         List<EnemyPanel> enemies = _bm.GetEnemyPanels();
-        return enemies != null && enemies.Count > 0;
+        int enemyCount = 0;
+        foreach (EnemyPanel enemy in enemies)
+        {
+            if (enemy.FreezeCount <= 0)
+            {
+                enemyCount++;
+            }
+        }
+        return enemyCount > 0;
     }
 
     /// <summary>
@@ -33,7 +41,7 @@ public class EnemyAttackProcessor
     {
         List<EnemyPanel> enemies = _bm.GetEnemyPanels();
 
-        if(enemies.Count == 0)
+        if (enemies.Count == 0)
         {
             return;
         }
@@ -41,7 +49,10 @@ public class EnemyAttackProcessor
         int enemyAttack = 0;
         foreach (EnemyPanel enemy in enemies)
         {
-            enemyAttack += enemy.Attack;
+            if (enemy.FreezeCount <= 0)
+            {
+                enemyAttack += enemy.Attack;
+            }
         }
 
         // シールドが吸収できるダメージ量
@@ -54,7 +65,7 @@ public class EnemyAttackProcessor
 
         _playerPreview.Hp -= playerHpDamage;
         _playerPreview.Shield = playerShieldRemain;
-        if(_playerPreview.Hp <= 0)
+        if (_playerPreview.Hp <= 0)
         {
             _playerPreview.IsDead = true;
         }

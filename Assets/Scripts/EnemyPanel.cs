@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 
 public class EnemyPanel : Panel
@@ -13,6 +13,8 @@ public class EnemyPanel : Panel
     protected int _hp;
     [SerializeField, Header("撃破Exp")]
     protected int _killExp;
+    [SerializeField, Header("行動不可ターン数")]
+    protected int _freezeCount;
     [SerializeField, Header("死亡フラグ")]
     protected bool _isDead;
 
@@ -28,6 +30,7 @@ public class EnemyPanel : Panel
     public int ShieldStrength { get => _shieldStrength; protected set => _shieldStrength = value; }
     public int Hp { get => _hp; protected set => _hp = value; }
     public int KillExp { get => _killExp; protected set => _killExp = value; }
+    public int FreezeCount { get => _freezeCount; protected set => _freezeCount = value; }
     public bool IsDead { get => _isDead; protected set => _isDead = value; }
     public EnemyDeathPreviewEffect DeathEffect => GetComponent<EnemyDeathPreviewEffect>();
 
@@ -36,9 +39,10 @@ public class EnemyPanel : Panel
         _preview = preview;
     }
 
-    protected void Start()
+    private void Start()
     {
         UpdateAttrDisplay();
+        EnemyCustomStart();
     }
     /// <summary>
     /// 戦闘処理で計算した結果プレビューを適用する
@@ -50,10 +54,6 @@ public class EnemyPanel : Panel
             Debug.LogWarning("敵パネルプレビューデータ無し！！");
             return;
         }
-        //if (_preview.IsDead)
-        //{
-        //    DestroyThis();
-        //}
         else
         {
             Hp = _preview.Hp;
@@ -65,10 +65,10 @@ public class EnemyPanel : Panel
 
     public override void DestroyThis()
     {
+        ReferenceManager.Instance.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
         CRIAudioManager.CRISEManager.Play("SE_ActionEnemy");
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         ReferenceManager.Instance.GameDirector.CountEnemyKill(1);
-  
         Destroy(gameObject);
     }
 
@@ -80,5 +80,28 @@ public class EnemyPanel : Panel
         _uiTextAttack.text = _attack.ToString();
         _uiTextShield.text = _shield.ToString();
         _uiTextHp.text = _hp.ToString();
+    }
+
+    /// <summary>
+    /// 敵ターン終了時の処理
+    /// </summary>
+    public void OnTurnEnd()
+    {
+        // 行動不可ターン数を1減算
+        _freezeCount = _freezeCount <= 0 ? 0 : _freezeCount - 1;
+    }
+
+    /// <summary>
+    /// EnemyPanelを継承する場合、親クラスのStart処理以外で何かしたい時、
+    /// 子クラスにてEnemyCustomStartメソッドをoverrideして書く
+    /// </summary>
+    protected virtual void EnemyCustomStart()
+    {
+        // 処理なし
+    }
+
+    protected override void CustomAwake()
+    {
+        ReferenceManager.Instance.Igsm.States[typeof(SIGEnemyTurn)].OnExit += OnTurnEnd;
     }
 }
