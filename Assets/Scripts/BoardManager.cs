@@ -207,6 +207,28 @@ public class BoardManager : MonoBehaviour
     }
 
     /// <summary>
+    ///         引数に指定したパネルの位置を入れ替える
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    public void SwapPanels(Panel a, Panel b)
+    {
+        // 変数に保存
+        Vector2Int posA = a.BoardPos;
+        Vector2Int posB = b.BoardPos;
+
+        // ↓入れ替え処理
+        _boardArray[posA.x, posA.y] = b;
+        _boardArray[posB.x, posB.y] = a;
+
+        a.BoardPos = posB;
+        b.BoardPos = posA;
+
+        a.transform.localPosition = new Vector3(posB.x, -posB.y, 0);
+        b.transform.localPosition = new Vector3(posA.x, -posA.y, 0);
+    }
+
+    /// <summary>
     ///         パネル二次元配列にて、指定されたパネルをnullに設定する
     /// </summary>
     /// <param name="panel"></param>
