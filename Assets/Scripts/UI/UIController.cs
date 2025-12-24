@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System;
 using System.Security.Cryptography;
 using TMPro;
@@ -62,6 +62,31 @@ public class UIController : MonoBehaviour
     public void PlayShieldGuageShake()
     {
         _rm.UIPlayerShieldGuage.transform.DOShakePosition(_guageShakeDuration, _guageShakeStrength, _guageShakeVibrato, _guageShakeRandomness, false, false);
+    }
+
+    public void ShowEnemyInfo(EnemyPanel enemy)
+    {
+        // パネルのWorld Space Positionを画面上のScreen Positionに変換する
+        // ※UICanvasのRender Modeが「Screen Space - Camera」の場合、計算基準はUIが使っているCameraとなるため、
+        // 　パラメータのcameraにはUICanvas.worldCameraを渡すこと
+        // 　ちなみに「Screen Space - Overlay」の場合は、MainCamera.WorldToViewPortで計算するほうが安定するらしい
+        Vector3 panelScreenPos = RectTransformUtility.WorldToScreenPoint(_rm.UICanvas.worldCamera, enemy.transform.position);
+        // さらに画面上のScreen PositionをUICanvasに対するlocalPositionに変換する
+        // 同様に、UICanvas.worldCameraを渡す
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            _rm.UICanvas.GetComponent<RectTransform>(),
+            panelScreenPos,
+            _rm.UICanvas.worldCamera,
+            out Vector2 localPos
+        );
+        _rm.UIEnemyInfo.gameObject.SetActive(true);
+        _rm.UIEnemyInfo.anchoredPosition = localPos;
+        _rm.UIEnemyInfo.GetComponent<EnemyInfoController>().SetEnemyInfoText(enemy);
+    }
+
+    public void HideEnemyInfo()
+    {
+        _rm.UIEnemyInfo.gameObject.SetActive(false);
     }
     #endregion
 
