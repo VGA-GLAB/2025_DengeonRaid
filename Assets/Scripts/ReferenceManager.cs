@@ -1,4 +1,5 @@
-﻿using TMPro;
+using System.Drawing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
 {
     [Header("UI系")]
     public UIController UIController;
+    public Canvas UICanvas;
     public TextMeshProUGUI UIPlayerHpText;
     public TextMeshProUGUI UIPlayerMaxHpText;
     public Slider UIPlayerHpGuage;
@@ -36,6 +38,7 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public GameObject LevelUpUI;
     public GameObject SkillPanel;
     public Slider ExpGuage;
+    public RectTransform UIEnemyInfo;
 
     [Header("システム系")]
     public Camera MainCamera;
