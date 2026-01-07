@@ -17,12 +17,6 @@ public class WarpingMiddleBossPanel : EnemyPanel
         _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += OnTurnEnd;
     }
 
-    private void OnDestroy()
-    {
-        if (_rm != null)
-            _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
-    }
-
     private void OnTurnEnd()
     {
         _turnCounter++;
@@ -35,7 +29,7 @@ public class WarpingMiddleBossPanel : EnemyPanel
     }
 
     /// <summary>
-    ///         ランダムなパネルと自信を入れ替える
+    ///         ランダムなパネルと自身を入れ替える
     /// </summary>
     private void TrySwapRandomPanel()
     {
@@ -54,5 +48,11 @@ public class WarpingMiddleBossPanel : EnemyPanel
 
         _rm.BoardManager.SwapPanels(this, target);
         // 演出入れるならここになるかも
+    }
+
+    private void OnDestroy()
+    {
+        if (_rm != null)
+            _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
     }
 }
