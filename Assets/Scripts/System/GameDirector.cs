@@ -25,8 +25,8 @@ public class GameDirector : MonoBehaviour
     private bool _bossExists;
     private int _enemyCount;
     [Header("中ボス出現要件")]
-    [SerializeField, Header("ワープする中ボスの出現条件（敵撃破数）")] private int _warpingMidBossCount;
     [SerializeField, Header("子分を生成する中ボスの出現条件（敵撃破数）")] private int _enemyGenerateMidBossCount;
+    [SerializeField, Header("ワープする中ボスの出現条件（敵撃破数）")] private int _warpingMidBossCount;
     [SerializeField, Header("ボスの出現条件（敵撃破数）")] private int _enemyCountForBoss;
     [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
@@ -53,6 +53,8 @@ public class GameDirector : MonoBehaviour
 
         _enemyCount = 0;
         _bossDefeated = false;
+        _warpingMidBossExists = false;
+        _enemyGenerateMidBossExists = false;
         _bossExists = false;
     }
     #endregion
