@@ -24,6 +24,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private UIController _uiController;
     [SerializeField] private SelectionScaleEffect _selectionScaleEffect;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
+    [SerializeField] private WarpingMiddleBossPanel _warpingMidBossPrefab;
+    [SerializeField] private EnemyGenerateMiddleBossPanel _generatedMidBossPrefab;
     [SerializeField] private BossPanel _bossPrefab;
 
     private GameObject _currentArrow;
@@ -204,6 +206,28 @@ public class BoardManager : MonoBehaviour
         _playerController.ApplyPreview();
         _uiController.UpdateUI();
 
+    }
+
+    /// <summary>
+    ///         引数に指定したパネルの位置を入れ替える
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    public void SwapPanels(Panel a, Panel b)
+    {
+        // 変数に保存
+        Vector2Int posA = a.BoardPos;
+        Vector2Int posB = b.BoardPos;
+
+        // ↓入れ替え処理
+        _boardArray[posA.x, posA.y] = b;
+        _boardArray[posB.x, posB.y] = a;
+
+        a.BoardPos = posB;
+        b.BoardPos = posA;
+
+        a.transform.localPosition = new Vector3(posB.x, -posB.y, 0);
+        b.transform.localPosition = new Vector3(posA.x, -posA.y, 0);
     }
 
     /// <summary>
@@ -408,19 +432,7 @@ public class BoardManager : MonoBehaviour
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
             for (int y = emptyY; y >= 0; y--)
             {
-                Panel newPanel;
-                // ボス出現条件を達している場合、Bossを生成する
-                if (ReferenceManager.Instance.GameDirector.CanGenerateBoss())
-                {
-                    newPanel = Instantiate(GetBossPanel(), _boardRoot);
-                    ReferenceManager.Instance.GameDirector.BossGenerated();
-                    _rm.BossPanel = newPanel as BossPanel;
-                    CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
-                }
-                else
-                {
-                    newPanel = Instantiate(GetRandomPanel(), _boardRoot);
-                }
+                Panel newPanel = CreatePanelForSpawn();
 
                 Vector3 targetPos = new Vector3(x, -y, 0);
                 Vector3 fromPos = targetPos + Vector3.up * 10f;
@@ -434,6 +446,39 @@ public class BoardManager : MonoBehaviour
 
         _panelDropManager.DropAll(droppedPanels, _isSkillUsed);
         _isSkillUsed = false;
+    }
+
+    private Panel CreatePanelForSpawn()
+    {
+        GameDirector director = ReferenceManager.Instance.GameDirector;
+
+        // ボス出現条件を達している場合、Bossを生成する
+        if (director.CanGenerateBoss())
+        {
+            Panel newPanel = Instantiate(GetBossPanel(), _boardRoot);
+            director.BossGenerated();
+            _rm.BossPanel = newPanel as BossPanel;
+            CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
+            return newPanel;
+        }
+
+        // 子分を生成する中ボス生成条件を達している場合、子分を生成する中ボスを生成する
+        if (director.CanGenerateEnemyGenerateMidBoss())
+        {
+            Panel newPanel = Instantiate(_generatedMidBossPrefab, _boardRoot);
+            director.EnemyGenerateMidBossGenerated();
+            return newPanel;
+        }
+
+        // ワープする中ボス生成条件を達している場合、ワープする中ボスを生成する
+        if (director.CanGenerateWarpingMidBoss())
+        {
+            Panel newPanel = Instantiate(_warpingMidBossPrefab, _boardRoot);
+            director.WarpingMidBossGenerated();
+            return newPanel;
+        }
+
+        return Instantiate(GetRandomPanel(), _boardRoot);
     }
 
     /// <summary>
