@@ -432,19 +432,7 @@ public class BoardManager : MonoBehaviour
             //  落とし終わったあと、上の方に空きが残っていれば新しいパネルを生成
             for (int y = emptyY; y >= 0; y--)
             {
-                Panel newPanel;
-                // ボス出現条件を達している場合、Bossを生成する
-                if (ReferenceManager.Instance.GameDirector.CanGenerateBoss())
-                {
-                    newPanel = Instantiate(GetBossPanel(), _boardRoot);
-                    ReferenceManager.Instance.GameDirector.BossGenerated();
-                    _rm.BossPanel = newPanel as BossPanel;
-                    CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
-                }
-                else
-                {
-                    newPanel = Instantiate(GetRandomPanel(), _boardRoot);
-                }
+                Panel newPanel = CreatePanelForSpawn();
 
                 Vector3 targetPos = new Vector3(x, -y, 0);
                 Vector3 fromPos = targetPos + Vector3.up * 10f;
@@ -458,6 +446,39 @@ public class BoardManager : MonoBehaviour
 
         _panelDropManager.DropAll(droppedPanels, _isSkillUsed);
         _isSkillUsed = false;
+    }
+
+    private Panel CreatePanelForSpawn()
+    {
+        GameDirector director = ReferenceManager.Instance.GameDirector;
+
+        // ボス出現条件を達している場合、Bossを生成する
+        if (director.CanGenerateBoss())
+        {
+            Panel newPanel = Instantiate(GetBossPanel(), _boardRoot);
+            director.BossGenerated();
+            _rm.BossPanel = newPanel as BossPanel;
+            CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
+            return newPanel;
+        }
+
+        // 子分を生成する中ボス生成条件を達している場合、子分を生成する中ボスを生成する
+        if (director.CanGenerateEnemyGenerateMidBoss())
+        {
+            Panel newPanel = Instantiate(_generatedMidBossPrefab, _boardRoot);
+            director.EnemyGenerateMidBossGenerated();
+            return newPanel;
+        }
+
+        // ワープする中ボス生成条件を達している場合、ワープする中ボスを生成する
+        if (director.CanGenerateWarpingMidBoss())
+        {
+            Panel newPanel = Instantiate(_warpingMidBossPrefab, _boardRoot);
+            director.WarpingMidBossGenerated();
+            return newPanel;
+        }
+
+        return Instantiate(GetRandomPanel(), _boardRoot);
     }
 
     /// <summary>
