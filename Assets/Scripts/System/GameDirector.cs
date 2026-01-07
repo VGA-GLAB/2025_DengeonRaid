@@ -20,8 +20,13 @@ public class GameDirector : MonoBehaviour
     private PlayerController _player;
     private bool _playerDefeated;
     private bool _bossDefeated;
+    private bool _warpingMidBossExists;
+    private bool _enemyGenerateMidBossExists;
     private bool _bossExists;
     private int _enemyCount;
+    [Header("中ボス出現要件")]
+    [SerializeField]private int _warpingMidBossCount;
+    [SerializeField]private int _enemyGenerateMidBossCount;
     [SerializeField, Header("ボスの出現条件（敵撃破数）")] private int _enemyCountForBoss;
     [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
@@ -178,6 +183,34 @@ public class GameDirector : MonoBehaviour
     {
         _enemyCount += count;
     }
+
+    /// <summary>
+    /// ワープする中ボスを生成する条件を達しているか
+    /// </summary>
+    /// <returns></returns>
+    public bool CanGenerateWarpingMidBoss()
+    {
+        return (_enemyCount >= _warpingMidBossCount) && (!_warpingMidBossExists);
+    }
+    public void WarpingMidBossGenerated()
+    {
+        _warpingMidBossExists = true;
+    }
+
+    /// <summary>
+    /// 子分を増やす中ボスを生成する条件を達しているか
+    /// </summary>
+    /// <returns></returns>
+    public bool CanGenerateEnemyGenerateMidBoss()
+    {
+        return (_enemyCount >= _enemyGenerateMidBossCount) && (!_enemyGenerateMidBossExists);
+    }
+
+    public void EnemyGenerateMidBossGenerated()
+    {
+        _enemyGenerateMidBossExists = true;
+    }
+
     /// <summary>
     /// ボスを生成する条件を達しているか
     /// </summary>
