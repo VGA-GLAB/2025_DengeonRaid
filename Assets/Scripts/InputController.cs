@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -9,6 +9,8 @@ public class InputController : MonoBehaviour
     [Header("参照")]
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Camera _camera;
+    [Header("パラメータ")]
+    [SerializeField, Header("敵情報表示待ち時間")] private float _hoverUITime;
 
     private SwipeAction _swipeAction;
     private InputAction _pressAction;
@@ -16,6 +18,11 @@ public class InputController : MonoBehaviour
     private bool _isDragging = false;
     private InGameStateMachine _gameStateMachine;
     private ReferenceManager _rm;
+
+    // マウスオーバー時間
+    private float _hoverTimer;
+    // 前フレームにマウスの下のパネル
+    private Panel _lastPanelUnderCursor;
 
     #region ライフサイクル
     private void Awake()
@@ -43,6 +50,10 @@ public class InputController : MonoBehaviour
             {
                 _boardManager.ContinueSelection(panel);
             }
+        }
+        else
+        {
+            HandleHovering();
         }
     }
 
@@ -73,6 +84,7 @@ public class InputController : MonoBehaviour
     /// </summary>
     private void HandlePress(InputAction.CallbackContext ctx)
     {
+        _rm.UIEnemyInfo.gameObject.SetActive(false);
         Vector2 mousePos = _positionAction.ReadValue<Vector2>();
         Panel panel = GetPanelUnderCursor(mousePos);
         if (panel != null)
@@ -123,5 +135,35 @@ public class InputController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
 
         return hit.collider ? hit.collider.GetComponent<Panel>() : null;
+    }
+
+    /// <summary>
+    ///         マウスオーバー処理
+    /// </summary>
+    private void HandleHovering()
+    {
+        // マウス位置
+        Vector2 mousePos = _positionAction.ReadValue<Vector2>();
+        // マウスの下のパネルを取得
+        Panel panel = GetPanelUnderCursor(mousePos);
+        if(_lastPanelUnderCursor == null) _lastPanelUnderCursor = panel;
+
+        // マウスの下のパネルが敵、かつマウスが同じパネルに置き続けている場合
+        if (panel is EnemyPanel && Object.ReferenceEquals(panel, _lastPanelUnderCursor))
+        {
+            _hoverTimer += Time.deltaTime;
+            // タイマーが一定時間過ぎて、敵情報が表示されていない場合、表示処理を行う
+            if (_hoverTimer >= _hoverUITime && !_rm.UIEnemyInfo.gameObject.activeInHierarchy)
+            {
+                _rm.UIController.ShowEnemyInfo(panel as EnemyPanel);
+            }
+        }
+        else
+        {
+            // マウスが離れたら、タイマーをリセットして、情報を非表示にする
+            _hoverTimer = 0;
+            _lastPanelUnderCursor = panel;
+            _rm.UIController.HideEnemyInfo();
+        }
     }
 }
