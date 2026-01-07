@@ -26,12 +26,6 @@ public class EnemyGenerateMiddleBossPanel : EnemyPanel
         _excludePanelList.Add(typeof(BossPanel));
     }
 
-    private void OnDestroy()
-    {
-        if (_rm != null)
-            _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
-    }
-
     private void OnTurnEnd()
     {
         _turnCounter++;
@@ -73,5 +67,11 @@ public class EnemyGenerateMiddleBossPanel : EnemyPanel
     {
         return _excludePanelList.Contains(panel.GetType())
             || panelsToAlter.Contains(panel);
+    }
+
+    private void OnDestroy()
+    {
+        if (_rm != null)
+            _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEnd;
     }
 }
