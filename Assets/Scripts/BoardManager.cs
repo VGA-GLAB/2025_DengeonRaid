@@ -24,6 +24,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private UIController _uiController;
     [SerializeField] private SelectionScaleEffect _selectionScaleEffect;
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
+    [SerializeField] private WarpingMiddleBossPanel _warpingMidBossPrefab;
+    [SerializeField] private EnemyGenerateMiddleBossPanel _generatedMidBossPrefab;
     [SerializeField] private BossPanel _bossPrefab;
 
     private GameObject _currentArrow;
