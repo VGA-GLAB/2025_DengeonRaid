@@ -10,6 +10,10 @@ public class Panel : MonoBehaviour
 
     [SerializeField, Tooltip("このパネルが属するグループ")]
     private PanelGroup _panelGroup;
+    [SerializeField, Header("パネル名")]
+    private string _panelName;
+    [SerializeField, Header("パネル説明文")]
+    private string _panelDescription;
 
     private SpriteRenderer _spriteRenderer;
     private Color _defaultColor;
@@ -61,6 +65,15 @@ public class Panel : MonoBehaviour
     public virtual void DestroyThis()
     {
         Debug.Log("DestroyThisメソッドが未実装");
+    }
+
+    /// <summary>
+    ///         マウスオーバー時のパネル情報を取得する
+    /// </summary>
+    /// <returns></returns>
+    public virtual PanelInfo GetPanelInfo()
+    {
+        return new PanelInfo("未設定", "-", "-");
     }
 
     /// <summary>

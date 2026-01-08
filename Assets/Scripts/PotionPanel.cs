@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System.Text;
+using UnityEngine;
 
 public class PotionPanel : Panel
 {
@@ -16,5 +17,13 @@ public class PotionPanel : Panel
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
+    }
+
+    public override PanelInfo GetPanelInfo()
+    {
+        string panelName = "ハート";
+        string description = "たまにしか出てこない。HPを回復できる！";
+        string attributes = $"HPを{_heal}回復";
+        return new PanelInfo(panelName, description, attributes);
     }
 }

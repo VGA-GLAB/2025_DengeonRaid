@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System.Text;
+using UnityEngine;
 
 public class CoinPanel : Panel
 {
@@ -16,5 +17,13 @@ public class CoinPanel : Panel
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
+    }
+
+    public override PanelInfo GetPanelInfo()
+    {
+        string panelName = "お金";
+        string description = "つなげて消すとお金がもらえる。ゲージが貯まると自分を強化できる！！";
+        string attributes = $"お金を{_coin}獲得";
+        return new PanelInfo(panelName, description, attributes);
     }
 }

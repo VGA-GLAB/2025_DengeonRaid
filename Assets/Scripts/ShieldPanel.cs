@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System.Text;
+using UnityEngine;
 
 public class ShieldPanel : Panel
 {
@@ -16,5 +17,13 @@ public class ShieldPanel : Panel
 
         ReferenceManager.Instance.BoardManager.RemovePanelFromBoard(this);
         Destroy(gameObject);
+    }
+
+    public override PanelInfo GetPanelInfo()
+    {
+        string panelName = "シールド";
+        string description = "消した数分シールドゲージを回復する";
+        string attributes = $"シールドを{_shield}回復";
+        return new PanelInfo(panelName, description, attributes);
     }
 }

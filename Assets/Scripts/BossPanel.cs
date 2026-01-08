@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 using Object = System.Object;
@@ -55,6 +57,16 @@ public class BossPanel : EnemyPanel
         }
     }
 
+    public override PanelInfo GetPanelInfo()
+    {
+        string panelName = "ボス";
+        string description = "隕石を生み出している張本人。特殊な攻撃もしてくるため注意しよう。";
+        StringBuilder attributes = new StringBuilder();
+        attributes.AppendLine($"攻撃力:{_attack}");
+        attributes.AppendLine($"シールド:{_shield}");
+        attributes.AppendLine($"HP:{_hp}");
+        return new PanelInfo(panelName, description, attributes.ToString());
+    }
     /// <summary>
     /// スキルから1つ選ぶ
     /// </summary>

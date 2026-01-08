@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -91,6 +92,16 @@ public class EnemyPanel : Panel
         _freezeCount = _freezeCount <= 0 ? 0 : _freezeCount - 1;
     }
 
+    public override PanelInfo GetPanelInfo()
+    {
+        string panelName = "ザコ敵";
+        string description = "誰かから生み出され怪物。攻撃される前に攻撃しよう。";
+        StringBuilder attributes = new StringBuilder();
+        attributes.AppendLine($"攻撃力:{_attack}");
+        attributes.AppendLine($"シールド:{_shield}");
+        attributes.AppendLine($"HP:{_hp}");
+        return new PanelInfo(panelName, description, attributes.ToString());
+    }
     /// <summary>
     /// EnemyPanelを継承する場合、親クラスのStart処理以外で何かしたい時、
     /// 子クラスにてEnemyCustomStartメソッドをoverrideして書く
