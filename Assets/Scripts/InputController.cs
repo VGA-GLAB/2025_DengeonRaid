@@ -10,7 +10,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Camera _camera;
     [Header("パラメータ")]
-    [SerializeField, Header("敵情報表示待ち時間")] private float _hoverUITime;
+    [SerializeField, Header("敵情報表示待ち時間")] private float _hoverUITime = 0.5f;
 
     private SwipeAction _swipeAction;
     private InputAction _pressAction;
@@ -84,7 +84,7 @@ public class InputController : MonoBehaviour
     /// </summary>
     private void HandlePress(InputAction.CallbackContext ctx)
     {
-        _rm.UIEnemyInfo.gameObject.SetActive(false);
+        _rm.UIPanelInfo.gameObject.SetActive(false);
         Vector2 mousePos = _positionAction.ReadValue<Vector2>();
         Panel panel = GetPanelUnderCursor(mousePos);
         if (panel != null)
@@ -148,14 +148,14 @@ public class InputController : MonoBehaviour
         Panel panel = GetPanelUnderCursor(mousePos);
         if(_lastPanelUnderCursor == null) _lastPanelUnderCursor = panel;
 
-        // マウスの下のパネルが敵、かつマウスが同じパネルに置き続けている場合
-        if (panel is EnemyPanel && Object.ReferenceEquals(panel, _lastPanelUnderCursor))
+        // マウスが同じパネルに置き続けている場合
+        if (panel is Panel && Object.ReferenceEquals(panel, _lastPanelUnderCursor))
         {
             _hoverTimer += Time.deltaTime;
             // タイマーが一定時間過ぎて、敵情報が表示されていない場合、表示処理を行う
-            if (_hoverTimer >= _hoverUITime && !_rm.UIEnemyInfo.gameObject.activeInHierarchy)
+            if (_hoverTimer >= _hoverUITime && !_rm.UIPanelInfo.gameObject.activeInHierarchy)
             {
-                _rm.UIController.ShowEnemyInfo(panel as EnemyPanel);
+                _rm.UIController.ShowPanelInfo(panel);
             }
         }
         else
@@ -163,7 +163,7 @@ public class InputController : MonoBehaviour
             // マウスが離れたら、タイマーをリセットして、情報を非表示にする
             _hoverTimer = 0;
             _lastPanelUnderCursor = panel;
-            _rm.UIController.HideEnemyInfo();
+            _rm.UIController.HidePanelInfo();
         }
     }
 }

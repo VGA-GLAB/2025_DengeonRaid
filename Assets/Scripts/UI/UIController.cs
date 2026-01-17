@@ -64,13 +64,13 @@ public class UIController : MonoBehaviour
         _rm.UIPlayerShieldGuage.transform.DOShakePosition(_guageShakeDuration, _guageShakeStrength, _guageShakeVibrato, _guageShakeRandomness, false, false);
     }
 
-    public void ShowEnemyInfo(EnemyPanel enemy)
+    public void ShowPanelInfo(Panel panel)
     {
         // パネルのWorld Space Positionを画面上のScreen Positionに変換する
         // ※UICanvasのRender Modeが「Screen Space - Camera」の場合、計算基準はUIが使っているCameraとなるため、
         // 　パラメータのcameraにはUICanvas.worldCameraを渡すこと
         // 　ちなみに「Screen Space - Overlay」の場合は、MainCamera.WorldToViewPortで計算するほうが安定するらしい
-        Vector3 panelScreenPos = RectTransformUtility.WorldToScreenPoint(_rm.UICanvas.worldCamera, enemy.transform.position);
+        Vector3 panelScreenPos = RectTransformUtility.WorldToScreenPoint(_rm.UICanvas.worldCamera, panel.transform.position);
         // さらに画面上のScreen PositionをUICanvasに対するlocalPositionに変換する
         // 同様に、UICanvas.worldCameraを渡す
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -79,14 +79,14 @@ public class UIController : MonoBehaviour
             _rm.UICanvas.worldCamera,
             out Vector2 localPos
         );
-        _rm.UIEnemyInfo.gameObject.SetActive(true);
-        _rm.UIEnemyInfo.anchoredPosition = localPos;
-        _rm.UIEnemyInfo.GetComponent<EnemyInfoController>().SetEnemyInfoText(enemy);
+        _rm.UIPanelInfo.gameObject.SetActive(true);
+        _rm.UIPanelInfo.anchoredPosition = localPos;
+        _rm.UIPanelInfo.GetComponent<PanelInfoController>().SetEnemyInfoText(panel);
     }
 
-    public void HideEnemyInfo()
+    public void HidePanelInfo()
     {
-        _rm.UIEnemyInfo.gameObject.SetActive(false);
+        _rm.UIPanelInfo.gameObject.SetActive(false);
     }
     #endregion
 
