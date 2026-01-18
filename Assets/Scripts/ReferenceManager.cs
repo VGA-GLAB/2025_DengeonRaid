@@ -38,7 +38,7 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public GameObject LevelUpUI;
     public GameObject SkillPanel;
     public Slider ExpGuage;
-    public RectTransform UIEnemyInfo;
+    public RectTransform UIPanelInfo;
 
     [Header("システム系")]
     public Camera MainCamera;
