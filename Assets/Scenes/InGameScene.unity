@@ -8068,11 +8068,11 @@ PrefabInstance:
       objectReference: {fileID: 578461729}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[0].Weight
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[1].Weight
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[2].Weight
@@ -8080,19 +8080,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[3].Weight
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[4].Weight
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[5].Weight
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[6].Weight
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1085741543266750781, guid: bce0193d82a4da8408e93ff979df17ff, type: 3}
       propertyPath: _panelPrefabs.Array.data[5].PanelPrefab
