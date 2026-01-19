@@ -1,13 +1,11 @@
-using DG.Tweening;
 using System;
-using System.Security.Cryptography;
-using TMPro;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public EnemyCounterUI EnemyCounterUI { get; private set; }
+
     private ReferenceManager _rm;
     private PlayerController _player;
 
@@ -28,6 +26,7 @@ public class UIController : MonoBehaviour
     {
         _rm = ReferenceManager.Instance;
         _player = _rm.PlayerController;
+        EnemyCounterUI = _rm.EnemyCounterUI;
 
         _rm.Igsm.States[typeof(SIGEliminatePanel)].OnExit += UpdateUI;
         _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += UpdateUI;
@@ -46,6 +45,7 @@ public class UIController : MonoBehaviour
         UpdateExp();
         UpdateBaseAttack();
         UpdateMissileAttack();
+        EnemyCounterUI?.UpdateEnemyCountUI();
     }
 
     public void WipeIn(Action callback)

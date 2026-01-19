@@ -4,26 +4,33 @@ using UnityEngine.UI;
 
 public class EnemyCounterUI : MonoBehaviour
 {
-    [SerializeField]
-    private GameDirector _gd;
-    [SerializeField]
-    private Image _enemyCountGauge;
-    [SerializeField]
-    private TextMeshProUGUI _enmeyCountText;
+    [SerializeField] private Image _enemyCountGauge;
+    [SerializeField] private TextMeshProUGUI _enemyCountText;
 
-    private float _restEnemyCount;
+    private GameDirector _gameDirector;
 
-    /// <summary>
-    /// 残りの敵の数をUIに反映する処理
-    /// </summary>
-    public void EnemyCount()
+    private void Awake()
     {
-        _restEnemyCount = _gd.EnemyCountForBoss - _gd.EnemyCount;
-        if (_restEnemyCount <= 0)
+        _gameDirector = ReferenceManager.Instance.GameDirector;
+    }
+
+    public void UpdateEnemyCountUI()
+    {
+        if (_gameDirector == null) return;
+
+        if (_gameDirector.EnemyCountForBoss <= 0)
         {
-            _restEnemyCount = 0;
+            _enemyCountGauge.fillAmount = 0f;
+            _enemyCountText.text = "0";
+            return;
         }
-        _enemyCountGauge.fillAmount = (_restEnemyCount) / _gd.EnemyCountForBoss;
-        _enmeyCountText.text = $"{_restEnemyCount}";
+
+        int restEnemyCount =
+            Mathf.Max(_gameDirector.EnemyCountForBoss - _gameDirector.EnemyCount, 0);
+
+        _enemyCountGauge.fillAmount =
+            Mathf.Clamp01((float)restEnemyCount / _gameDirector.EnemyCountForBoss);
+
+        _enemyCountText.text = restEnemyCount.ToString();
     }
 }
