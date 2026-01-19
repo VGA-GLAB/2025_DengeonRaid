@@ -1,16 +1,16 @@
 ﻿using DG.Tweening;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ReloadEffect : MonoBehaviour
 {
     [Header("参照")]
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private GameObject _muzzleBullet;
+    [SerializeField, Tooltip("リロードする弾のプレハブ")] private GameObject _bulletPrefab;
+    [SerializeField, Tooltip("銃口の弾")] private GameObject _muzzleBullet;
     [SerializeField] private Transform _muzzle;
 
     [Header("リロードの角度設定等")]
-    [SerializeField] private Transform _magazineCenter;
+    [SerializeField, Tooltip("弧を描く中心")] private Transform _magazineCenter;
     [SerializeField] private float _startAngle;
     [SerializeField] private float _endAngle;
     [SerializeField] private float _radius;
