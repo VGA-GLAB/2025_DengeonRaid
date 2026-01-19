@@ -506,6 +506,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MissileManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6474522984947807714, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474522984947807714, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.68
+      objectReference: {fileID: 0}
     - target: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.7
@@ -552,6 +560,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 947422908}
+    - targetCorrespondingSourceObject: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 246967759}
+    - targetCorrespondingSourceObject: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373147050}
+    - targetCorrespondingSourceObject: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1459438517}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3736190999172992262, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
       insertIndex: -1
@@ -1343,6 +1360,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &246967758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246967759}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &246967759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246967758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.59, y: -5.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2029926680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &280281282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1831,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545369d0c1850f14495b3abcdee6219e, type: 3}
+--- !u!1 &373147049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373147050}
+  m_Layer: 0
+  m_Name: ReloadSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &373147050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373147049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3, y: -5.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2029926680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &400457566 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5046870616967516256, guid: 85fe18349e4c5d74998d5a5f194a3349, type: 3}
@@ -5963,6 +6042,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultButtonEvent
   _fadeInImage: {fileID: 101856107}
+--- !u!1 &1459438516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1459438517}
+  m_Layer: 0
+  m_Name: 'ReloadViaPos '
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1459438517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459438516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.74, y: -2.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2029926680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1486684052
 GameObject:
   m_ObjectHideFlags: 0
@@ -7915,8 +8025,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056f6671114954547b8ca06ab5650317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReloadEffect
-  _bulletPrefab: {fileID: 947422906}
+  _bulletPrefab: {fileID: 3702286162762849536, guid: 83f60a6d506d91e4091ea7c21df26192, type: 3}
+  _muzzleBullet: {fileID: 947422906}
   _muzzle: {fileID: 93459154}
+  _magazineCenter: {fileID: 246967759}
+  _startAngle: 0
+  _endAngle: 40
+  _radius: 3
+  _reloadSpawnPos: {fileID: 373147050}
+  _reloadViaPos: {fileID: 1459438517}
+  _reloadMoveDuration: 1
+  _shiftDuration: 1
+  _shiftEase: 3
+  _bulletCapacity: 3
 --- !u!4 &2029926680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7827936039003670116, guid: 9c1f384a0a5903f4fbba11925570f98c, type: 3}
