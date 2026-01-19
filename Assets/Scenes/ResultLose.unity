@@ -1160,6 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartButtonEvent
   _fadeInImage: {fileID: 1077633369}
+  _onPreseButton: {fileID: 0}
 --- !u!1 &1645243653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,8 +1197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237, y: -232}
-  m_SizeDelta: {x: 123, y: 92}
+  m_AnchoredPosition: {x: 228.3, y: -232}
+  m_SizeDelta: {x: 170.6, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1645243655
 MonoBehaviour:
@@ -1246,7 +1247,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1467423433}
         m_TargetAssemblyTypeName: ResultButtonEvent, Assembly-CSharp
         m_MethodName: OnButtonClicked
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1350,7 +1351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30BF\u30A4\u30C8\u30EB\u306B\u3082\u3069\u308B"
+  m_text: "\u30BF\u30A4\u30C8\u30EB\u306B\n\u3082\u3069\u308B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f91066ca060e86f40bc00079d8e28093, type: 2}
   m_sharedMaterial: {fileID: -7506880158641631478, guid: f91066ca060e86f40bc00079d8e28093, type: 2}
