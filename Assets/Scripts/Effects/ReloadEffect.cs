@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///         リロードの演出をするクラス
+/// </summary>
 public class ReloadEffect : MonoBehaviour
 {
     [Header("参照")]
