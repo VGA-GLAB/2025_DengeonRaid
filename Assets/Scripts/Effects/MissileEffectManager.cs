@@ -82,7 +82,7 @@ public class MissileEffectManager : MonoBehaviour
         // ミサイルエフェクトを生成して再生
         for (int i = 0; i < _deadEnemyList.Count; i++)
         {
-            _reloadEffect.Fire();
+            _reloadEffect?.FireVisual();
 
             Sprite oneSprite = _deadEnemyList[i];
             Vector3 targetPos = positions[i];
@@ -102,6 +102,7 @@ public class MissileEffectManager : MonoBehaviour
             });
         }
 
+        _reloadEffect.ReloadOne();
         _deadEnemyList.Clear();
     }
 
