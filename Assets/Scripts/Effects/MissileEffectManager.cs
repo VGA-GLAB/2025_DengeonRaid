@@ -12,6 +12,7 @@ public class MissileEffectManager : MonoBehaviour
     [SerializeField] private GameObject _missileEffectPrefab;
     [SerializeField] private Transform _spawnPos;
     [SerializeField] private GameObject _targetObjectPrefab;
+    [SerializeField] private ReloadEffect _reloadEffect;
 
     [Header("並び替え設定")]
     [SerializeField] private Transform _startTargetPos;
@@ -81,6 +82,8 @@ public class MissileEffectManager : MonoBehaviour
         // ミサイルエフェクトを生成して再生
         for (int i = 0; i < _deadEnemyList.Count; i++)
         {
+            _reloadEffect?.FireVisual();
+
             Sprite oneSprite = _deadEnemyList[i];
             Vector3 targetPos = positions[i];
 
@@ -99,6 +102,7 @@ public class MissileEffectManager : MonoBehaviour
             });
         }
 
+        _reloadEffect.ReloadOne();
         _deadEnemyList.Clear();
     }
 
