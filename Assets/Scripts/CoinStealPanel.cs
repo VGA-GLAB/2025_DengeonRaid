@@ -3,15 +3,27 @@ using UnityEngine;
 public class CoinStealPanel : EnemyPanel
 {
     [SerializeField]
-    private PreviewPlayerData playerData;
-    [SerializeField]
     private int _stealCoinAmount;
     [SerializeField]
     private int _skillInterval;
 
     private int _turnProgress;
 
-    public void TurnEndAction()
+    private ReferenceManager _rm;
+
+    private PlayerController _playerController;
+
+    private PreviewPlayerData _playerData;
+
+    protected override void EnemyCustomStart()
+    {
+        _rm = ReferenceManager.Instance;
+        _playerController = _rm.PlayerController;
+        _playerData = new PreviewPlayerData(_playerController);
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit += OnTurnEndAction;
+    }
+
+    private void OnTurnEndAction()
     {
         _turnProgress++;
         if (_turnProgress >= _skillInterval)
@@ -23,10 +35,15 @@ public class CoinStealPanel : EnemyPanel
 
     public void StealCoin()
     {
-        playerData.Money -= _stealCoinAmount;
-        if (playerData.Money <= _stealCoinAmount)
+        _playerData.Money -= _stealCoinAmount;
+        if (_playerData.Money <= _stealCoinAmount)
         {
-            playerData.Money -= playerData.Money;
+            _playerData.Money -= _playerData.Money;
         }
+    }
+
+    private void OnDestroy()
+    {
+        _rm.Igsm.States[typeof(SIGEnemyTurn)].OnExit -= OnTurnEndAction;
     }
 }

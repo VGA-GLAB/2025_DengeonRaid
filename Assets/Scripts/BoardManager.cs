@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField, Tooltip("生成したパネルの親")] private Transform _boardRoot;
     [SerializeField] private WarpingMiddleBossPanel _warpingMidBossPrefab;
     [SerializeField] private EnemyGenerateMiddleBossPanel _generatedMidBossPrefab;
+    [SerializeField] private CoinStealPanel _coinStealMidBossPrefab;
     [SerializeField] private BossPanel _bossPrefab;
 
     private GameObject _currentArrow;
@@ -475,6 +476,14 @@ public class BoardManager : MonoBehaviour
         {
             Panel newPanel = Instantiate(_warpingMidBossPrefab, _boardRoot);
             director.WarpingMidBossGenerated();
+            return newPanel;
+        }
+
+        // コインを奪う中ボスの生成条件を達している場合、コインを奪う中ボスを生成する
+        if (director.CanGenerateCoinStealMidBoss())
+        {
+            Panel newPanel = Instantiate(_coinStealMidBossPrefab, _boardRoot);
+            director.CoinStealMidBossGenerated();
             return newPanel;
         }
 
