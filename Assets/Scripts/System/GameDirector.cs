@@ -22,11 +22,13 @@ public class GameDirector : MonoBehaviour
     private bool _bossDefeated;
     private bool _warpingMidBossExists;
     private bool _enemyGenerateMidBossExists;
+    private bool _coinStealMidBossExists;
     private bool _bossExists;
     private int _enemyCount;
     [Header("中ボス出現要件")]
     [SerializeField, Header("子分を生成する中ボスの出現条件（敵撃破数）")] private int _enemyGenerateMidBossCount;
     [SerializeField, Header("ワープする中ボスの出現条件（敵撃破数）")] private int _warpingMidBossCount;
+    [SerializeField, Header("コインを奪うｔｙ中ボスの出現条件")] private int _coinStealMidBossCount;
     [SerializeField, Header("ボスの出現条件（敵撃破数）")] private int _enemyCountForBoss;
     [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
@@ -211,6 +213,20 @@ public class GameDirector : MonoBehaviour
     public void EnemyGenerateMidBossGenerated()
     {
         _enemyGenerateMidBossExists = true;
+    }
+
+    /// <summary>
+    /// コインを奪う中ボスの生成条件に達しているか
+    /// </summary>
+    /// <returns></returns>
+    public bool CanGenerateCoinStealMidBoss()
+    {
+        return (_enemyCount >= _coinStealMidBossCount) && (!_coinStealMidBossExists);
+    }
+
+    public void CoinStealMidBossGenerated()
+    {
+        _coinStealMidBossExists = true;
     }
 
     /// <summary>
