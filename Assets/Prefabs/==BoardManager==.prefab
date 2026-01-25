@@ -51,15 +51,19 @@ MonoBehaviour:
   _height: 6
   _panelPrefabs:
   - PanelPrefab: {fileID: -4260931707250557988, guid: 42001b8692d4df94481b3459e3e9ce51, type: 3}
-    Weight: 10
+    Weight: 25
   - PanelPrefab: {fileID: 8298974069918889336, guid: 6079ddfc70ba1da42837792110b8e049, type: 3}
-    Weight: 10
+    Weight: 5
   - PanelPrefab: {fileID: 1010363264004800150, guid: db2518c952cf5964f8a8bf15fa72cdc6, type: 3}
-    Weight: 10
+    Weight: 30
   - PanelPrefab: {fileID: -1984394713350848579, guid: e7efeadb00e408a4c8c1b9f64bc0f0b2, type: 3}
-    Weight: 8
+    Weight: 25
   - PanelPrefab: {fileID: -3511616952413351084, guid: 40ebf721cc33c76418e7f8fc71b3e313, type: 3}
-    Weight: 7
+    Weight: 10
+  - PanelPrefab: {fileID: -3511616952413351084, guid: 8992b9c4f5894af47a8b78c25b81e663, type: 3}
+    Weight: 2
+  - PanelPrefab: {fileID: -3511616952413351084, guid: 756baac70183865499829e3e6b665ea0, type: 3}
+    Weight: 3
   _lineRenderer: {fileID: 4707849184922748696}
   _arrowPrefab: {fileID: 5434484964152232612, guid: d5521738616f9564e8ae465f8b055c65, type: 3}
   _playerController: {fileID: 0}
@@ -68,6 +72,9 @@ MonoBehaviour:
   _uiController: {fileID: 0}
   _selectionScaleEffect: {fileID: 0}
   _boardRoot: {fileID: 0}
+  _warpingMidBossPrefab: {fileID: 726892536485634573, guid: 885799fa5695e1b40adc93b5a17c6bf2, type: 3}
+  _generatedMidBossPrefab: {fileID: 3285904406227532131, guid: 0e392e4995d428b4c9ee924afc5fc1a0, type: 3}
+  _coinStealMidBossPrefab: {fileID: -5046873942461159770, guid: 8d81749fd06d3724c8a633bf4652e154, type: 3}
   _bossPrefab: {fileID: -1706300619643160376, guid: 84acd9f530a56f844864946df5825301, type: 3}
 --- !u!120 &4707849184922748696
 LineRenderer:
