@@ -26,9 +26,9 @@ public class GameDirector : MonoBehaviour
     private bool _bossExists;
     private int _enemyCount;
     [Header("中ボス出現要件")]
+    [SerializeField, Header("コインを奪う中ボスの出現条件")] private int _coinStealMidBossCount;
     [SerializeField, Header("子分を生成する中ボスの出現条件（敵撃破数）")] private int _enemyGenerateMidBossCount;
     [SerializeField, Header("ワープする中ボスの出現条件（敵撃破数）")] private int _warpingMidBossCount;
-    [SerializeField, Header("コインを奪うｔｙ中ボスの出現条件")] private int _coinStealMidBossCount;
     [SerializeField, Header("ボスの出現条件（敵撃破数）")] private int _enemyCountForBoss;
     [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
