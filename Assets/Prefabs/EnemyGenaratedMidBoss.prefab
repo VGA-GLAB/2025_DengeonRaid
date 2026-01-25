@@ -553,7 +553,7 @@ SpriteRenderer:
   m_SortingLayerID: 1692082987
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d416c8d61174734cb95a6ff1d6c91e5, type: 3}
+  m_Sprite: {fileID: -4024502305938295072, guid: dba9bd3274f8ff84d9b9771504e9f994, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -602,7 +602,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.92, y: 0.73142576}
     newSize: {x: 0.85714287, y: 0.85714287}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -670,6 +670,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGenerateMiddleBossPanel
   _panelId: 9
   _panelGroup: 1
+  _panelName: 
+  _panelDescription: 
   _attack: 2
   _shield: 3
   _shieldStrength: 1
