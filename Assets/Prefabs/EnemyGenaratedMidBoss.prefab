@@ -673,11 +673,11 @@ MonoBehaviour:
   _panelGroup: 1
   _panelName: 
   _panelDescription: 
-  _attack: 2
-  _shield: 3
+  _attack: 1
+  _shield: 25
   _shieldStrength: 1
-  _hp: 3
-  _killExp: 1
+  _hp: 25
+  _killExp: 25
   _freezeCount: 1
   _isDead: 0
   _uiTextAttack: {fileID: 1306952683508599991}
