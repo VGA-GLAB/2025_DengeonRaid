@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 4673953966276855531}
   - component: {fileID: 6257073034527455142}
   - component: {fileID: -5046873942461159770}
+  - component: {fileID: -2853490602755580988}
   m_Layer: 0
   m_Name: CoinStealMidBoss
   m_TagString: Untagged
@@ -684,6 +685,28 @@ MonoBehaviour:
   _uiTextHp: {fileID: 5530316674061650530}
   _stealCoinAmount: 3
   _skillInterval: 1
+--- !u!95 &-2853490602755580988
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372357441442014396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a61b9d7e8b6e3e4b878299183c6cffc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8427238799357678195
 GameObject:
   m_ObjectHideFlags: 0
