@@ -87,6 +87,7 @@ public class ReloadEffect : MonoBehaviour
         // 銃口に乗ったら消し、銃口の弾の見た目をONにする
         seq.AppendCallback(() =>
         {
+            CRIAudioManager.CRISEManager.Play("SE_RocketReload");
             if (carryBullet != null)
                 carryBullet.SetActive(false);
 
