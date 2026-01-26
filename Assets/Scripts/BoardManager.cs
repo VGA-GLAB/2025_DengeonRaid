@@ -265,7 +265,7 @@ public class BoardManager : MonoBehaviour
     {
         if (action == null) return;
 
-        // Drop中じゃなければ即実行でOK
+        // Drop中じゃなければ即実行する
         if (!IsDropping)
         {
             action.Invoke();
