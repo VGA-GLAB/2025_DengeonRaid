@@ -77,6 +77,7 @@ public class LevelUpUIManager : MonoBehaviour
     public void OpenLevelUp()
     {
         gameObject.SetActive(true);
+        CRIAudioManager.CRISEManager.Play("SE_LvUp");
         foreach (RectTransform item in _itemTransform.GetComponentInChildren<RectTransform>())
         {
             Destroy(item.gameObject);
