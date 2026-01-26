@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 /// <summary>
 ///         ワープする中ボス
@@ -23,9 +24,24 @@ public class WarpingMiddleBossPanel : EnemyPanel
 
         if (_turnCounter >= _skillInterval)
         {
-            TrySwapRandomPanel();
+            TrySwapRandomPanelOrDefer();
             _turnCounter = 0;
         }
+    }
+
+    /// <summary>
+    ///     スキル発動を試みる（Drop中ならDrop完了後に実行を延期する）
+    /// </summary>
+    private void TrySwapRandomPanelOrDefer()
+    {
+        // Drop中なら「Dropが終わった瞬間に1回だけ」実行する
+        if (_rm.BoardManager.IsDropping)
+        {
+            _rm.BoardManager.EnqueueAfterDrop(TrySwapRandomPanel);
+            return;
+        }
+
+        TrySwapRandomPanel();
     }
 
     /// <summary>
@@ -46,6 +62,7 @@ public class WarpingMiddleBossPanel : EnemyPanel
             break;
         }
 
+        if (target == null) return;
         _rm.BoardManager.SwapPanels(this, target);
         // 演出入れるならここになるかも
     }
