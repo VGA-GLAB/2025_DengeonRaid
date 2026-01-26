@@ -54,6 +54,7 @@ public class ShopUIManager : MonoBehaviour
     {
         InitShop();
         gameObject.SetActive(true);
+        CRIAudioManager.CRISEManager.Play("SE_ToShop");
     }
 
     /// <summary>

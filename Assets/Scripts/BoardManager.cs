@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private CoinStealPanel _coinStealMidBossPrefab;
     [SerializeField] private BossPanel _bossPrefab;
 
+    private readonly Queue<Action> _afterDropQueue = new();
     private GameObject _currentArrow;
     private Panel[,] _boardArray;
     private Stack<Panel> _selectedStack = new Stack<Panel>();
@@ -45,6 +47,7 @@ public class BoardManager : MonoBehaviour
     public Panel[,] GetBoardArray { get { return _boardArray; } }
     public int SelectedCount { get { return _selectedStack.Count; } }
     public int SelectThreshold { get { return _selectCount; } }
+    public bool IsDropping => _panelDropManager.IsDropping;
 
     #region ライフサイクル
     private void Awake()
@@ -216,6 +219,9 @@ public class BoardManager : MonoBehaviour
     /// <param name="b"></param>
     public void SwapPanels(Panel a, Panel b)
     {
+        a.transform.DOKill();
+        b.transform.DOKill();
+
         // 変数に保存
         Vector2Int posA = a.BoardPos;
         Vector2Int posB = b.BoardPos;
@@ -248,6 +254,25 @@ public class BoardManager : MonoBehaviour
         //  スキル使用フラグを立てて、パネル効果を発動
         _isSkillUsed = true;
         DropPanel();
+    }
+
+    /// <summary>
+    ///     「Dropが終わった後に実行したい処理」を登録する。
+    ///      Drop中ならキューに積み、Drop完了時（DropAllのonComplete）にまとめて実行する
+    /// </summary>
+    /// <param name="action"></param>
+    public void EnqueueAfterDrop(Action action)
+    {
+        if (action == null) return;
+
+        // Drop中じゃなければ即実行する
+        if (!IsDropping)
+        {
+            action.Invoke();
+            return;
+        }
+
+        _afterDropQueue.Enqueue(action);
     }
 
     #region なぞり処理
@@ -445,7 +470,14 @@ public class BoardManager : MonoBehaviour
             }
         }
 
-        _panelDropManager.DropAll(droppedPanels, _isSkillUsed);
+        _panelDropManager.DropAll(droppedPanels, _isSkillUsed, () =>
+        {
+            while (_afterDropQueue.Count > 0)
+            {
+                var a = _afterDropQueue.Dequeue();
+                a?.Invoke();
+            }
+        });
         _isSkillUsed = false;
     }
 
