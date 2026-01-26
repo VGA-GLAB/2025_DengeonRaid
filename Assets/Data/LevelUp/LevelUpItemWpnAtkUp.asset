@@ -15,6 +15,6 @@ MonoBehaviour:
   Type: 3
   ItemName: "\u30DF\u30B5\u30A4\u30EB\u653B\u6483\u529BUP"
   Icon: {fileID: 21300000, guid: b51af5549b631c1418836494d0713542, type: 3}
-  Value: 3
-  SkillPrefab: {fileID: 0}
+  Value: 2
+  SkillToUnlock: 0
   Description: "\u30DF\u30B5\u30A4\u30EB\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"

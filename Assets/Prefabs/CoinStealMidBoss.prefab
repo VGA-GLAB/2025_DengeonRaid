@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 4673953966276855531}
   - component: {fileID: 6257073034527455142}
   - component: {fileID: -5046873942461159770}
+  - component: {fileID: -2853490602755580988}
   m_Layer: 0
   m_Name: CoinStealMidBoss
   m_TagString: Untagged
@@ -553,7 +554,7 @@ SpriteRenderer:
   m_SortingLayerID: 1692082987
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d416c8d61174734cb95a6ff1d6c91e5, type: 3}
+  m_Sprite: {fileID: -4652728555591211445, guid: 42144e295e17ec044b3c386b469aefba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -602,7 +603,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.17, y: 1.09}
     newSize: {x: 0.85714287, y: 0.85714287}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -668,22 +669,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed23d465eee1b7429c86d9abb73aef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinStealPanel
-  _panelId: 0
-  _panelGroup: 0
+  _panelId: 9
+  _panelGroup: 1
   _panelName: 
   _panelDescription: 
-  _attack: 0
-  _shield: 0
-  _shieldStrength: 0
-  _hp: 0
-  _killExp: 0
-  _freezeCount: 0
+  _attack: 3
+  _shield: 15
+  _shieldStrength: 1
+  _hp: 15
+  _killExp: 10
+  _freezeCount: 2
   _isDead: 0
-  _uiTextAttack: {fileID: 0}
-  _uiTextShield: {fileID: 0}
-  _uiTextHp: {fileID: 0}
-  _stealCoinAmount: 0
-  _skillInterval: 0
+  _uiTextAttack: {fileID: 1306952683508599991}
+  _uiTextShield: {fileID: 6168554444288424254}
+  _uiTextHp: {fileID: 5530316674061650530}
+  _stealCoinAmount: 3
+  _skillInterval: 1
+--- !u!95 &-2853490602755580988
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372357441442014396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a61b9d7e8b6e3e4b878299183c6cffc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8427238799357678195
 GameObject:
   m_ObjectHideFlags: 0

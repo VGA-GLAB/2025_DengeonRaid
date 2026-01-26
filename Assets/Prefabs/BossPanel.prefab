@@ -198,11 +198,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossPanel
   _panelId: 5
   _panelGroup: 1
-  _attack: 2
+  _panelName: 
+  _panelDescription: 
+  _attack: 5
   _shield: 10
   _shieldStrength: 1
   _hp: 90
-  _killExp: 100
+  _killExp: 0
   _freezeCount: 1
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}

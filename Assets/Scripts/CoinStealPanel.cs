@@ -35,12 +35,13 @@ public class CoinStealPanel : EnemyPanel
 
     public void StealCoin()
     {
-        _playerData.Money -= _stealCoinAmount;
-        if (_playerData.Money <= _stealCoinAmount)
-        {
-            _playerData.Money -= _playerData.Money;
-        }
+        _playerData.Money = Mathf.Max(0, _playerData.Money - _stealCoinAmount);
+
+        _playerController.SetResolvePreview(_playerData);
+        _playerController.ApplyPreview();
     }
+
+
 
     private void OnDestroy()
     {

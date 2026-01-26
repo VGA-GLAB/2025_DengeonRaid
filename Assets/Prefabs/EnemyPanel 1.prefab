@@ -158,11 +158,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPanel
   _panelId: 4
   _panelGroup: 1
+  _panelName: 
+  _panelDescription: 
   _attack: 5
   _shield: 0
   _shieldStrength: 1
   _hp: 3
-  _killExp: 3
+  _killExp: 5
   _freezeCount: 1
   _isDead: 0
   _uiTextAttack: {fileID: 4643187983591604337}

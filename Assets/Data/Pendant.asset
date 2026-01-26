@@ -15,5 +15,5 @@ MonoBehaviour:
   ShopEffectType: 0
   ItemName: HP
   Icon: {fileID: 1361756782407511637, guid: 5b9e01ff98b7a7549813dd90aed0e604, type: 3}
-  Value: 10
+  Value: 5
   Description: "\u30B9\u30FC\u30C4\u6539\u9020"
