@@ -1,6 +1,7 @@
 using System.Drawing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 /// <summary>
@@ -53,6 +54,8 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
     public ShopUIManager ShopUIManager;
     public SkillUnlockManager SkillUnlockManager;
     public LevelUpUIManager LevelUpUIManager;
+    public PlayableDirector CutsceneDirector;
+    public CutsceneManager CutsceneManager;
 
     [Header("ゲーム内要素")]
     public PlayerController PlayerController;
@@ -61,4 +64,6 @@ public class ReferenceManager : StaticInstanceMonoBehaviour<ReferenceManager>
 
     [Header("エフェクト系")]
     public BossDestroyEffect BossDestroyEffect;
+    public Animator BossWarningAnimation;
+    public GameObject CutsceneBoss;
 }

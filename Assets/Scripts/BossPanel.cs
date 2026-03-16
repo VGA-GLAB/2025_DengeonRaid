@@ -12,6 +12,8 @@ public class BossPanel : EnemyPanel
     private List<Action> _skills;
     private int _turnCounter;
     private ReferenceManager _rm;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     [Header("スキル関連パラメータ"), Space(0.2f)]
     [Header("スキル用敵Prefab")]
@@ -67,6 +69,14 @@ public class BossPanel : EnemyPanel
         attributes.AppendLine($"HP:{_hp}");
         return new PanelInfo(panelName, description, attributes.ToString());
     }
+
+    public void ShowBossSprite()
+    {
+        _spriteRenderer.enabled = true;
+        _animator.enabled = true;
+        _animator.Play("BossIdle");
+    }
+
     /// <summary>
     /// スキルから1つ選ぶ
     /// </summary>
@@ -128,6 +138,12 @@ public class BossPanel : EnemyPanel
 
     protected override void EnemyCustomStart()
     {
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _animator.enabled = false;
+        _spriteRenderer.enabled = false;
+
         _skills = new List<Action>();
         _skills.Add(() => SkillSelfRecovery());
         _skills.Add(() => SkillChangePanels());

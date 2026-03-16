@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -24,6 +24,7 @@ public class GameDirector : MonoBehaviour
     private bool _enemyGenerateMidBossExists;
     private bool _coinStealMidBossExists;
     private bool _bossExists;
+    private bool _isEnteringBossPhase;
     private int _enemyCount;
     [Header("中ボス出現要件")]
     [SerializeField, Header("コインを奪う中ボスの出現条件")] private int _coinStealMidBossCount;
@@ -33,6 +34,7 @@ public class GameDirector : MonoBehaviour
     [SerializeField, Header("デバッグ用　現在STATE"), ReadOnly] public string CurrentState;
 
     public bool BossExists { get => _bossExists; private set => _bossExists = value; }
+    public bool IsEnteringBossPhase => _isEnteringBossPhase;
 
     #region ライフサイクル
     private void Awake()
@@ -48,7 +50,6 @@ public class GameDirector : MonoBehaviour
     private void Start()
     {
         _player = _rm.PlayerController;
-        // TODO 本番ではSIGIntro
         _igsm.ChangeState<SIGIdle>();
         _igsm.States[typeof(SIGShop)].OnEnter += CheckOpenShop;
         _igsm.States[typeof(SIGLevelUp)].OnEnter += CheckLevelUp;
@@ -117,7 +118,15 @@ public class GameDirector : MonoBehaviour
     /// </summary>
     public void SpawnNewPanelFinished()
     {
-        _rm.Igsm.ChangeState<SIGEnemyTurn>();
+        if (_isEnteringBossPhase)
+        {
+            _rm.Igsm.ChangeState<SIGBusy>();
+            _rm.CutsceneDirector.Play();
+        }
+        else
+        {
+            _rm.Igsm.ChangeState<SIGEnemyTurn>();
+        }
     }
 
     /// <summary>
@@ -240,7 +249,18 @@ public class GameDirector : MonoBehaviour
 
     public void BossGenerated()
     {
+        _isEnteringBossPhase = true;
         _bossExists = true;
+    }
+
+    /// <summary>
+    /// ボス登場演出終了
+    /// </summary>
+    public void BossDropAnimationOver()
+    {
+        _isEnteringBossPhase = false;
+        CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
+        _igsm.ChangeState<SIGEnemyTurn>();
     }
     /// <summary>
     /// ボス撃破

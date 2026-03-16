@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -491,7 +491,6 @@ public class BoardManager : MonoBehaviour
             Panel newPanel = Instantiate(GetBossPanel(), _boardRoot);
             director.BossGenerated();
             _rm.BossPanel = newPanel as BossPanel;
-            CRIAudioManager.CRIBGMManager.Play("BGM_Boss");
             return newPanel;
         }
 
