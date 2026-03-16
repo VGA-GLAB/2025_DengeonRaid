@@ -1,4 +1,4 @@
-﻿using CriWare;
+using CriWare;
 using System;
 
 /// <summary>
@@ -40,6 +40,33 @@ public class SEPlayer
         CriAtomEx.CueInfo info = Array.Find(cueArray, ci => ci.name == cueName);
         _player.SetCue(_criAtomExAcb, info.id);
         _player.Start();
+    }
+
+    /// <summary>
+    ///         フェードアウト付きでSEを再生する
+    /// </summary>
+    /// <param name="cueName"></param>
+    /// <param name="fadeOutTime"></param>
+    public void PlayFadable(string cueName, int fadeTime)
+    {
+        if(_criAtomExAcb == null) return;
+
+        CriAtomEx.CueInfo[] cueArray = _criAtomExAcb.GetCueInfoList();
+        CriAtomEx.CueInfo info = Array.Find(cueArray, ci => ci.name == cueName);
+        _player.SetCue(_criAtomExAcb, info.id);
+        _player.AttachFader();
+        _player.SetFadeOutTime(fadeTime);
+        _player.Start();
+    }
+
+    /// <summary>
+    ///         再生を停止する（Disposeなし）
+    /// </summary>
+    public void Stop()
+    {
+        if (_player is null) return;
+
+        _player.Stop();
     }
 
     /// <summary>

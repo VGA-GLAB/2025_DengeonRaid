@@ -1,4 +1,4 @@
-﻿using CriWare;
+using CriWare;
 using System.Collections.Generic;
 
 /// <summary>
@@ -41,6 +41,42 @@ public class CRISEManager
         SEPlayer free = _pool.Find(p => !p.IsPlaying);
         if (free != null)
             free.Play(cueName);
+    }
+
+    /// <summary>
+    ///         指定したSEを再生し、制御用プレイヤーも取得する
+    /// </summary>
+    /// <param name="cueName"></param>
+    /// <returns></returns>
+    public SEPlayer PlayAndGetPlayer(string cueName)
+    {
+        SEPlayer free = _pool.Find(p => !p.IsPlaying);
+        if (free != null)
+            free.Play(cueName);
+        return free;
+    }
+
+    /// <summary>
+    ///         フェードアウト付きで指定したSEを再生
+    /// </summary>
+    /// <param name="cueName"></param>
+    /// <param name="fadeTime"></param>
+    /// <returns></returns>
+    public SEPlayer PlayFadable(string cueName, int fadeTime)
+    {
+        SEPlayer free = _pool.Find(p => !p.IsPlaying);
+        if (free != null)
+            free.PlayFadable(cueName, fadeTime);
+        return free;
+    }
+
+    /// <summary>
+    ///         指定したSEを停止する
+    /// </summary>
+    /// <param name="player"></param>
+    public void Stop(SEPlayer player)
+    {
+        player.Stop();
     }
 
     /// <summary>
